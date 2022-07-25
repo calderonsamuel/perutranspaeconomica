@@ -4,7 +4,9 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Samuel", "Calderon", , "samuel.calderon@uarm.pe", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6847-1210"))
-Description: What the package does (one paragraph).
+Description: El objetivo de perutranspaeconomica es contar con una manera de 
+    obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz 
+    de programación consistente y clara.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
