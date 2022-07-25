@@ -1,0 +1,11 @@
+#' Definir la seccion de '¿Cuándo se hizo el gasto?'
+#'
+#' @param trimestre int. Número del 1 al 4
+#' @param mes int. Número del 1 al 12
+#'
+#' @return Una lista con nombres correspondientes a los endpoints de la API
+#'
+set_cuando_se_hizo <- function(trimestre = NULL, mes = NULL) {
+    params <- list("22" = trimestre, "23" = mes)
+    purrr::discard(params, is.null)
+}
