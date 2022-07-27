@@ -27,6 +27,10 @@ le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
 
 \item{unidad_ejecutora}{chr. Código de Unidad Ejecutora. No tiene forma estandar}
 
+\item{goblocal_o_manc}{chr. Escoger entre "M" (gobierno local)
+o "N" (mancomunidad). Si es "M", desbloque \code{departamento}, \code{provincia} y \code{municipalidad}.
+Si es "N", le corresponde \code{mancomunidad}.}
+
 \item{mancomunidad}{chr. Código de mancomunidad, de forma "XXXXXX" (6).}
 
 \item{departamento}{chr. Código de departamento. El valor "07" corresponde a Callao.}
@@ -34,10 +38,6 @@ le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
 \item{provincia}{chr. Código de provincia. El valor "01" corresponde a capital de departamento.}
 
 \item{municipalidad}{chr. Código de municipalidad, de forma "XXXXXX". No corresponde con ubigeo.}
-
-\item{goblocal_o_mancomunidad}{chr. Escoger entre "M" (gobierno local)
-o "N" (mancomunidad). Si es "M", desbloque \code{departamento}, \code{provincia} y \code{municipalidad}.
-Si es "N", le corresponde \code{mancomunidad}.}
 }
 \value{
 Una lista con nombres correspondientes a los endpoints de la API

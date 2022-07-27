@@ -8,17 +8,10 @@ set_req_url_query(actualizacion = "diaria")
 }
 \arguments{
 \item{actualizacion}{chr. Uno de c("mensual", "diaria")}
-
-\item{year}{int. El año del cual se quiere obtener información}
-
-\item{...}{Otros parametros que sirven para armar el query}
 }
 \value{
 Objeto con clase "httr2_request"
 }
 \description{
 Definir el query URL de la consulta
-}
-\examples{
-set_req_url_query(2022L)
 }

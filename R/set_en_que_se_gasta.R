@@ -2,7 +2,7 @@
 #'
 #' @param categoria_presupuestal chr. Código de programa presupuestal de forma "XXXX" (4).
 #' Para Acciones Centrales usar "9001" y para APnoP usar "9002".
-#' @param producto. chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).
+#' @param producto chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).
 #' @param actividad chr. Código de actividad, acción de inversión u obra, de forma "XXXXXXX" (7).
 #' @param funcion chr. Código de función de forma "XX" (2).
 #' @param division_funcional chr. Código de división funcional de forma "XXX" (3).

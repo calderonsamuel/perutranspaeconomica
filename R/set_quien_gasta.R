@@ -9,7 +9,7 @@
 #' @param sector chr. Codigo de sector, de forma "XX" (2).
 #' @param pliego chr. Código de pliego, de forma "XXX" (3).
 #' @param unidad_ejecutora chr. Código de Unidad Ejecutora. No tiene forma estandar
-#' @param goblocal_o_mancomunidad chr. Escoger entre "M" (gobierno local)
+#' @param goblocal_o_manc chr. Escoger entre "M" (gobierno local)
 #' o "N" (mancomunidad). Si es "M", desbloque `departamento`, `provincia` y `municipalidad`.
 #' Si es "N", le corresponde `mancomunidad`.
 #' @param mancomunidad chr. Código de mancomunidad, de forma "XXXXXX" (6).

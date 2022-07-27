@@ -18,6 +18,8 @@ set_en_que_se_gasta(
 \item{categoria_presupuestal}{chr. Código de programa presupuestal de forma "XXXX" (4).
 Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
 
+\item{producto}{chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).}
+
 \item{actividad}{chr. Código de actividad, acción de inversión u obra, de forma "XXXXXXX" (7).}
 
 \item{funcion}{chr. Código de función de forma "XX" (2).}
@@ -27,8 +29,6 @@ Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
 \item{grupo_funcional}{chr. Código de grupo funcional de forma "XXXX" (4).}
 
 \item{meta}{chr. Código de meta. No tiene forma estandarizada.}
-
-\item{producto.}{chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).}
 }
 \value{
 Una lista con nombres correspondientes a los endpoints de la API

@@ -1,6 +1,6 @@
 #' Armar el query detallado para consulta de ejecución presupuestal
 #'
-#'
+#' @param year Año del cual se quiere obtener la información
 #' @inheritParams set_quien_gasta
 #' @inheritParams set_en_que_se_gasta
 #' @inheritParams set_con_que_se_financia

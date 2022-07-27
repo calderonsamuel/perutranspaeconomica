@@ -36,6 +36,8 @@ make_gasto_query(
 )
 }
 \arguments{
+\item{year}{Año del cual se quiere obtener la información}
+
 \item{nivel}{chr. Nivel de gobierno. Puede ser "E" (gobierno nacional),
 "M" (gobiernos locales) o "R" (gobiernos regionales). Si es "E" o "R",
 le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
@@ -45,6 +47,10 @@ le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
 \item{pliego}{chr. Código de pliego, de forma "XXX" (3).}
 
 \item{unidad_ejecutora}{chr. Código de Unidad Ejecutora. No tiene forma estandar}
+
+\item{goblocal_o_manc}{chr. Escoger entre "M" (gobierno local)
+o "N" (mancomunidad). Si es "M", desbloque \code{departamento}, \code{provincia} y \code{municipalidad}.
+Si es "N", le corresponde \code{mancomunidad}.}
 
 \item{mancomunidad}{chr. Código de mancomunidad, de forma "XXXXXX" (6).}
 
@@ -56,6 +62,8 @@ le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
 
 \item{categoria_presupuestal}{chr. Código de programa presupuestal de forma "XXXX" (4).
 Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
+
+\item{producto}{chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).}
 
 \item{actividad}{chr. Código de actividad, acción de inversión u obra, de forma "XXXXXXX" (7).}
 
