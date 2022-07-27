@@ -1,6 +1,7 @@
 current_year <- function() {
-    Sys.Date() |>
-        as.character() |>
-        gsub(pattern = "(^.{4}).+", replacement = "\\1", x = _) |>
+    year_chr <- Sys.Date() |>
+        as.character()
+
+    gsub(pattern = "(^.{4}).+", replacement = "\\1", x = year_chr) |>
         as.integer()
 }
