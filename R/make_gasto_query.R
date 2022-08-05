@@ -97,7 +97,7 @@ make_gasto_query <- function(year = NULL,
     params
 }
 
-gasto_query <- function(request, ...) {
+set_gasto_query <- function(request, ...) {
     params <- make_gasto_query(...)
 
     params <- purrr::list_modify(.req = request, params)

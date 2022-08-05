@@ -9,7 +9,7 @@
 #'
 gasto <- function(year, ..., actualizacion = "diaria") {
     set_req_url_query(actualizacion = actualizacion) |>
-        gasto_query(year = year, ...) |>
+        set_gasto_query(year = year, ...) |>
         retrieve_html_body() |>
         retrive_response_tbl() |>
         process_tbl(year = year)
@@ -38,15 +38,5 @@ process_tbl <- function(tbl, year) {
         suppressWarnings()
 }
 
-perform_gasto_query <- function(gasto_query, actualizacion = "diaria") {
 
-    request <- set_req_url_query(actualizacion = actualizacion)
-    query_params <- purrr::list_modify(.req = request, gasto_query)
-    year <- gasto_query$y
-
-    do.call(httr2::req_url_query, query_params) |>
-        retrieve_html_body() |>
-        retrive_response_tbl() |>
-        process_tbl(year = year)
-}
 

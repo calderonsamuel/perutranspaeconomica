@@ -2,3 +2,4 @@
 
 export(gasto)
 export(make_gasto_query)
+export(perform_gasto_query)
