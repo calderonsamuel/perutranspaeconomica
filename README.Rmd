@@ -38,6 +38,7 @@ Puedes instalar el paquete desde mi [R-universe](https://calderonsamuel.r-univer
 options(repos = c(
   calderonsamuel = 'https://calderonsamuel.r-universe.dev',
   CRAN = 'https://cloud.r-project.org'))
+
 # Descargar e instalar perutranspaeconomica en R
 install.packages('perutranspaeconomica')
 ```
@@ -74,10 +75,12 @@ make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "")
 
 Como se puede ver, esto nos devuelve una lista nombrada en la que los nombres corresponden con los parámetros de consulta tal y como están definidos en la API del sistema del MEF. Además, componiendo la lista de esta manera se aprovecha el autocompletado.
 
-```{r, eval=FALSE}
+```{r}
 make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "") |> 
     perform_gasto_query()
 ```
+
+De esta manera se obtiene el mismo resultado.
 
 
 
