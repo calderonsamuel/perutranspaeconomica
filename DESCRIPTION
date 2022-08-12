@@ -4,23 +4,27 @@ Version: 0.1.0
 Authors@R: 
     person("Samuel", "Calderon", , "samuel.calderon@uarm.pe", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6847-1210"))
-Description: Obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz 
-    de programación consistente, clara y escalable.
+Description: Obtener datos del Portal de Transparencia Económica Perú
+    desde R, con una interfaz de programación consistente, clara y
+    escalable.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
 URL: https://github.com/calderonsamuel/perutranspaeconomica
 BugReports: https://github.com/calderonsamuel/perutranspaeconomica/issues
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
 Imports: 
+    cli,
     dplyr,
     glue,
     httr2,
     janitor,
     purrr,
+    R6,
     readr,
     rvest,
+    stats,
     tidyr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
