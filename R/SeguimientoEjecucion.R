@@ -66,9 +66,11 @@ SeguimientoEjecucion$set("public", "set_years", function(years) {
 
 SeguimientoEjecucion$set("private", "cli_years", function() {
     if (is.null(private$years)) {
-        cli::cli_li("Años: Sin definir")
+        cli::cli_li("{.strong Años:} Sin definir")
     } else {
-        cli::cli_li("Años: {private$years}")
+        cli::cli_li("{.strong Años:}")
+        cli::cli_ul()
+        cli::cli_li("{private$years}")
         # listado <- cli::cli_ul()
         # private$years |>
         #     purrr::walk(cli::cli_li)
@@ -84,7 +86,7 @@ SeguimientoEjecucion$set(
     value =  function() {
         consulta <- private$quien_gasta
         if (is.null(consulta)) return(NULL)
-        cli::cli_li("¿Quién gasta?:")
+        cli::cli_li("{.strong ¿Quién gasta?:}")
         sublista <- cli::cli_ul()
         private$cli_li_optional(consulta$nivel, "Nivel de gobierno")
         private$cli_li_optional(consulta$sector, "Sector")
@@ -132,16 +134,17 @@ SeguimientoEjecucion$set(
 ## en qué se gasta ----
 
 SeguimientoEjecucion$set("private", "cli_en_que_se_gasta", function() {
-    if(is.null(private$en_que_se_gasta)) return(NULL)
-    cli::cli_li("¿En qué se gasta?: ")
+    consulta <- private$en_que_se_gasta
+    if(is.null(consulta)) return(NULL)
+    cli::cli_li("{.strong ¿En qué se gasta?:}")
     sublista <- cli::cli_ul()
-    private$cli_li_optional(private$en_que_se_gasta$categoria_presupuestal, "Categoría presupuestal")
-    private$cli_li_optional(private$en_que_se_gasta$producto, "Producto")
-    private$cli_li_optional(private$en_que_se_gasta$actividad, "Actividad")
-    private$cli_li_optional(private$en_que_se_gasta$meta, "Meta")
-    private$cli_li_optional(private$en_que_se_gasta$funcion, "Función")
-    private$cli_li_optional(private$en_que_se_gasta$division_funcional, "División funcional")
-    private$cli_li_optional(private$en_que_se_gasta$grupo_funcional, "Grupo funcional")
+    private$cli_li_optional(consulta$categoria_presupuestal, "Categoría presupuestal")
+    private$cli_li_optional(consulta$producto, "Producto")
+    private$cli_li_optional(consulta$actividad, "Actividad")
+    private$cli_li_optional(consulta$meta, "Meta")
+    private$cli_li_optional(consulta$funcion, "Función")
+    private$cli_li_optional(consulta$division_funcional, "División funcional")
+    private$cli_li_optional(consulta$grupo_funcional, "Grupo funcional")
 })
 
 SeguimientoEjecucion$set(
@@ -169,23 +172,106 @@ SeguimientoEjecucion$set(
 ## con que se financia ----
 
 SeguimientoEjecucion$set("private", "cli_con_que_se_financia", function() {
-    if(is.null(private$con_que_se_financia)) return(NULL)
-    cli::cli_li("¿Con qué se financia?:")
+    consulta <- private$con_que_se_financia
+    if(is.null(consulta)) return(NULL)
+    cli::cli_li("{.strong ¿Con qué se financia?:}")
+    sublista <- cli::cli_ul()
+    private$cli_li_optional(consulta$fuente_financiamiento, "Fuente de financiamiento")
+    private$cli_li_optional(consulta$rubro, "Rubro")
+    private$cli_li_optional(consulta$tipo_de_recurso, "Tipo de recurso")
 })
+
+SeguimientoEjecucion$set(
+    which = "public",
+    name = "set_con_que_se_financia",
+    value = function(fuente_financiamiento = NULL,
+                     rubro = NULL,
+                     tipo_de_recurso = NULL
+                     ) {
+        private$con_que_se_financia <- list(
+            fuente_financiamiento = fuente_financiamiento,
+            rubro = rubro,
+            tipo_de_recurso = tipo_de_recurso
+        )
+        self
+    })
+
+## como se estructura ----
 
 SeguimientoEjecucion$set("private", "cli_como_se_estructura", function() {
-    if(is.null(private$como_se_estructura)) return(NULL)
-    cli::cli_li("¿Cómo se estructura gasto?:")
+    consulta <- private$como_se_estructura
+    if(is.null(consulta)) return(NULL)
+    cli::cli_li("{.strong ¿Cómo se estructura gasto?:}")
+    sublista <- cli::cli_ul()
+    private$cli_li_optional(consulta$generica, "Genérica")
+    private$cli_li_optional(consulta$subgenerica, "Sub-genérica")
+    private$cli_li_optional(consulta$detalle_subgenerica, "Detalle de sub-genérica")
+    private$cli_li_optional(consulta$especifica, "Específica")
+    private$cli_li_optional(consulta$detalle_especifica, "Detalle de específica")
 })
+
+SeguimientoEjecucion$set(
+    which = "public",
+    name = "set_como_se_estructura",
+    value = function(generica = NULL,
+                     subgenerica = NULL,
+                     detalle_subgenerica = NULL,
+                     especifica = NULL,
+                     detalle_especifica = NULL
+    ) {
+        private$como_se_estructura <- list(
+            generica = generica,
+            subgenerica = subgenerica,
+            detalle_subgenerica = detalle_subgenerica,
+            especifica = especifica,
+            detalle_especifica = detalle_especifica
+        )
+        self
+    })
+
+## donde se gasta ----
 
 SeguimientoEjecucion$set("private", "cli_donde_se_gasta", function() {
-    if(is.null(private$donde_se_gasta)) return(NULL)
-    cli::cli_li("¿Dónde se gasta?:")
+    consulta <- private$donde_se_gasta
+    if(is.null(consulta)) return(NULL)
+    cli::cli_li("{.strong ¿Dónde se gasta?:}")
+    sublista <- cli::cli_ul()
+    private$cli_li_optional(consulta$departamento_meta, "Departamento (meta)")
 })
 
+SeguimientoEjecucion$set(
+    which = "public",
+    name = "set_donde_se_gasta",
+    value = function(departamento_meta = NULL
+    ) {
+        private$donde_se_gasta <- list(
+            departamento_meta = departamento_meta
+        )
+        self
+    })
+
+## cuando se hizo gasto ----
+
 SeguimientoEjecucion$set("private", "cli_cuando_se_hizo_gasto", function() {
-    if(is.null(private$cuando_se_hizo_gasto)) return(NULL)
-    cli::cli_li("¿Cuándo se hizo gasto?:")
+    consulta <- private$cuando_se_hizo_gasto
+    if(is.null(consulta)) return(NULL)
+    cli::cli_li("{.strong ¿Cuándo se hizo gasto?:}")
+    sublista <- cli::cli_ul()
+    private$cli_li_optional(consulta$trimestre, "Trimestre")
+    private$cli_li_optional(consulta$mes, "Mes")
 })
+
+SeguimientoEjecucion$set(
+    which = "public",
+    name = "set_cuando_se_hizo_gasto",
+    value = function(trimestre = NULL,
+                     mes = NULL
+    ) {
+        private$cuando_se_hizo_gasto <- list(
+            trimestre = trimestre,
+            mes = mes
+        )
+        self
+    })
 
 
