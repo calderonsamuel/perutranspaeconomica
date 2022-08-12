@@ -94,7 +94,8 @@ make_gasto_query <- function(year = NULL,
     ) |>
         purrr::flatten()
 
-    params
+    params |>
+        purrr::map(~ifelse(.x == "todos", "", .x))
 }
 
 set_gasto_query <- function(request, ...) {
