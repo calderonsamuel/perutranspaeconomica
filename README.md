@@ -56,7 +56,6 @@ Empezamos por cargar el paquete:
 
 ``` r
 library(perutranspaeconomica)
-#> Warning: package 'perutranspaeconomica' was built under R version 4.2.1
 ```
 
 Tenemos dos maneras de usar el paquete. En primer lugar, podemos usar la
@@ -65,7 +64,7 @@ obtener el gasto ejecutado en todos los productos del programa
 presupuestal “0031” en el 2021:
 
 ``` r
-gasto(year = 2021, categoria_presupuestal = "0031", producto = "")
+gasto(year = 2021, categoria_presupuestal = "0031", producto = "todos")
 #> # A tibble: 5 × 11
 #>    year cod_proyecto desc_proyecto     pia    pim certificacion compromiso_anual
 #>   <dbl> <chr>        <chr>           <dbl>  <dbl>         <dbl>            <dbl>
@@ -82,7 +81,7 @@ La segunda opción es componer primero la lista de parámetros y luego
 ejecutar la consulta. Comenzamos por componer la lista:
 
 ``` r
-make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "")
+make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos")
 #> $y
 #> [1] 2022
 #> 
@@ -90,7 +89,7 @@ make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "")
 #> [1] "0031"
 #> 
 #> $`31`
-#> [1] ""
+#> [1] "todos"
 ```
 
 Como se puede ver, esto nos devuelve una lista nombrada en la que los
@@ -99,7 +98,7 @@ definidos en la API del sistema del MEF. Además, componiendo la lista de
 esta manera se aprovecha el autocompletado.
 
 ``` r
-make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "") |> 
+make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos") |> 
     perform_gasto_query()
 #> # A tibble: 8 × 11
 #>    year cod_proyecto desc_proyecto     pia    pim certificacion compromiso_anual
@@ -108,9 +107,9 @@ make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "") |>
 #> 2  2022 2152344      MEJORAMIENTO … 1.81e4 1.81e4             0                0
 #> 3  2022 2152345      MEJORAMIENTO … 1.57e4 1.57e4             0                0
 #> 4  2022 2522056      ADQUISICION D… 0      2.3 e5        229900                0
-#> 5  2022 3000001      ACCIONES COMU… 8.78e6 9.10e6       8295159          5888995
-#> 6  2022 3000294      OPERACIONES D… 2.29e8 2.28e8     223549616        219793186
-#> 7  2022 3000490      HECTAREAS RED… 2.27e7 2.27e7      20266991         18095190
+#> 5  2022 3000001      ACCIONES COMU… 8.78e6 9.10e6       8118516          6407450
+#> 6  2022 3000294      OPERACIONES D… 2.29e8 2.28e8     223609907        220168288
+#> 7  2022 3000490      HECTAREAS RED… 2.27e7 2.27e7      20280451         18243005
 #> 8  2022 3000492      PROCESOS JUDI… 8.00e6 8.13e6       7361405          7337575
 #> # … with 4 more variables: atencion_de_compromiso_mensual <dbl>,
 #> #   devengado <dbl>, girado <dbl>, avance_percent <dbl>

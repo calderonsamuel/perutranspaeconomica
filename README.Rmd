@@ -64,19 +64,19 @@ library(perutranspaeconomica)
 Tenemos dos maneras de usar el paquete. En primer lugar, podemos usar la función `gasto()` para hacer una consulta directa. Por ejemplo, para obtener el gasto ejecutado en todos los productos del programa presupuestal "0031" en el 2021:
 
 ```{r}
-gasto(year = 2021, categoria_presupuestal = "0031", producto = "")
+gasto(year = 2021, categoria_presupuestal = "0031", producto = "todos")
 ```
 
 La segunda opción es componer primero la lista de parámetros y luego ejecutar la consulta. Comenzamos por componer la lista:
 
 ```{r}
-make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "")
+make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos")
 ```
 
 Como se puede ver, esto nos devuelve una lista nombrada en la que los nombres corresponden con los parámetros de consulta tal y como están definidos en la API del sistema del MEF. Además, componiendo la lista de esta manera se aprovecha el autocompletado.
 
 ```{r}
-make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "") |> 
+make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos") |> 
     perform_gasto_query()
 ```
 
