@@ -17,5 +17,6 @@ set_con_que_se_financia <- function(fuente_financiamiento = NULL,
         fuente_financiamiento = fuente_financiamiento,
         rubro = rubro,
         tipo_de_recurso = tipo_de_recurso
-    )
+    ) |>
+        purrr::discard(is.null)
 }

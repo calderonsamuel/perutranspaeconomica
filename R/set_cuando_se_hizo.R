@@ -9,5 +9,6 @@ set_cuando_se_hizo <- function(trimestre = NULL, mes = NULL) {
     list(
         trimestre = trimestre,
         mes = mes
-    )
+    ) |>
+        purrr::discard(is.null)
 }

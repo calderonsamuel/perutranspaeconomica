@@ -27,5 +27,6 @@ set_en_que_se_gasta <- function(categoria_presupuestal = NULL,
         division_funcional = division_funcional,
         grupo_funcional = grupo_funcional,
         meta = meta
-    )
+    ) |>
+        purrr::discard(is.null)
 }

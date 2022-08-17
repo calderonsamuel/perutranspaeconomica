@@ -40,5 +40,6 @@ set_quien_gasta <- function(nivel = NULL,
         departamento = departamento,
         provincia = provincia,
         municipalidad = municipalidad
-    )
+    ) |>
+        purrr::discard(is.null)
 }
