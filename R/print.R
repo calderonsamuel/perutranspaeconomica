@@ -11,6 +11,8 @@ print.sep_df <- function(x) {
 cli_query <- function(x) {
     if (query_is_empty(x)) {
         cli::cli_alert_info("No se ha definido parámetros de consulta")
+    } else {
+        cli_years(x)
     }
 }
 
@@ -21,6 +23,15 @@ cli_sin_consulta <- function() {
 cli_titulo <- function(x) {
     actualizacion <- get_actualizacion(x)
     cli::cli_h1("Seguimiento a la ejecución presupuestal ({.emph actualización {actualizacion}})")
+}
+
+cli_years <- function(x) {
+    query <- get_query(x)
+    if (!is.null(query$years)) {
+        cli::cli_li("{.strong Años:}")
+        cli::cli_ul()
+        cli::cli_li("{query$years}")
+    }
 }
 
 # SeguimientoEjecucion$set("public", "print", function() {
