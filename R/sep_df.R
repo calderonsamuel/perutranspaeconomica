@@ -1,11 +1,10 @@
 # constructor
 #' @noRd
 new_sep_df <- function(x = tibble::tibble(),
-                       query = list(),
+                       query = query,
                        modulo = "gasto",
                        actualizacion = "diaria"
                        ) {
-
     class(x) <- c("sep_df", class(x))
     attr(x, "modulo") <- modulo
     attr(x, "actualizacion") <-  actualizacion
@@ -28,8 +27,11 @@ sep_df <- function(query = list(), modulo = "gasto", actualizacion = "diaria") {
 
 # exposed API
 #' @export
-sep <- function(..., actualizacion = "diaria") {
-    query <- list(...)
+sep <- function(actualizacion = "diaria") {
+    query <- list(
+        years = NULL,
+        quien_gasta = set_quien_gasta()
+    )
     sep_df(query = query, actualizacion = actualizacion)
 }
 
@@ -38,7 +40,7 @@ sep <- function(..., actualizacion = "diaria") {
 
 #' @noRd
 query_is_empty <- function(x) {
-    query <- get_query(x)
+    query <- get_query(x) |> purrr::flatten()
     length(query) == 0
 }
 

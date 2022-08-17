@@ -3,7 +3,8 @@ consultar <- function(x) UseMethod("consultar")
 
 #' @export
 consultar.sep_df <- function(x) {
-    query <- get_query(x)
+    query <- get_query(x) |> purrr::flatten()
+    check_years(query$years)
     translated <- sep_params_translate(query)
     request <- get_req_url(x)
     expanded <- do.call(tidyr::expand_grid, translated)
