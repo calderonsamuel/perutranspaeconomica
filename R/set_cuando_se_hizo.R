@@ -6,6 +6,8 @@
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #'
 set_cuando_se_hizo <- function(trimestre = NULL, mes = NULL) {
-    params <- list("22" = trimestre, "23" = mes)
-    purrr::discard(params, is.null)
+    list(
+        trimestre = trimestre,
+        mes = mes
+    )
 }

@@ -13,11 +13,9 @@ set_con_que_se_financia <- function(fuente_financiamiento = NULL,
                                     rubro = NULL,
                                     tipo_de_recurso = NULL
                                     ) {
-    params <- list(
-        "14" = fuente_financiamiento,
-        "15" = rubro,
-        "17" = tipo_de_recurso
+    list(
+        fuente_financiamiento = fuente_financiamiento,
+        rubro = rubro,
+        tipo_de_recurso = tipo_de_recurso
     )
-
-    purrr::discard(params, is.null)
 }

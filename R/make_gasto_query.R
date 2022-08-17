@@ -11,7 +11,7 @@
 #' @return Una lista cuyos elementos tienen el key-value de los parámetros de la API
 #' @export
 #'
-make_gasto_query <- function(year = NULL,
+make_gasto_query <- function(years = NULL,
                              nivel = NULL,
                              sector = NULL,
                              pliego = NULL,
@@ -41,7 +41,7 @@ make_gasto_query <- function(year = NULL,
                              mes = NULL) {
 
 
-    stopifnot(year %in% seq(from = 1999, to = current_year()))
+    check_years(years)
 
     quien_gasta <- set_quien_gasta(
         nivel = nivel,
@@ -84,7 +84,6 @@ make_gasto_query <- function(year = NULL,
     cuando_se_hizo <- set_cuando_se_hizo(trimestre = trimestre, mes = mes)
 
     params <- list(
-        y = year,
         quien_gasta,
         en_que_se_gasta,
         con_que_se_financia,
@@ -92,7 +91,10 @@ make_gasto_query <- function(year = NULL,
         donde_se_gasta,
         cuando_se_hizo
     ) |>
-        purrr::flatten()
+        purrr::flatten() |>
+        purrr::list_modify(years = years) |>
+        sep_params_translate() |>
+        purrr::discard(is.null)
 
     params |>
         purrr::map(~ifelse(.x == "todos", "", .x))

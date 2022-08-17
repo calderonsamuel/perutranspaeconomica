@@ -29,17 +29,16 @@ set_quien_gasta <- function(nivel = NULL,
                             provincia = NULL,
                             municipalidad = NULL
 ) {
-    params <- list(
-        "1" = nivel,
-        "2" = sector,
-        "3" = pliego,
-        "4" = unidad_ejecutora,
-        "5" = departamento,
-        "6" = provincia,
-        "7" = municipalidad,
-        "37" = goblocal_o_manc,
-        "36" = mancomunidad
-    )
 
-    purrr::discard(params, is.null)
+    list(
+        nivel = nivel,
+        sector = sector,
+        pliego = pliego,
+        unidad_ejecutora = unidad_ejecutora,
+        goblocal_o_manc = goblocal_o_manc,
+        mancomunidad = mancomunidad,
+        departamento = departamento,
+        provincia = provincia,
+        municipalidad = municipalidad
+    )
 }

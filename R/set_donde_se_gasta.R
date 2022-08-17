@@ -6,6 +6,7 @@
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #'
 set_donde_se_gasta <- function(departamento_meta = NULL) {
-    params <- list("21" = departamento_meta)
-    purrr::discard(params, is.null)
+    list(
+        departamento_meta = departamento_meta
+    )
 }

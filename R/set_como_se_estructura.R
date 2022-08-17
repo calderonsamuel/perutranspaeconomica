@@ -26,11 +26,11 @@ set_como_se_estructura <- function(generica = NULL,
                                    detalle_especifica = NULL
                                    ) {
     params <- list(
-        "24" = generica,
-        "25" = subgenerica,
-        "26" = detalle_subgenerica,
-        "27" = especifica,
-        "28" = detalle_especifica
+        generica = generica,
+        subgenerica = subgenerica,
+        detalle_subgenerica = detalle_subgenerica,
+        especifica = especifica,
+        detalle_especifica = detalle_especifica
     )
 
     purrr::discard(params, is.null)
