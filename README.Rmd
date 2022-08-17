@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # perutranspaeconomica
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente y clara.
