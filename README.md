@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+![runiverse-name](https://calderonsamuel.r-universe.dev/badges/:name)
+![runiverse-package](https://calderonsamuel.r-universe.dev/badges/perutranspaeconomica)
 [![Codecov test
 coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
 [![CRAN

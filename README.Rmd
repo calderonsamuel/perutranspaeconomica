@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # perutranspaeconomica
 
 <!-- badges: start -->
+![runiverse-name](https://calderonsamuel.r-universe.dev/badges/:name)
+![runiverse-package](https://calderonsamuel.r-universe.dev/badges/perutranspaeconomica)
 [![Codecov test coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
