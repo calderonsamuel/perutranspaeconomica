@@ -27,6 +27,7 @@ sep_df <- function(query = list(), modulo = "gasto", actualizacion = "diaria") {
 
 
 # exposed API
+#' @export
 sep <- function(..., actualizacion = "diaria") {
     query <- list(...)
     sep_df(query = query, actualizacion = actualizacion)

@@ -1,3 +1,4 @@
+#' @export
 consultar <- function(x) UseMethod("consultar")
 
 #' @export

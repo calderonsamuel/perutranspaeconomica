@@ -1,3 +1,4 @@
+#' @export
 choose_years <- function(x, years) UseMethod("choose_years")
 
 #' @export
