@@ -21,6 +21,7 @@ Imports:
     readr,
     rvest,
     stats,
+    tibble,
     tidyr
 Suggests: 
     testthat (>= 3.0.0)
