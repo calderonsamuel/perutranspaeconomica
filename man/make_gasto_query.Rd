@@ -5,7 +5,7 @@
 \title{Armar el query detallado para consulta de ejecución presupuestal}
 \usage{
 make_gasto_query(
-  year = NULL,
+  years = NULL,
   nivel = NULL,
   sector = NULL,
   pliego = NULL,
@@ -36,8 +36,6 @@ make_gasto_query(
 )
 }
 \arguments{
-\item{year}{Año del cual se quiere obtener la información}
-
 \item{nivel}{chr. Nivel de gobierno. Puede ser "E" (gobierno nacional),
 "M" (gobiernos locales) o "R" (gobiernos regionales). Si es "E" o "R",
 le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
@@ -100,6 +98,8 @@ Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".}
 \item{trimestre}{int. Número del 1 al 4}
 
 \item{mes}{int. Número del 1 al 12}
+
+\item{year}{Año del cual se quiere obtener la información}
 }
 \value{
 Una lista cuyos elementos tienen el key-value de los parámetros de la API
