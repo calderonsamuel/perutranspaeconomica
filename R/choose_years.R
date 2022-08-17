@@ -3,7 +3,10 @@ choose_years <- function(x, years) UseMethod("choose_years")
 
 #' @export
 choose_years.sep_df <- function(x, years = current_year()) {
-    old <- get_query(x)
-    attr(x, "query") <- purrr::list_modify(old, years = years)
+    check_years(years)
+    query <- get_query(x)
+    new_years <- list(years)
+    query <- purrr::list_modify(query, years = new_years)
+    attr(x, "query") <- query
     x
 }
