@@ -7,6 +7,8 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de
