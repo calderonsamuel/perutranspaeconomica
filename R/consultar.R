@@ -8,12 +8,16 @@ consultar.sep_df <- function(x) {
 
     expanded |>
         split_by_row() |>
-        purrr::map_dfr(consulta_individual, request = request) |>
+        purrr::map_dfr(ejecutar_consulta_individual, request = request) |>
         inherit_attr(inherit_from = x)
 }
 
-consulta_individual <- function(x, request) {
-    lista <- as.list(x) |> empty_str_to_last()
+ejecutar_consulta_individual <- function(query_params, request) {
+    lista <- as.list(query_params)
+    if (!years_is_only_param(query_params)) {
+        lista <- empty_str_to_last(lista)
+    }
+
     year <- lista$y
     params <- purrr::list_modify(.req = request, lista)
     do.call(httr2::req_url_query, params) |>
@@ -60,4 +64,9 @@ empty_str_to_last <- function(x) {
     remaining <- purrr::discard(x, ~.x == "")
     remaining[[empty_str_name]] <- empty_str_value
     remaining
+}
+
+years_is_only_param <- function(query) {
+    qn <- names(query)
+    length(qn) == 1 && qn == "y"
 }
