@@ -30,23 +30,12 @@ sep_df <- function(query = list(), modulo = "gasto", actualizacion = "diaria") {
 sep <- function(actualizacion = "diaria") {
     query <- list(
         years = NULL,
-        quien_gasta = set_quien_gasta()
+        quien_gasta = set_quien_gasta(),
+        en_que_se_gasta = set_en_que_se_gasta()
     )
     sep_df(query = query, actualizacion = actualizacion)
 }
 
-
-
-
-#' @noRd
-query_is_empty <- function(x) {
-    query <- get_query(x) |> purrr::flatten()
-    length(query) == 0
-}
-
-# sep_df()
-
-# sep(year = 2020)
 
 sep_params <- list(
     "y" = "years",
@@ -80,7 +69,10 @@ sep_params <- list(
 sep_params_translate <- function(params_list) {
     sep_params |>
         purrr::keep(~.x %in% names(params_list)) |>
-        purrr::map(~params_list[[.x]])
+        purrr::map(~params_list[[.x]]) |>
+        purrr::map(~ifelse(.x == "todos", "", .x))
 }
+
+
 
 
