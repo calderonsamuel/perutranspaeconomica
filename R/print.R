@@ -9,16 +9,18 @@ print.sep_df <- function(x) {
 }
 
 cli_query <- function(x) {
-    if (query_is_empty(x)) {
+    query <- get_query(x)
+    query_flattened <- purrr::flatten(query)
+    if (rlang::is_empty(query_flattened)) {
         cli::cli_alert_info("No se ha definido parámetros de consulta")
     } else {
-        cli_years(x)
-        cli_quien_gasta(x)
-        cli_en_que_se_gasta(x)
-        cli_con_que_se_financia(x)
-        cli_como_se_estructura(x)
-        cli_donde_se_gasta(x)
-        cli_cuando_se_hizo_gasto(x)
+        cli_years(query)
+        cli_quien_gasta(query)
+        cli_en_que_se_gasta(query)
+        cli_con_que_se_financia(query)
+        cli_como_se_estructura(query)
+        cli_donde_se_gasta(query)
+        cli_cuando_se_hizo_gasto(query)
     }
 }
 
@@ -31,8 +33,8 @@ cli_titulo <- function(x) {
     cli::cli_h1("Seguimiento a la ejecución presupuestal ({.emph actualización {actualizacion}})")
 }
 
-cli_years <- function(x) {
-    query <- get_query(x) |> purrr::flatten()
+cli_years <- function(query) {
+    query <- query |> purrr::flatten()
     if (!is.null(query$years)) {
         cli::cli_li("{.strong Años:}")
         cli::cli_ul()
@@ -40,8 +42,8 @@ cli_years <- function(x) {
     }
 }
 
-cli_quien_gasta <- function(x) {
-    consulta <- get_query(x)$quien_gasta
+cli_quien_gasta <- function(query) {
+    consulta <- query$quien_gasta
     if (!rlang::is_empty(consulta)) {
         cli::cli_li("{.strong ¿Quién gasta?:}")
         cli::cli_ul()
@@ -57,8 +59,19 @@ cli_quien_gasta <- function(x) {
     }
 }
 
-cli_en_que_se_gasta <- function(x){
-
+cli_en_que_se_gasta <- function(query){
+    consulta <- query$en_que_se_gasta
+    if (!rlang::is_empty(consulta)) {
+        cli::cli_li("{.strong ¿En qué se gasta?:}")
+        cli::cli_ul()
+        cli_li_optional(consulta$categoria_presupuestal, "Categoría presupuestal")
+        cli_li_optional(consulta$producto, "Producto")
+        cli_li_optional(consulta$actividad, "Actividad")
+        cli_li_optional(consulta$meta, "Meta")
+        cli_li_optional(consulta$funcion, "Función")
+        cli_li_optional(consulta$division_funcional, "División funcional")
+        cli_li_optional(consulta$grupo_funcional, "Grupo funcional")
+    }
 }
 
 cli_con_que_se_financia <- function(x){

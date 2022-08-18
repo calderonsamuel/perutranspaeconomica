@@ -37,7 +37,7 @@ choose_quien_gasta.sep_df <- function(x,
             municipalidad = municipalidad
         )
 
-    query <- purrr::list_modify(query, new_query)
+    query <- purrr::list_modify(query, quien_gasta = new_query)
     attr(x, "query") <- query
     x
 }
