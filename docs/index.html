@@ -12,8 +12,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Consulta el sistema de transparencia economica del MEF-Peru">
-<meta property="og:description" content="Obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz 
-    de programación consistente, clara y escalable.">
+<meta property="og:description" content="Obtener datos del Portal de Transparencia Económica Perú
+    desde R, con una interfaz de programación consistente, clara y
+    escalable.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -70,7 +71,7 @@
 <div class="page-header"><h1 id="perutranspaeconomica">perutranspaeconomica<a class="anchor" aria-label="anchor" href="#perutranspaeconomica"></a>
 </h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
+
 <p>El objetivo de <a href="https://github.com/calderonsamuel/perutranspaeconomica" class="external-link">perutranspaeconomica</a> es contar con una manera de obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente y clara.</p>
 <div class="section level2">
 <h2 id="aviso">Aviso<a class="anchor" aria-label="anchor" href="#aviso"></a>
@@ -105,11 +106,10 @@
 <p>Con este paquete puedes realizar consultas del Portal de Transparencia Económica del MEF-Perú, específicamente en el <a href="https://www.mef.gob.pe/es/?option=com_content&amp;language=es-ES&amp;Itemid=100944&amp;lang=es-ES&amp;view=article&amp;id=504" class="external-link">módulo de gasto de seguimiento a la ejecución presupuestal</a>.</p>
 <p>Empezamos por cargar el paquete:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/calderonsamuel/perutranspaeconomica" class="external-link">perutranspaeconomica</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'perutranspaeconomica' was built under R version 4.2.1</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/calderonsamuel/perutranspaeconomica" class="external-link">perutranspaeconomica</a></span><span class="op">)</span></span></code></pre></div>
 <p>Tenemos dos maneras de usar el paquete. En primer lugar, podemos usar la función <code><a href="reference/gasto.html">gasto()</a></code> para hacer una consulta directa. Por ejemplo, para obtener el gasto ejecutado en todos los productos del programa presupuestal “0031” en el 2021:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/gasto.html">gasto</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, categoria_presupuestal <span class="op">=</span> <span class="st">"0031"</span>, producto <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gasto.html">gasto</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, categoria_presupuestal <span class="op">=</span> <span class="st">"0031"</span>, producto <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 5 × 11</span></span>
 <span><span class="co">#&gt;    year cod_proyecto desc_proyecto     pia    pim certificacion compromiso_anual</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;</span></span>
@@ -122,7 +122,7 @@
 <span><span class="co">#&gt; #   devengado &lt;dbl&gt;, girado &lt;dbl&gt;, avance_percent &lt;dbl&gt;</span></span></code></pre></div>
 <p>La segunda opción es componer primero la lista de parámetros y luego ejecutar la consulta. Comenzamos por componer la lista:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/make_gasto_query.html">make_gasto_query</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, categoria_presupuestal <span class="op">=</span> <span class="st">"0031"</span>, producto <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/make_gasto_query.html">make_gasto_query</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, categoria_presupuestal <span class="op">=</span> <span class="st">"0031"</span>, producto <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $y</span></span>
 <span><span class="co">#&gt; [1] 2022</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -133,7 +133,7 @@
 <span><span class="co">#&gt; [1] ""</span></span></code></pre></div>
 <p>Como se puede ver, esto nos devuelve una lista nombrada en la que los nombres corresponden con los parámetros de consulta tal y como están definidos en la API del sistema del MEF. Además, componiendo la lista de esta manera se aprovecha el autocompletado.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/make_gasto_query.html">make_gasto_query</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, categoria_presupuestal <span class="op">=</span> <span class="st">"0031"</span>, producto <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/make_gasto_query.html">make_gasto_query</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, categoria_presupuestal <span class="op">=</span> <span class="st">"0031"</span>, producto <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="reference/perform_gasto_query.html">perform_gasto_query</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 8 × 11</span></span>
 <span><span class="co">#&gt;    year cod_proyecto desc_proyecto     pia    pim certificacion compromiso_anual</span></span>
@@ -142,10 +142,10 @@
 <span><span class="co">#&gt; 2  2022 2152344      MEJORAMIENTO … 1.81e4 1.81e4             0                0</span></span>
 <span><span class="co">#&gt; 3  2022 2152345      MEJORAMIENTO … 1.57e4 1.57e4             0                0</span></span>
 <span><span class="co">#&gt; 4  2022 2522056      ADQUISICION D… 0      2.3 e5        229900                0</span></span>
-<span><span class="co">#&gt; 5  2022 3000001      ACCIONES COMU… 8.78e6 9.10e6       8295159          5888995</span></span>
-<span><span class="co">#&gt; 6  2022 3000294      OPERACIONES D… 2.29e8 2.28e8     223549616        219793186</span></span>
-<span><span class="co">#&gt; 7  2022 3000490      HECTAREAS RED… 2.27e7 2.27e7      20266991         18095190</span></span>
-<span><span class="co">#&gt; 8  2022 3000492      PROCESOS JUDI… 8.00e6 8.13e6       7361405          7337575</span></span>
+<span><span class="co">#&gt; 5  2022 3000001      ACCIONES COMU… 8.78e6 9.10e6       8185102          6420329</span></span>
+<span><span class="co">#&gt; 6  2022 3000294      OPERACIONES D… 2.29e8 2.28e8     225026326        220646110</span></span>
+<span><span class="co">#&gt; 7  2022 3000490      HECTAREAS RED… 2.27e7 2.27e7      20280451         18243005</span></span>
+<span><span class="co">#&gt; 8  2022 3000492      PROCESOS JUDI… 8.00e6 8.13e6       7406405          7382575</span></span>
 <span><span class="co">#&gt; # … with 4 more variables: atencion_de_compromiso_mensual &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   devengado &lt;dbl&gt;, girado &lt;dbl&gt;, avance_percent &lt;dbl&gt;</span></span></code></pre></div>
 <p>De esta manera se obtiene el mismo resultado.</p>
@@ -191,7 +191,14 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main" class="external-link"><img src="https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=perutranspaeconomica" class="external-link"><img src="https://www.r-pkg.org/badges/version/perutranspaeconomica" alt="CRAN status"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+</ul>
+</div>
 
   </div>
 </div>
