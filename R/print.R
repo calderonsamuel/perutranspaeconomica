@@ -74,20 +74,47 @@ cli_en_que_se_gasta <- function(query){
     }
 }
 
-cli_con_que_se_financia <- function(x){
-
+cli_con_que_se_financia <- function(query){
+    consulta <- query$con_que_se_financia
+    if (!rlang::is_empty(consulta)) {
+        cli::cli_li("{.strong ¿Con qué se financia?:}")
+        cli::cli_ul()
+        cli_li_optional(consulta$fuente_financiamiento, "Fuente de financiamiento")
+        cli_li_optional(consulta$rubro, "Rubro")
+        cli_li_optional(consulta$tipo_de_recurso, "Tipo de recurso")
+    }
 }
 
-cli_como_se_estructura <- function(x){
-
+cli_como_se_estructura <- function(query){
+    consulta <- query$como_se_estructura
+    if (!rlang::is_empty(consulta)) {
+        cli::cli_li("{.strong ¿Cómo se estructura gasto?:}")
+        cli::cli_ul()
+        cli_li_optional(consulta$generica, "Genérica")
+        cli_li_optional(consulta$subgenerica, "Sub-genérica")
+        cli_li_optional(consulta$detalle_subgenerica, "Detalle de sub-genérica")
+        cli_li_optional(consulta$especifica, "Específica")
+        cli_li_optional(consulta$detalle_especifica, "Detalle de específica")
+    }
 }
 
-cli_donde_se_gasta <- function(x){
-
+cli_donde_se_gasta <- function(query){
+    consulta <- query$donde_se_gasta
+    if (!rlang::is_empty(consulta)) {
+        cli::cli_li("{.strong ¿Dónde se gasta?:}")
+        cli::cli_ul()
+        cli_li_optional(consulta$departamento_meta, "Departamento (meta)")
+    }
 }
 
-cli_cuando_se_hizo_gasto <- function(x){
-
+cli_cuando_se_hizo_gasto <- function(query){
+    consulta <- query$cuando_se_hizo_gasto
+    if (!rlang::is_empty(consulta)) {
+        cli::cli_li("{.strong ¿Cuándo se hizo gasto?:}")
+        cli::cli_ul()
+        cli_li_optional(consulta$trimestre, "Trimestre")
+        cli_li_optional(consulta$mes, "Mes")
+    }
 }
 
 cli_li_optional <- function(x, label) {

@@ -5,7 +5,7 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #'
-set_cuando_se_hizo <- function(trimestre = NULL, mes = NULL) {
+set_cuando_se_hizo_gasto <- function(trimestre = NULL, mes = NULL) {
     list(
         trimestre = trimestre,
         mes = mes

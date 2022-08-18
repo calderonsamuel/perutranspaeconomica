@@ -6,7 +6,7 @@
 #' @inheritParams set_con_que_se_financia
 #' @inheritParams set_como_se_estructura
 #' @inheritParams set_donde_se_gasta
-#' @inheritParams set_cuando_se_hizo
+#' @inheritParams set_cuando_se_hizo_gasto
 #'
 #' @return Una lista cuyos elementos tienen el key-value de los parámetros de la API
 #' @export
@@ -81,7 +81,7 @@ make_gasto_query <- function(years = NULL,
 
     donde_se_gasta <- set_donde_se_gasta(departamento_meta = departamento_meta)
 
-    cuando_se_hizo <- set_cuando_se_hizo(trimestre = trimestre, mes = mes)
+    cuando_se_hizo <- set_cuando_se_hizo_gasto(trimestre = trimestre, mes = mes)
 
     params <- list(
         quien_gasta,
