@@ -1,10 +1,11 @@
 # constructor
+#' @importFrom tibble tibble
 #' @noRd
-new_sep_df <- function(x = tibble::tibble(),
-                       query = query,
+new_sep_df <- function(query = query,
                        modulo = "gasto",
                        actualizacion = "diaria"
                        ) {
+    x <- tibble()
     class(x) <- c("sep_df", class(x))
     attr(x, "modulo") <- modulo
     attr(x, "actualizacion") <-  actualizacion

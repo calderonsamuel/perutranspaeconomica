@@ -16,9 +16,10 @@ gasto <- function(year, ..., actualizacion = "diaria") {
 }
 
 
-separate_cod_desc <- function(.data, .num_col = 2L) {
-    col_name <- names(.data[, .num_col])
-    if (col_name == "na_2") return(.data |> dplyr::rename(total = na_2))
+#' @importFrom rlang .data
+separate_cod_desc <- function(.dat, .num_col = 2L) {
+    col_name <- names(.dat[, .num_col])
+    if (col_name == "na_2") return(.dat |> dplyr::rename(total = .data$na_2))
     cod_col <- glue::glue("cod_{col_name}")
     desc_col <- glue::glue("desc_{col_name}")
 
@@ -26,15 +27,16 @@ separate_cod_desc <- function(.data, .num_col = 2L) {
         tidyr::separate(col = .num_col, into = c(cod_col, desc_col), sep = ": ", extra = "merge")
 }
 
+#' @importFrom rlang .data
 process_tbl <- function(tbl, year) {
     tbl |>
         dplyr::mutate(year = year) |>
         dplyr::relocate(year) |>
         janitor::remove_empty("cols") |>
         dplyr::distinct(dplyr::across()) |>
-        dplyr::filter(!is.na(readr::parse_number(pia))) |>
+        dplyr::filter(!is.na(readr::parse_number(.data$pia))) |>
         separate_cod_desc() |>
-        dplyr::mutate(dplyr::across(pia:avance_percent, readr::parse_number)) |>
+        dplyr::mutate(dplyr::across(.data$pia:.data$avance_percent, readr::parse_number)) |>
         suppressWarnings()
 }
 

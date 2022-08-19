@@ -1,3 +1,4 @@
+#' @importFrom R6 R6Class
 SeguimientoEjecucion <- R6::R6Class(
     classname = "SeguimientoEjecucion",
     public = list(

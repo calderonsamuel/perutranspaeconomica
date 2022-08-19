@@ -1,5 +1,5 @@
 #' @export
-print.sep_df <- function(x) {
+print.sep_df <- function(x, ...) {
     cli_titulo(x)
     cli::cli_h2("Parámetros de consulta")
     cli_query(x)
