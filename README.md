@@ -13,6 +13,7 @@ coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/
 status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de
@@ -117,9 +118,9 @@ make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos")
 #> 3  2022 2152345      MEJORAMIENTO … 1.57e4 1.57e4             0                0
 #> 4  2022 2522056      ADQUISICION D… 0      2.3 e5        229900                0
 #> 5  2022 3000001      ACCIONES COMU… 8.78e6 9.10e6       8185102          6420329
-#> 6  2022 3000294      OPERACIONES D… 2.29e8 2.28e8     225026326        220646110
+#> 6  2022 3000294      OPERACIONES D… 2.29e8 2.28e8     225012111        220630407
 #> 7  2022 3000490      HECTAREAS RED… 2.27e7 2.27e7      20280451         18243005
-#> 8  2022 3000492      PROCESOS JUDI… 8.00e6 8.13e6       7406405          7382575
+#> 8  2022 3000492      PROCESOS JUDI… 8.00e6 8.13e6       7396785          7372955
 #> # … with 4 more variables: atencion_de_compromiso_mensual <dbl>,
 #> #   devengado <dbl>, girado <dbl>, avance_percent <dbl>
 ```
