@@ -71,10 +71,6 @@ SeguimientoEjecucion$set("private", "cli_years", function() {
         cli::cli_li("{.strong Años:}")
         cli::cli_ul()
         cli::cli_li("{private$years}")
-        # listado <- cli::cli_ul()
-        # private$years |>
-        #     purrr::walk(cli::cli_li)
-        # cli::cli_end(listado)
     }
 })
 
