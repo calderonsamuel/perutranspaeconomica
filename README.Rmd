@@ -20,15 +20,11 @@ knitr::opts_chunk$set(
 ![runiverse-package](https://calderonsamuel.r-universe.dev/badges/perutranspaeconomica)
 [![Codecov test coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente y clara.
-
-## Aviso
-
-Este paquete se encuentra aún en desarrollo, por lo que no se recomienda implementarlo en producción.
 
 ## Code of Conduct
 
@@ -61,32 +57,137 @@ remotes::install_github("calderonsamuel/perutranspaeconomica")
 
 Con este paquete puedes realizar consultas del Portal de Transparencia Económica del MEF-Perú, específicamente en el [módulo de gasto de seguimiento a la ejecución presupuestal](https://www.mef.gob.pe/es/?option=com_content&language=es-ES&Itemid=100944&lang=es-ES&view=article&id=504).
 
+El paquete propone un flujo de trabajo de 1) iniciar consulta, 2) elegir parámetros, y 3) ejecutar consulta. Para ello, se ha creado la clase 'sep_df' para consolidar una infraestructura interna consistente. EL usuario común no va a necesitar interactuar con esa infraestructura directamente ya que se han agregado funciones de soporte que habilitan una interfaz de programación más amigable.
+
 Empezamos por cargar el paquete:
 
 ```{r example}
 library(perutranspaeconomica)
 ```
 
-Tenemos dos maneras de usar el paquete. En primer lugar, podemos usar la función `gasto()` para hacer una consulta directa. Por ejemplo, para obtener el gasto ejecutado en todos los productos del programa presupuestal "0031" en el 2021:
+### Iniciar consulta
+
+Para iniciar una consulta tan solo hace falta usar la función `sep()`. Esto crea un dataframe vacío y muestra los parámetros de consulta agregados. Al inicio no tenemos parámetros ni data.
 
 ```{r}
-gasto(year = 2021, categoria_presupuestal = "0031", producto = "todos")
+sep()
 ```
 
-La segunda opción es componer primero la lista de parámetros y luego ejecutar la consulta. Comenzamos por componer la lista:
+### Elegir parámetros de consulta
+
+La elección de parámetros de consulta se hace con las funciones que `choose_*()`. Por ejemplo, para consultas en el módulo de gasto presupuestal, se pueden utilizar las siguientes:
+
+- `choose_years()` 
+- `choose_quien_gasta()`
+- `choose_en_que_se_gasta()`
+- `choose_como_se_estructura()`
+- `choose_cuando_se_hizo_gasto()`
+- `choose_donde_se_gasta()`
+
+De todas ellas, la mínima requerida es `choose_years()`. 
+
+Una vez que se le agrega parámetros a la consulta, la interfaz lo refleja. `choose_years()` utiliza por defecto el año en curso
 
 ```{r}
-make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos")
+sep() |> 
+    choose_years()
 ```
 
-Como se puede ver, esto nos devuelve una lista nombrada en la que los nombres corresponden con los parámetros de consulta tal y como están definidos en la API del sistema del MEF. Además, componiendo la lista de esta manera se aprovecha el autocompletado.
+Cada argumento de las funciones `choose_*()` puede aceptar vectores con más de un elemento para una consulta más potente.
 
 ```{r}
-make_gasto_query(year=2022, categoria_presupuestal = "0031", producto = "todos") |> 
-    perform_gasto_query()
+sep() |> 
+    choose_years(years = 2020:2022)
 ```
 
-De esta manera se obtiene el mismo resultado.
+Sin embargo, en el resto de parámetros, es necesario que al menos un argumento esté definido como `"todos"`. Más adelante se verá que en caso contrario la consulta no prosperará.
+
+```r
+# malo. dos argumentos definidos como "todos"
+sep() |> 
+    choose_years() |> 
+    choose_quien_gasta(nivel = "todos") |> 
+    choose_donde_se_gasta(departamento_meta = "todos")
+```
+
+```{r}
+# bueno. solo un argumento definido como "todos"
+sep() |> 
+    choose_years() |> 
+    choose_quien_gasta(nivel = "E") |> 
+    choose_donde_se_gasta(departamento_meta = "todos") 
+```
+
+Todos los métodos `choose_*()` cuentan con documentación referente a cómo deben ser definidos. Para mayor detalle consultar el método específico. Por ejemplo, `help("choose_quien_gasta")` o `?choose_quien_gasta`.
+
+### Consultar
+
+Una vez definidos los parámetros de la consulta, solo hace falta ejecutarla. Para ello, usamos la función `consultar()`. Esto nos devolverá la interfaz de consulta, pero ahora contendrá la data requerida. 
+
+```{r}
+# ¿Cómo va la ejecución presupuestal por departamento en el gobierno nacional?
+sep() |> 
+    choose_years() |> 
+    choose_quien_gasta(nivel = "E") |> 
+    choose_donde_se_gasta(departamento_meta = "todos") |> 
+    consultar()
+```
+
+Se recomienda asignarle nombre a una consulta ejecutada para evitar posibles tediosas re-descargas, especialmente cuando la consulta usa parámetros con vectores más grandes.
+
+```{r}
+# ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
+mi_consulta <- sep() |> 
+    choose_years(2015:2021) |> 
+    choose_en_que_se_gasta(categoria_presupuestal = "0031") |> 
+    choose_como_se_estructura(generica = "todos") |> 
+    consultar()
+
+mi_consulta
+```
+
+Nunca definir más de un parámetro de consulta como `"todos"` porque (por ahora) producirá un incomprensible.
+
+```{r, error=TRUE}
+# malo. dos argumentos definidos como "todos"
+sep() |> 
+    choose_years() |> 
+    choose_quien_gasta(nivel = "todos") |> 
+    choose_donde_se_gasta(departamento_meta = "todos") |> 
+    consultar()
+```
+
+Una vez obtenida la consulta requerida, es posible tratar los datos obtenidos como cualquier otro dataframe en R. Por ejemplo, para calcular el porcentaje de presupuesto destinado a personal y obligaciones sociales por periodo anual.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+
+mi_consulta |> 
+    select(year, desc_generica, pim) |> 
+    group_by(year) |> 
+    mutate(porc_presupuesto = (pim/sum(pim)*100) |> round(1)) |> 
+    ungroup() |> 
+    filter(desc_generica == "PERSONAL Y OBLIGACIONES SOCIALES")
+```
+
+También es posible usar los datos obtenidos directamente para un gráfico con `ggplot2`.
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+mi_consulta |> 
+    ggplot(aes(year, pim, color = cod_generica)) +
+    geom_line() +
+    scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))
+```
+
+
+
+
+
+
+
+
 
 
 

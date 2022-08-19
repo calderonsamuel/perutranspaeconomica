@@ -25,6 +25,30 @@
     <loc>/reference/api_gasto.html</loc>
   </url>
   <url>
+    <loc>/reference/choose_como_se_estructura.html</loc>
+  </url>
+  <url>
+    <loc>/reference/choose_con_que_se_financia.html</loc>
+  </url>
+  <url>
+    <loc>/reference/choose_cuando_se_hizo_gasto.html</loc>
+  </url>
+  <url>
+    <loc>/reference/choose_donde_se_gasta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/choose_en_que_se_gasta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/choose_quien_gasta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/choose_years.html</loc>
+  </url>
+  <url>
+    <loc>/reference/consultar.html</loc>
+  </url>
+  <url>
     <loc>/reference/gasto.html</loc>
   </url>
   <url>
@@ -41,6 +65,9 @@
   </url>
   <url>
     <loc>/reference/retrive_response_tbl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sep.html</loc>
   </url>
   <url>
     <loc>/reference/set_como_se_estructura.html</loc>

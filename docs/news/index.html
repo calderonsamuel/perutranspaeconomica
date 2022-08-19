@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">perutranspaeconomica</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -56,6 +56,30 @@
 <ul><li>Se puede usar <code><a href="../reference/gasto.html">gasto()</a></code> para hacer consultas sobre la ejecución presupuestal con actualización diaria o mensual.</li>
 <li>Se puede <em>pipear</em> <code><a href="../reference/make_gasto_query.html">make_gasto_query()</a></code> y <code><a href="../reference/perform_gasto_query.html">perform_gasto_query()</a></code> para usar <code><a href="../reference/gasto.html">gasto()</a></code> aprovechando el autocompletado.</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.0" id="version-020">Version 0.2.0<a class="anchor" aria-label="anchor" href="#version-020"></a></h2>
+<div class="section level3">
+<h3 id="sep_df-0-2-0">‘sep_df’<a class="anchor" aria-label="anchor" href="#sep_df-0-2-0"></a></h3>
+<ul><li>Se creó la clase ‘sep_df’ como subclase de ‘tibble::tbl_df’.</li>
+<li>Los objetos ‘sep_df’ cuentan con un método <code>print.sep_df()</code> que muestra los parámetros de consulta mientras se van armando.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-0-2-0">Testing<a class="anchor" aria-label="anchor" href="#testing-0-2-0"></a></h3>
+<ul><li>El paquete ha incorporado una estructura de testing en el que todas sus funciones exportadas inician o devuelven un objeto de clase ‘sep_df’.</li>
+<li>El paquete cuenta con R CMD check automático, para mayor robustez.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="iniciar-elegir-y-consultar-0-2-0">Iniciar, elegir y consultar.<a class="anchor" aria-label="anchor" href="#iniciar-elegir-y-consultar-0-2-0"></a></h3>
+<ul><li>Para hacer consultas es necesario combinar las funciones <code><a href="../reference/sep.html">sep()</a></code>, alguna o varias del grupo <code>choose_*()</code> y <code><a href="../reference/consultar.html">consultar()</a></code>.</li>
+<li>Todos los parámetros indicados con funciones <code>choose_*()</code> aceptan vectores con longitud mayor a 1. De esta manera se pueden hacer múltiples consultas a la vez.</li>
+<li>Todos los parámetros indicados con funciones <code>choose_*()</code> pueden aceptar el string <code>'todos'</code>. De hecho, cualquier consulta requiere que al menos un parámetro esté indicado como <code>'todos'</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="gestión-del-repositorio-0-2-0">Gestión del repositorio<a class="anchor" aria-label="anchor" href="#gesti%C3%B3n-del-repositorio-0-2-0"></a></h3>
+<ul><li>A partir de la versión 0.2.0, <code>main</code> pasa a ser la versión estable, por compatibilidad con la infraestructura de r-universe. La versión en desarrollo será trabajada en <code>devel</code>, que será el branch que recibirá pull requests.</li>
+<li>El paquete deja de ser considerado experimental y pasa a ser estable. El README reflejará ese cambio.</li>
+</ul></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
