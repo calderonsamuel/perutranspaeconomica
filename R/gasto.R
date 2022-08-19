@@ -23,7 +23,7 @@ separate_cod_desc <- function(.dat, .num_col = 2L) {
     cod_col <- glue::glue("cod_{col_name}")
     desc_col <- glue::glue("desc_{col_name}")
 
-    .data |>
+    .dat |>
         tidyr::separate(col = .num_col, into = c(cod_col, desc_col), sep = ": ", extra = "merge")
 }
 
