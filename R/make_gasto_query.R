@@ -1,12 +1,12 @@
 #' Armar el query detallado para consulta de ejecución presupuestal
 #'
 #' @param years Año del cual se quiere obtener la información
-#' @inheritParams set_quien_gasta
-#' @inheritParams set_en_que_se_gasta
-#' @inheritParams set_con_que_se_financia
-#' @inheritParams set_como_se_estructura
-#' @inheritParams set_donde_se_gasta
-#' @inheritParams set_cuando_se_hizo_gasto
+#' @inheritParams choose_quien_gasta
+#' @inheritParams choose_en_que_se_gasta
+#' @inheritParams choose_con_que_se_financia
+#' @inheritParams choose_como_se_estructura
+#' @inheritParams choose_donde_se_gasta
+#' @inheritParams choose_cuando_se_hizo_gasto
 #'
 #' @return Una lista cuyos elementos tienen el key-value de los parámetros de la API
 #' @export

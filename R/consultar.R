@@ -1,3 +1,8 @@
+#' Ejecutar consulta de seguimiento a la ejecución presupuestal
+#'
+#' @param x Objeto de clase 'sep_df' que contiene los parámetros de la consulta deseada
+#'
+#' @return sep_df. Tabla que contiene el resultado de la consulta solicitada
 #' @export
 consultar <- function(x) UseMethod("consultar")
 
