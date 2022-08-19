@@ -36,10 +36,10 @@ SeguimientoEjecucion$set("public", "initialize", function(
 })
 
 SeguimientoEjecucion$set("public", "print", function() {
-    cli::cli_h1("Seguimiento a la ejecución presupuestal ({.emph {private$actualizacion}})")
-    cli::cli_h2("Parámetros de búsqueda")
+    cli::cli_h1("Seguimiento a la ejecucion presupuestal ({.emph {private$actualizacion}})")
+    cli::cli_h2("Parametros de consulta")
     cli::cli_ul()
-    # cli::cli_li("Actualización: {private$actualizacion}")
+    # cli::cli_li("Actualizacion: {private$actualizacion}")
     private$cli_years()
     private$cli_quien_gasta()
     private$cli_en_que_se_gasta()
@@ -67,9 +67,9 @@ SeguimientoEjecucion$set("public", "set_years", function(years) {
 
 SeguimientoEjecucion$set("private", "cli_years", function() {
     if (is.null(private$years)) {
-        cli::cli_li("{.strong Años:} Sin definir")
+        cli::cli_li("{.strong Periodo anual:} Sin definir")
     } else {
-        cli::cli_li("{.strong Años:}")
+        cli::cli_li("{.strong Periodo anual:}")
         cli::cli_ul()
         cli::cli_li("{private$years}")
     }
@@ -83,7 +83,7 @@ SeguimientoEjecucion$set(
     value =  function() {
         consulta <- private$quien_gasta
         if (is.null(consulta)) return(NULL)
-        cli::cli_li("{.strong ¿Quién gasta?:}")
+        cli::cli_li("{.strong ¿Quien gasta?:}")
         sublista <- cli::cli_ul()
         private$cli_li_optional(consulta$nivel, "Nivel de gobierno")
         private$cli_li_optional(consulta$sector, "Sector")
@@ -128,19 +128,19 @@ SeguimientoEjecucion$set(
 
 
 
-## en qué se gasta ----
+## en que se gasta ----
 
 SeguimientoEjecucion$set("private", "cli_en_que_se_gasta", function() {
     consulta <- private$en_que_se_gasta
     if(is.null(consulta)) return(NULL)
-    cli::cli_li("{.strong ¿En qué se gasta?:}")
+    cli::cli_li("{.strong ¿En que se gasta?:}")
     sublista <- cli::cli_ul()
-    private$cli_li_optional(consulta$categoria_presupuestal, "Categoría presupuestal")
+    private$cli_li_optional(consulta$categoria_presupuestal, "Categoria presupuestal")
     private$cli_li_optional(consulta$producto, "Producto")
     private$cli_li_optional(consulta$actividad, "Actividad")
     private$cli_li_optional(consulta$meta, "Meta")
-    private$cli_li_optional(consulta$funcion, "Función")
-    private$cli_li_optional(consulta$division_funcional, "División funcional")
+    private$cli_li_optional(consulta$funcion, "Funcion")
+    private$cli_li_optional(consulta$division_funcional, "Division funcional")
     private$cli_li_optional(consulta$grupo_funcional, "Grupo funcional")
 })
 
@@ -171,7 +171,7 @@ SeguimientoEjecucion$set(
 SeguimientoEjecucion$set("private", "cli_con_que_se_financia", function() {
     consulta <- private$con_que_se_financia
     if(is.null(consulta)) return(NULL)
-    cli::cli_li("{.strong ¿Con qué se financia?:}")
+    cli::cli_li("{.strong ¿Con que se financia?:}")
     sublista <- cli::cli_ul()
     private$cli_li_optional(consulta$fuente_financiamiento, "Fuente de financiamiento")
     private$cli_li_optional(consulta$rubro, "Rubro")
@@ -198,13 +198,13 @@ SeguimientoEjecucion$set(
 SeguimientoEjecucion$set("private", "cli_como_se_estructura", function() {
     consulta <- private$como_se_estructura
     if(is.null(consulta)) return(NULL)
-    cli::cli_li("{.strong ¿Cómo se estructura gasto?:}")
+    cli::cli_li("{.strong ¿Como se estructura gasto?:}")
     sublista <- cli::cli_ul()
-    private$cli_li_optional(consulta$generica, "Genérica")
-    private$cli_li_optional(consulta$subgenerica, "Sub-genérica")
-    private$cli_li_optional(consulta$detalle_subgenerica, "Detalle de sub-genérica")
-    private$cli_li_optional(consulta$especifica, "Específica")
-    private$cli_li_optional(consulta$detalle_especifica, "Detalle de específica")
+    private$cli_li_optional(consulta$generica, "Generica")
+    private$cli_li_optional(consulta$subgenerica, "Sub-generica")
+    private$cli_li_optional(consulta$detalle_subgenerica, "Detalle de sub-generica")
+    private$cli_li_optional(consulta$especifica, "Especifica")
+    private$cli_li_optional(consulta$detalle_especifica, "Detalle de especifica")
 })
 
 SeguimientoEjecucion$set(
@@ -231,7 +231,7 @@ SeguimientoEjecucion$set(
 SeguimientoEjecucion$set("private", "cli_donde_se_gasta", function() {
     consulta <- private$donde_se_gasta
     if(is.null(consulta)) return(NULL)
-    cli::cli_li("{.strong ¿Dónde se gasta?:}")
+    cli::cli_li("{.strong ¿Donde se gasta?:}")
     sublista <- cli::cli_ul()
     private$cli_li_optional(consulta$departamento_meta, "Departamento (meta)")
 })
@@ -252,7 +252,7 @@ SeguimientoEjecucion$set(
 SeguimientoEjecucion$set("private", "cli_cuando_se_hizo_gasto", function() {
     consulta <- private$cuando_se_hizo_gasto
     if(is.null(consulta)) return(NULL)
-    cli::cli_li("{.strong ¿Cuándo se hizo gasto?:}")
+    cli::cli_li("{.strong ¿Cuando se hizo gasto?:}")
     sublista <- cli::cli_ul()
     private$cli_li_optional(consulta$trimestre, "Trimestre")
     private$cli_li_optional(consulta$mes, "Mes")
