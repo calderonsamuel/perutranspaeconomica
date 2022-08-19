@@ -1,3 +1,8 @@
+#' Elegir periodo anual de consulta
+#'
+#' @inheritParams consultar
+#' @param years numeric. Periodo anual de consulta
+#' @return sep_df
 #' @export
 choose_years <- function(x, years) UseMethod("choose_years")
 
