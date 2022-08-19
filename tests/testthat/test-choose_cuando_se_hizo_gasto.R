@@ -1,0 +1,10 @@
+test_that("choose_cuando_se_hizo_gasto() affects only query$cuando_se_hizo_gasto", {
+    query <- sep() |> choose_cuando_se_hizo_gasto(trimestre = "todos") |> get_query()
+    expect_null(query$years)
+    expect_type(query$cuando_se_hizo_gasto, "list")
+    expect_length(query$en_que_se_gasta, 0)
+    expect_length(query$quien_gasta, 0)
+    expect_length(query$como_se_estructura, 0)
+    expect_length(query$con_que_se_financia, 0)
+    expect_length(query$donde_se_gasta, 0)
+})

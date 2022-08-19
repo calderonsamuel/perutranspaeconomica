@@ -1,0 +1,10 @@
+test_that("choose_como_se_estructura() affects only query$como_se_estructura", {
+    query <- sep() |> choose_como_se_estructura(generica = "todos") |> get_query()
+    expect_null(query$years)
+    expect_type(query$como_se_estructura, "list")
+    expect_length(query$en_que_se_gasta, 0)
+    expect_length(query$quien_gasta, 0)
+    expect_length(query$con_que_se_financia, 0)
+    expect_length(query$cuando_se_hizo_gasto, 0)
+    expect_length(query$donde_se_gasta, 0)
+})
