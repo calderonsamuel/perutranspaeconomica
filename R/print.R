@@ -45,7 +45,7 @@ cli_years <- function(query) {
 cli_quien_gasta <- function(query) {
     consulta <- query$quien_gasta
     if (!rlang::is_empty(consulta)) {
-        cli::cli_li("{.strong ¿Quien gasta?:}")
+        cli::cli_li("{.strong Quien gasta:}")
         cli::cli_ul()
         cli_li_optional(consulta$nivel, "Nivel de gobierno")
         cli_li_optional(consulta$sector, "Sector")
@@ -62,7 +62,7 @@ cli_quien_gasta <- function(query) {
 cli_en_que_se_gasta <- function(query){
     consulta <- query$en_que_se_gasta
     if (!rlang::is_empty(consulta)) {
-        cli::cli_li("{.strong ¿En que se gasta?:}")
+        cli::cli_li("{.strong En que se gasta:}")
         cli::cli_ul()
         cli_li_optional(consulta$categoria_presupuestal, "Categoria presupuestal")
         cli_li_optional(consulta$producto, "Producto")
@@ -77,7 +77,7 @@ cli_en_que_se_gasta <- function(query){
 cli_con_que_se_financia <- function(query){
     consulta <- query$con_que_se_financia
     if (!rlang::is_empty(consulta)) {
-        cli::cli_li("{.strong ¿Con que se financia?:}")
+        cli::cli_li("{.strong Con que se financia:}")
         cli::cli_ul()
         cli_li_optional(consulta$fuente_financiamiento, "Fuente de financiamiento")
         cli_li_optional(consulta$rubro, "Rubro")
@@ -88,7 +88,7 @@ cli_con_que_se_financia <- function(query){
 cli_como_se_estructura <- function(query){
     consulta <- query$como_se_estructura
     if (!rlang::is_empty(consulta)) {
-        cli::cli_li("{.strong ¿Como se estructura gasto?:}")
+        cli::cli_li("{.strong Como se estructura gasto:}")
         cli::cli_ul()
         cli_li_optional(consulta$generica, "Generica")
         cli_li_optional(consulta$subgenerica, "Sub-generica")
@@ -101,7 +101,7 @@ cli_como_se_estructura <- function(query){
 cli_donde_se_gasta <- function(query){
     consulta <- query$donde_se_gasta
     if (!rlang::is_empty(consulta)) {
-        cli::cli_li("{.strong ¿Donde se gasta?:}")
+        cli::cli_li("{.strong Donde se gasta:}")
         cli::cli_ul()
         cli_li_optional(consulta$departamento_meta, "Departamento (meta)")
     }
@@ -110,7 +110,7 @@ cli_donde_se_gasta <- function(query){
 cli_cuando_se_hizo_gasto <- function(query){
     consulta <- query$cuando_se_hizo_gasto
     if (!rlang::is_empty(consulta)) {
-        cli::cli_li("{.strong ¿Cuando se hizo gasto?:}")
+        cli::cli_li("{.strong Cuando se hizo gasto:}")
         cli::cli_ul()
         cli_li_optional(consulta$trimestre, "Trimestre")
         cli_li_optional(consulta$mes, "Mes")
