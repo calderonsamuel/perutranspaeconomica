@@ -1,6 +1,7 @@
 test_that("check_years() works inside choose_years()", {
     df <- sep()
     expect_error(df |> choose_years(2011))
+    expect_error(df |> choose_years(list(2022)))
     expect_error(df |> choose_years(current_year() + 1))
 })
 
