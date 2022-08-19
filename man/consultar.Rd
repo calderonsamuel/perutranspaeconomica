@@ -7,7 +7,7 @@
 consultar(x)
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' que contiene los parámetros de la consulta deseada}
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
 }
 \value{
 sep_df. Tabla que contiene el resultado de la consulta solicitada

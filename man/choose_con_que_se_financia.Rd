@@ -12,6 +12,8 @@ choose_con_que_se_financia(
 )
 }
 \arguments{
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+
 \item{fuente_financiamiento}{int. Código de fuente de financiamiento.
 En su versión más reciente va del 1 al 5.}
 

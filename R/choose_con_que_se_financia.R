@@ -1,5 +1,6 @@
 #' Definir la sección '¿Con qué se financian los gastos?'
 #'
+#' @inheritParams consultar
 #' @param fuente_financiamiento int. Código de fuente de financiamiento.
 #' En su versión más reciente va del 1 al 5.
 #' @param rubro chr. código de rubro, de  forma "XX" (2).

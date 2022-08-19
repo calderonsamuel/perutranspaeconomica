@@ -10,7 +10,7 @@
 #' detalle de la sub-genérica "7-28.2.1" debe pasarse "2-8-2-1". La específica y
 #' detalle de específica siguen este patrón.
 #'
-#'
+#' @inheritParams consultar
 #' @param generica chr. Código de genérica de forma "X-X-X"
 #' @param subgenerica chr. Código de sub-genérica de forma "X-X-X"
 #' @param detalle_subgenerica chr. Código de detalle de sub-genérica de forma "X-X-X-X"

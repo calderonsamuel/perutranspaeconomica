@@ -1,5 +1,6 @@
 #' Definir la seccion de '¿Dónde se gasta?'
 #'
+#' @inheritParams consultar
 #' @param departamento_meta chr. Código de departamento.
 #' Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".
 #'

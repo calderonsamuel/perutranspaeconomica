@@ -18,6 +18,8 @@ choose_quien_gasta(
 )
 }
 \arguments{
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+
 \item{nivel}{chr. Nivel de gobierno. Puede ser "E" (gobierno nacional),
 "M" (gobiernos locales) o "R" (gobiernos regionales). Si es "E" o "R",
 le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}

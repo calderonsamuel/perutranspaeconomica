@@ -7,6 +7,8 @@
 choose_cuando_se_hizo_gasto(x, trimestre = NULL, mes = NULL)
 }
 \arguments{
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+
 \item{trimestre}{int. Número del 1 al 4}
 
 \item{mes}{int. Número del 1 al 12}

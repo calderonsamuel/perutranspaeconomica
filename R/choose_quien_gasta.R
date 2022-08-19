@@ -2,7 +2,7 @@
 #'
 #' El presupuesto público peruano hace uso de clasificadores presupuestales.
 #' La sección '¿quién gasta?' hace uso del clasificador institucional.
-#'
+#' @inheritParams consultar
 #' @param nivel chr. Nivel de gobierno. Puede ser "E" (gobierno nacional),
 #' "M" (gobiernos locales) o "R" (gobiernos regionales). Si es "E" o "R",
 #' le corresponde `sector`. Si es "M", le corresponde `goblocal_o_manc`.
@@ -32,6 +32,7 @@ choose_quien_gasta <- function(x,
     UseMethod("choose_quien_gasta")
 }
 
+#' @inheritParams choose_quien_gasta
 #' @export
 choose_quien_gasta.sep_df <- function(x,
                                       nivel = NULL,

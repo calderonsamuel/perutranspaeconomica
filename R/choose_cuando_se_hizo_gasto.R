@@ -1,5 +1,6 @@
 #' Definir la seccion de '¿Cuándo se hizo el gasto?'
 #'
+#' @inheritParams consultar
 #' @param trimestre int. Número del 1 al 4
 #' @param mes int. Número del 1 al 12
 #'

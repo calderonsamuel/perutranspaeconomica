@@ -16,6 +16,8 @@ choose_en_que_se_gasta(
 )
 }
 \arguments{
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+
 \item{categoria_presupuestal}{chr. Código de programa presupuestal de forma "XXXX" (4).
 Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
 

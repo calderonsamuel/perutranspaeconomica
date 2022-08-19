@@ -14,6 +14,8 @@ choose_como_se_estructura(
 )
 }
 \arguments{
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+
 \item{generica}{chr. Código de genérica de forma "X-X-X"}
 
 \item{subgenerica}{chr. Código de sub-genérica de forma "X-X-X"}

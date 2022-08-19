@@ -7,6 +7,8 @@
 choose_donde_se_gasta(x, departamento_meta = NULL)
 }
 \arguments{
+\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+
 \item{departamento_meta}{chr. Código de departamento.
 Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".}
 }

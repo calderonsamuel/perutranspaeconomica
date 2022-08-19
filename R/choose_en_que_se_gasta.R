@@ -1,5 +1,6 @@
 #' Definir la seccion de '¿En qué se gasta?'
 #'
+#' @inheritParams consultar
 #' @param categoria_presupuestal chr. Código de programa presupuestal de forma "XXXX" (4).
 #' Para Acciones Centrales usar "9001" y para APnoP usar "9002".
 #' @param producto chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).
