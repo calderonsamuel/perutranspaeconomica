@@ -11,10 +11,32 @@ consultar.sep_df <- function(x) {
     request <- get_req_url(x)
     expanded <- expand_query(x)
 
-    expanded |>
-        split_by_row() |>
-        purrr::map_dfr(ejecutar_consulta_individual, request = request) |>
+    splitted <- expanded |>
+        split_by_row()
+
+    n_consultas <- length(splitted)
+    consultas_recibidas <- vector("list", length = n_consultas)
+
+    cli::cli_alert_info("Iniciando consulta")
+
+    cli::cli_progress_bar("Ejecutando consulta", total = n_consultas, type = "tasks")
+
+    for(i in seq_len(n_consultas)) {
+        consultas_recibidas[[i]] <- ejecutar_consulta_individual(splitted[[i]], request)
+        cli::cli_progress_update()
+    }
+
+    cli::cli_progress_done()
+
+    cli::cli_alert_info("Unificando consultas...")
+
+    consultas_unificadas <- consultas_recibidas |>
+        purrr::map_dfr(~.x) |>
         inherit_attr(inherit_from = x)
+
+    cli::cli_alert_success("Consultas realizadas y unificadas")
+
+    consultas_unificadas
 }
 
 ejecutar_consulta_individual <- function(query_params, request) {
