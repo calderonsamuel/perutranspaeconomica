@@ -1,5 +1,5 @@
 test_that("elegir_donde_se_gasta() affects only query$donde_se_gasta", {
-    query <- sep() |> elegir_donde_se_gasta(departamento_meta = "todos") |> get_query()
+    query <- seguimiento_ep() |> elegir_donde_se_gasta(departamento_meta = "todos") |> get_query()
     expect_null(query$years)
     expect_type(query$donde_se_gasta, "list")
     expect_length(query$en_que_se_gasta, 0)

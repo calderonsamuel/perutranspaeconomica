@@ -1,5 +1,5 @@
 test_that("getters return the expected object", {
-  df <- sep()
+  df <- seguimiento_ep()
   expect_type(get_actualizacion(df), "character")
   expect_type(get_modulo(df), "character")
   expect_type(get_query(df), "list")

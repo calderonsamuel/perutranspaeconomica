@@ -1,5 +1,5 @@
 test_that("elegir_con_que_se_financia() affects only query$con_que_se_financia", {
-    query <- sep() |> elegir_con_que_se_financia(fuente_financiamiento = "todos") |> get_query()
+    query <- seguimiento_ep() |> elegir_con_que_se_financia(fuente_financiamiento = "todos") |> get_query()
     expect_null(query$years)
     expect_type(query$con_que_se_financia, "list")
     expect_length(query$en_que_se_gasta, 0)

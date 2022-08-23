@@ -4,7 +4,7 @@
 #'
 #' @return Objeto con clase 'sep_df' en el que se pueden agregar parámetros de consulta
 #' @export
-sep <- function(actualizacion = "diaria") {
+seguimiento_ep <- function(actualizacion = "diaria") {
     query <- list(
         years = NULL,
         quien_gasta = set_quien_gasta(),
