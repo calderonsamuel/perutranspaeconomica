@@ -1,4 +1,4 @@
-#' @inheritParams choose_como_se_estructura
+#' @inheritParams elegir_como_se_estructura
 #'
 set_como_se_estructura <- function(generica = NULL,
                                    subgenerica = NULL,

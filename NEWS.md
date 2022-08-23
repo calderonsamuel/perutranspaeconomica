@@ -21,9 +21,9 @@
 
 ## Iniciar, elegir y consultar.
 
-- Para hacer consultas es necesario combinar las funciones `sep()`, alguna o varias del grupo `choose_*()` y `consultar()`.
-- Todos los parámetros indicados con funciones `choose_*()` aceptan vectores con longitud mayor a 1. De esta manera se pueden hacer múltiples consultas a la vez.
-- Todos los parámetros indicados con funciones `choose_*()` pueden aceptar el string `'todos'`. De hecho, cualquier consulta requiere que al menos un parámetro esté indicado como `'todos'`.
+- Para hacer consultas es necesario combinar las funciones `sep()`, alguna o varias del grupo `elegir_*()` y `consultar()`.
+- Todos los parámetros indicados con funciones `elegir_*()` aceptan vectores con longitud mayor a 1. De esta manera se pueden hacer múltiples consultas a la vez.
+- Todos los parámetros indicados con funciones `elegir_*()` pueden aceptar el string `'todos'`. De hecho, cualquier consulta requiere que al menos un parámetro esté indicado como `'todos'`.
 
 ## Gestión del repositorio
 

@@ -19,17 +19,17 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #' @export
-choose_como_se_estructura <- function(x,
+elegir_como_se_estructura <- function(x,
                                       generica = NULL,
                                       subgenerica = NULL,
                                       detalle_subgenerica = NULL,
                                       especifica = NULL,
                                       detalle_especifica = NULL) {
-    UseMethod("choose_como_se_estructura")
+    UseMethod("elegir_como_se_estructura")
 }
 
 #' @export
-choose_como_se_estructura.sep_df <- function(x,
+elegir_como_se_estructura.sep_df <- function(x,
                                              generica = NULL,
                                              subgenerica = NULL,
                                              detalle_subgenerica = NULL,

@@ -19,7 +19,7 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #' @export
-choose_quien_gasta <- function(x,
+elegir_quien_gasta <- function(x,
                                nivel = NULL,
                                sector = NULL,
                                pliego = NULL,
@@ -29,12 +29,12 @@ choose_quien_gasta <- function(x,
                                departamento = NULL,
                                provincia = NULL,
                                municipalidad = NULL) {
-    UseMethod("choose_quien_gasta")
+    UseMethod("elegir_quien_gasta")
 }
 
-#' @inheritParams choose_quien_gasta
+#' @inheritParams elegir_quien_gasta
 #' @export
-choose_quien_gasta.sep_df <- function(x,
+elegir_quien_gasta.sep_df <- function(x,
                                       nivel = NULL,
                                       sector = NULL,
                                       pliego = NULL,

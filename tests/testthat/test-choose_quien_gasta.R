@@ -1,5 +1,5 @@
-test_that("choose_quien_gasta() affects only query$quien_gasta", {
-  query <- sep() |> choose_quien_gasta(nivel = "todos") |> get_query()
+test_that("elegir_quien_gasta() affects only query$quien_gasta", {
+  query <- sep() |> elegir_quien_gasta(nivel = "todos") |> get_query()
     expect_null(query$years)
     expect_length(query$en_que_se_gasta, 0)
     expect_length(query$como_se_estructura, 0)

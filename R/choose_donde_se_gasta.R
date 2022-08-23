@@ -6,13 +6,13 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #' @export
-choose_donde_se_gasta <- function(x,
+elegir_donde_se_gasta <- function(x,
                                   departamento_meta = NULL) {
-    UseMethod("choose_donde_se_gasta")
+    UseMethod("elegir_donde_se_gasta")
 }
 
 #' @export
-choose_donde_se_gasta.sep_df <- function(x,
+elegir_donde_se_gasta.sep_df <- function(x,
                                          departamento_meta = NULL) {
     query <- get_query(x)
 

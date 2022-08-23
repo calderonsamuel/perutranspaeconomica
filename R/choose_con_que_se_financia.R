@@ -10,15 +10,15 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #' @export
-choose_con_que_se_financia <- function(x,
+elegir_con_que_se_financia <- function(x,
                                        fuente_financiamiento = NULL,
                                        rubro = NULL,
                                        tipo_de_recurso = NULL) {
-    UseMethod("choose_con_que_se_financia")
+    UseMethod("elegir_con_que_se_financia")
 }
 
 #' @export
-choose_con_que_se_financia.sep_df <- function(x,
+elegir_con_que_se_financia.sep_df <- function(x,
                                               fuente_financiamiento = NULL,
                                               rubro = NULL,
                                               tipo_de_recurso = NULL) {

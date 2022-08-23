@@ -4,10 +4,10 @@
 #' @param years numeric. Periodo anual de consulta
 #' @return sep_df
 #' @export
-choose_years <- function(x, years) UseMethod("choose_years")
+elegir_years <- function(x, years) UseMethod("elegir_years")
 
 #' @export
-choose_years.sep_df <- function(x, years = current_year()) {
+elegir_years.sep_df <- function(x, years = current_year()) {
     check_years(years)
     query <- get_query(x)
     new_years <- list(years)

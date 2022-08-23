@@ -1,5 +1,5 @@
-test_that("choose_en_que_se_gasta() affects only query$en_que_se_gasta", {
-    query <- sep() |> choose_en_que_se_gasta(categoria_presupuestal = "todos") |> get_query()
+test_that("elegir_en_que_se_gasta() affects only query$en_que_se_gasta", {
+    query <- sep() |> elegir_en_que_se_gasta(categoria_presupuestal = "todos") |> get_query()
     expect_null(query$years)
     expect_type(query$en_que_se_gasta, "list")
     expect_length(query$donde_se_gasta, 0)

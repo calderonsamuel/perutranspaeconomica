@@ -12,7 +12,7 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #' @export
-choose_en_que_se_gasta <- function(x,
+elegir_en_que_se_gasta <- function(x,
                                    categoria_presupuestal = NULL,
                                    producto = NULL,
                                    actividad = NULL,
@@ -20,11 +20,11 @@ choose_en_que_se_gasta <- function(x,
                                    division_funcional = NULL,
                                    grupo_funcional = NULL,
                                    meta = NULL) {
-    UseMethod("choose_en_que_se_gasta")
+    UseMethod("elegir_en_que_se_gasta")
 }
 
 #' @export
-choose_en_que_se_gasta.sep_df <- function(x,
+elegir_en_que_se_gasta.sep_df <- function(x,
                                           categoria_presupuestal = NULL,
                                           producto = NULL,
                                           actividad = NULL,

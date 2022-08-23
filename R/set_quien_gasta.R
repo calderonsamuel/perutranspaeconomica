@@ -1,4 +1,4 @@
-#' @inheritParams choose_quien_gasta
+#' @inheritParams elegir_quien_gasta
 set_quien_gasta <- function(nivel = NULL,
                             sector = NULL,
                             pliego = NULL,

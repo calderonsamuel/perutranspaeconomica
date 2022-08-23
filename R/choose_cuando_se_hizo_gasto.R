@@ -6,14 +6,14 @@
 #'
 #' @return Una lista con nombres correspondientes a los endpoints de la API
 #' @export
-choose_cuando_se_hizo_gasto <- function(x,
+elegir_cuando_se_hizo_gasto <- function(x,
                                         trimestre = NULL,
                                         mes = NULL) {
-    UseMethod("choose_cuando_se_hizo_gasto")
+    UseMethod("elegir_cuando_se_hizo_gasto")
 }
 
 #' @export
-choose_cuando_se_hizo_gasto.sep_df <- function(x,
+elegir_cuando_se_hizo_gasto.sep_df <- function(x,
                                                trimestre = NULL,
                                                mes = NULL) {
     query <- get_query(x)

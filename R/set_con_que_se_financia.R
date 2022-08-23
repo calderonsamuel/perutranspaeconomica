@@ -1,5 +1,5 @@
 
-#' @inheritParams choose_con_que_se_financia
+#' @inheritParams elegir_con_que_se_financia
 set_con_que_se_financia <- function(fuente_financiamiento = NULL,
                                     rubro = NULL,
                                     tipo_de_recurso = NULL

@@ -93,24 +93,24 @@ sep()
 ### Elegir parámetros de consulta
 
 La elección de parámetros de consulta se hace con las funciones que
-`choose_*()`. Por ejemplo, para consultas en el módulo de gasto
+`elegir_*()`. Por ejemplo, para consultas en el módulo de gasto
 presupuestal, se pueden utilizar las siguientes:
 
--   `choose_years()`
--   `choose_quien_gasta()`
--   `choose_en_que_se_gasta()`
--   `choose_como_se_estructura()`
--   `choose_cuando_se_hizo_gasto()`
--   `choose_donde_se_gasta()`
+-   `elegir_years()`
+-   `elegir_quien_gasta()`
+-   `elegir_en_que_se_gasta()`
+-   `elegir_como_se_estructura()`
+-   `elegir_cuando_se_hizo_gasto()`
+-   `elegir_donde_se_gasta()`
 
-De todas ellas, la mínima requerida es `choose_years()`.
+De todas ellas, la mínima requerida es `elegir_years()`.
 
 Una vez que se le agrega parámetros a la consulta, la interfaz lo
-refleja. `choose_years()` utiliza por defecto el año en curso
+refleja. `elegir_years()` utiliza por defecto el año en curso
 
 ``` r
 sep() |> 
-    choose_years()
+    elegir_years()
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -124,12 +124,12 @@ sep() |>
 #> ℹ No se ha ejecutado ninguna consulta
 ```
 
-Cada argumento de las funciones `choose_*()` puede aceptar vectores con
+Cada argumento de las funciones `elegir_*()` puede aceptar vectores con
 más de un elemento para una consulta más potente.
 
 ``` r
 sep() |> 
-    choose_years(years = 2020:2022)
+    elegir_years(years = 2020:2022)
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -150,17 +150,17 @@ contrario la consulta no prosperará.
 ``` r
 # malo. dos argumentos definidos como "todos"
 sep() |> 
-    choose_years() |> 
-    choose_quien_gasta(nivel = "todos") |> 
-    choose_donde_se_gasta(departamento_meta = "todos")
+    elegir_years() |> 
+    elegir_quien_gasta(nivel = "todos") |> 
+    elegir_donde_se_gasta(departamento_meta = "todos")
 ```
 
 ``` r
 # bueno. solo un argumento definido como "todos"
 sep() |> 
-    choose_years() |> 
-    choose_quien_gasta(nivel = "E") |> 
-    choose_donde_se_gasta(departamento_meta = "todos") 
+    elegir_years() |> 
+    elegir_quien_gasta(nivel = "E") |> 
+    elegir_donde_se_gasta(departamento_meta = "todos") 
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -178,10 +178,10 @@ sep() |>
 #> ℹ No se ha ejecutado ninguna consulta
 ```
 
-Todos los métodos `choose_*()` cuentan con documentación referente a
+Todos los métodos `elegir_*()` cuentan con documentación referente a
 cómo deben ser definidos. Para mayor detalle consultar el método
-específico. Por ejemplo, `help("choose_quien_gasta")` o
-`?choose_quien_gasta`.
+específico. Por ejemplo, `help("elegir_quien_gasta")` o
+`?elegir_quien_gasta`.
 
 ### Consultar
 
@@ -193,9 +193,9 @@ requerida.
 ``` r
 # ¿Cómo va la ejecución presupuestal por departamento en el gobierno nacional?
 sep() |> 
-    choose_years() |> 
-    choose_quien_gasta(nivel = "E") |> 
-    choose_donde_se_gasta(departamento_meta = "todos") |> 
+    elegir_years() |> 
+    elegir_quien_gasta(nivel = "E") |> 
+    elegir_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()
 #> ℹ Iniciando consulta
 #> ℹ Unificando consultas...
@@ -239,9 +239,9 @@ parámetros con vectores más grandes.
 ``` r
 # ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
 mi_consulta <- sep() |> 
-    choose_years(2015:2021) |> 
-    choose_en_que_se_gasta(categoria_presupuestal = "0031") |> 
-    choose_como_se_estructura(generica = "todos") |> 
+    elegir_years(2015:2021) |> 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
+    elegir_como_se_estructura(generica = "todos") |> 
     consultar()
 #> ℹ Iniciando consulta
 #> ⠙ 2/7 ETA:  5s | Ejecutando consulta ⠹ 3/7 ETA:  4s | Ejecutando consulta ⠸ 4/7 ETA:  3s | Ejecutando consulta ⠼ 5/7 ETA:  2s | Ejecutando consulta ⠴ 6/7 ETA:  1s | Ejecutando consulta                                       ℹ Unificando consultas...
@@ -285,9 +285,9 @@ ahora) producirá un incomprensible.
 ``` r
 # malo. dos argumentos definidos como "todos"
 sep() |> 
-    choose_years() |> 
-    choose_quien_gasta(nivel = "todos") |> 
-    choose_donde_se_gasta(departamento_meta = "todos") |> 
+    elegir_years() |> 
+    elegir_quien_gasta(nivel = "todos") |> 
+    elegir_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()
 #> ℹ Iniciando consulta
 #> Error in `[[<-`(`*tmp*`, empty_str_name, value = empty_str_value): no such index at level 1

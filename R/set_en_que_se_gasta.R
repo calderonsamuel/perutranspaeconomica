@@ -1,4 +1,4 @@
-#' @inheritParams choose_en_que_se_gasta
+#' @inheritParams elegir_en_que_se_gasta
 set_en_que_se_gasta <- function(categoria_presupuestal = NULL,
                                 producto = NULL,
                                 actividad = NULL,
