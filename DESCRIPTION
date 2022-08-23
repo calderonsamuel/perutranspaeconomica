@@ -17,7 +17,6 @@ Imports:
     httr2,
     janitor,
     purrr,
-    R6,
     readr,
     rlang,
     rvest,
