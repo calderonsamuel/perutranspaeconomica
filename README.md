@@ -47,7 +47,7 @@ También puedes instalar la versión en desarrollo de
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("calderonsamuel/perutranspaeconomica")
+remotes::install_github("calderonsamuel/perutranspaeconomica", "devel")
 ```
 
 ## Ejemplo
@@ -197,6 +197,9 @@ sep() |>
     choose_quien_gasta(nivel = "E") |> 
     choose_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()
+#> ℹ Iniciando consulta
+#> ℹ Unificando consultas...
+#> ✔ Consultas realizadas y unificadas
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -214,16 +217,16 @@ sep() |>
 #> # A tibble: 26 × 11
 #>     year cod_departamento_meta desc_departamento_me…    pia    pim certificacion
 #>    <int> <chr>                 <chr>                  <dbl>  <dbl>         <dbl>
-#>  1  2022 01                    AMAZONAS              1.03e9 1.07e9     884461176
-#>  2  2022 02                    ANCASH                3.37e9 3.26e9    2615743947
-#>  3  2022 03                    APURIMAC              9.13e8 1.09e9     942827167
-#>  4  2022 04                    AREQUIPA              2.19e9 2.25e9    1909744614
-#>  5  2022 05                    AYACUCHO              1.14e9 1.29e9    1134941063
-#>  6  2022 06                    CAJAMARCA             2.03e9 2.31e9    1976494630
-#>  7  2022 07                    PROVINCIA CONSTITUCI… 2.72e9 3.05e9    2876702415
-#>  8  2022 08                    CUSCO                 3.20e9 3.34e9    2902237770
-#>  9  2022 09                    HUANCAVELICA          1.06e9 1.01e9     848055170
-#> 10  2022 10                    HUANUCO               1.64e9 1.67e9    1443358550
+#>  1  2022 01                    AMAZONAS              1.03e9 1.08e9     885621298
+#>  2  2022 02                    ANCASH                3.37e9 3.27e9    2631476015
+#>  3  2022 03                    APURIMAC              9.13e8 1.08e9     944808773
+#>  4  2022 04                    AREQUIPA              2.19e9 2.25e9    1935578841
+#>  5  2022 05                    AYACUCHO              1.14e9 1.29e9    1138568494
+#>  6  2022 06                    CAJAMARCA             2.03e9 2.32e9    1991342959
+#>  7  2022 07                    PROVINCIA CONSTITUCI… 2.72e9 3.15e9    2880961617
+#>  8  2022 08                    CUSCO                 3.20e9 3.34e9    2900200250
+#>  9  2022 09                    HUANCAVELICA          1.06e9 1.01e9     850755286
+#> 10  2022 10                    HUANUCO               1.64e9 1.66e9    1444721591
 #> # … with 16 more rows, and 5 more variables: compromiso_anual <dbl>,
 #> #   atencion_de_compromiso_mensual <dbl>, devengado <dbl>, girado <dbl>,
 #> #   avance_percent <dbl>
@@ -240,8 +243,12 @@ mi_consulta <- sep() |>
     choose_en_que_se_gasta(categoria_presupuestal = "0031") |> 
     choose_como_se_estructura(generica = "todos") |> 
     consultar()
+#> ℹ Iniciando consulta
+#> ⠙ 2/7 ETA:  5s | Ejecutando consulta ⠹ 3/7 ETA:  4s | Ejecutando consulta ⠸ 4/7 ETA:  3s | Ejecutando consulta ⠼ 5/7 ETA:  2s | Ejecutando consulta ⠴ 6/7 ETA:  1s | Ejecutando consulta                                       ℹ Unificando consultas...
+#> ✔ Consultas realizadas y unificadas
 
 mi_consulta
+#> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
 #> ── Parametros de consulta ──
@@ -254,7 +261,6 @@ mi_consulta
 #>   • Generica: todos
 #> 
 #> ── Data ──
-#> 
 #> # A tibble: 28 × 11
 #>     year cod_generica desc_generica    pia    pim certificacion compromiso_anual
 #>    <int> <chr>        <chr>          <dbl>  <dbl>         <dbl>            <dbl>
@@ -283,6 +289,7 @@ sep() |>
     choose_quien_gasta(nivel = "todos") |> 
     choose_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()
+#> ℹ Iniciando consulta
 #> Error in `[[<-`(`*tmp*`, empty_str_name, value = empty_str_value): no such index at level 1
 ```
 

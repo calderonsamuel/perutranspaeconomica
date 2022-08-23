@@ -50,7 +50,7 @@ También puedes instalar la versión en desarrollo de `{perutranspaeconomica}` d
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("calderonsamuel/perutranspaeconomica")
+remotes::install_github("calderonsamuel/perutranspaeconomica", "devel")
 ```
 
 ## Ejemplo
