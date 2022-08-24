@@ -6,7 +6,7 @@ test_that("consultar() falla si no se especifica año de búsqueda", {
 
 test_that("consultar() devuelve un objeto 'sep_df'", {
     df <- seguimiento_ep() |> elegir_years()
-    expect_s3_class(df |> consultar(), "sep_df")
+    expect_s3_class(df |> consultar() |> suppressMessages(), "sep_df")
 })
 
 test_that("consultar() sirve para todos los elementos de query()", {
