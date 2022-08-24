@@ -22,7 +22,8 @@ Imports:
     rvest,
     stats,
     tibble,
-    tidyr
+    tidyr,
+    tidyselect
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
