@@ -24,7 +24,9 @@ sep_params <- list(
     "13" = "meta",
     "8" = "funcion",
     "33" = "division_funcional",
-    "34" = "grupo_funcional"
+    "34" = "grupo_funcional",
+    "22" = "trimestre",
+    "23" = "mes"
 )
 
 sep_params_translate <- function(params_list) {
