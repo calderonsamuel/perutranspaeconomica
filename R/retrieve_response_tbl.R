@@ -4,7 +4,7 @@
 #'
 #' @return Un tibble
 #'
-retrive_response_tbl <- function(response){
+retrieve_response_tbl <- function(response){
     column_names <- retrieve_html_tbl(response, "header") |>
         janitor::row_to_names(2) |>
         janitor::clean_names() |>
