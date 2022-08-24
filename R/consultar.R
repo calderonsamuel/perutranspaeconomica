@@ -40,17 +40,22 @@ consultar.sep_df <- function(x) {
 }
 
 ejecutar_consulta_individual <- function(query_params, request) {
-    lista <- as.list(query_params)
+    lista_amigable <- as.list(query_params)
+    lista_translated <- sep_params_translate(lista_amigable)
     if (!years_is_only_param(query_params)) {
-        lista <- empty_str_to_last(lista)
+        lista_translated <- empty_str_to_last(lista_translated)
     }
 
-    year <- lista$y
-    params <- purrr::list_modify(.req = request, lista)
-    do.call(httr2::req_url_query, params) |>
+    params <- purrr::list_modify(.req = request, lista_translated)
+    tabla <- do.call(httr2::req_url_query, params) |>
         retrieve_html_body() |>
-        retrive_response_tbl() |>
-        process_tbl(year = year)
+        retrieve_response_tbl() |>
+        process_tbl()
+
+    lista_amigable |>
+        tibble::as_tibble() |>
+        dplyr::mutate(tabla = list(tabla)) |>
+        tidyr::unnest(tabla)
 }
 
 split_by_row <- function(.df) {
@@ -72,18 +77,6 @@ inherit_attr <- function(new_df, inherit_from) {
     new_df
 }
 
-#' @noRd
-expand_query <- function(x) UseMethod("expand_query")
-
-#' @export
-expand_query.sep_df <- function(x) {
-    query <- get_query(x) |> purrr::flatten()
-    check_years(query$years)
-    translated <- sep_params_translate(query)
-    expanded <- do.call(tidyr::expand_grid, translated)
-    expanded
-}
-
 empty_str_to_last <- function(x) {
     empty_str <- purrr::keep(x, ~.x == "")
     empty_str_name <- names(empty_str)
@@ -95,5 +88,5 @@ empty_str_to_last <- function(x) {
 
 years_is_only_param <- function(query) {
     qn <- names(query)
-    length(qn) == 1 && qn == "y"
+    length(qn) == 1 && qn == "years"
 }
