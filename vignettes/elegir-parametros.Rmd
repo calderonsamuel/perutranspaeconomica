@@ -1,0 +1,119 @@
+---
+title: "Elección de parámetros"
+author: "Samuel Calderon"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{elegir-parametros}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, include=FALSE}
+library(DiagrammeR)
+
+add_custom_node <- function(graph, label) {
+    add_node(
+        graph = graph, 
+        label = stringr::str_wrap(label, 12), 
+        node_aes = node_aes(shape = "rectangle", fontsize = 5)
+    )
+}
+
+add_custom_edge <- function(graph, from, to) {
+    add_edge(
+        graph = graph,
+        from = stringr::str_wrap(from, 12),
+        to = stringr::str_wrap(to, 12)
+    )
+}
+```
+
+
+
+A pesar de que este paquete brinda una manera de interactuar con la plataforma de seguimiento a la ejecución presupuestal, es necesario mencionar que yo (el autor del paquete) no he tenido ningún tipo de participación en el diseño, programación o mantenimiento de la plataforma del MEF. La plataforma no parece haber sido diseñada pensando en consultas fuera de su interfaz gráfica, que protege al usuario típico de tener que conocer las maneras tan distintas en que se definen sus parámetros, tanto en sus nombres como en sus valores esperados.
+
+Pero si estás leyendo esto significa que la interfaz definida por el equipo del MEF no es suficiente para tus propósitos, y tienes la disposición necesaria para invertir un poco de esfuerzo para obtener la gran recompensa de aprovechar de manera más eficiente la información de la plataforma. Siéntete libre de consultar este documento cuantas veces sea necesario.
+
+
+## El flujo de trabajo
+
+Como pasa con cualquier paquete en R, para usarlo debemos cargarlo. 
+
+```{r setup}
+library(perutranspaeconomica)
+```
+
+
+El flujo de trabajo propuesto por `{perutranspaeconomica}` consiste en:
+
+1. Iniciar
+2. Elegir
+3. Consultar
+
+Por lo pronto, iniciar no requiere más trabajo que el uso de `seguimiento_ep()`. Este documento busca explicar con mayor detalle la manera en que se deben definir los parámetros pasados a las funciones `elegir_*()` para, en combinación con `consultar()`, poder hacer consultas exitosas.
+
+## Funciones de elección
+
+El paquete permite especificar todas las consultas que se pueden hacer desde la plataforma del MEF, del 2012 en adelante. A continuación se explica cómo definir cada uno de los parámetros. En todos los casos se hará uso de `consultar()` para ver la tabla consultada.
+
+### Elegir periodo anual
+
+Para esto usamos `elegir_years()`. Toda consulta requiere que se defina el periodo anual. Cuando no se especifica ningún año dentro de esta función, se usa por defecto el año en curso. 
+
+```{r}
+seguimiento_ep() |> 
+    elegir_years() |> 
+    consultar()
+```
+
+Debido a que no estamos  especificando ningún otro parámetro aún, `consultar()` nos devuelve los datos del presupuesto total. Es la misma información que se obtiene al ingresar a la plataforma de manera normal.
+
+Es posible especificar más de un año de consulta. Para ello basta con especificar un vector numérico con los años que nos interesan.
+
+```{r}
+seguimiento_ep() |> 
+    elegir_years(c(2012, 2014, 2016)) |> 
+    consultar()
+```
+
+### Elegir quién gasta
+
+```{r, echo=FALSE}
+create_graph(attr_theme = "lr") |> 
+    add_custom_node(label = "Nivel de gobierno") |> 
+    add_custom_node(label = "Sector") |> 
+    add_custom_node(label = "Gob local o mancomunidad") |> 
+    add_custom_node(label = "Pliego") |> 
+    add_custom_node(label = "Unidad ejecutora") |> 
+    add_custom_node(label = "Departamento") |> 
+    add_custom_node(label = "Mancomunidad") |> 
+    add_custom_node(label = "Provincia") |> 
+    add_custom_node(label = "Municipalidad") |> 
+    add_custom_edge(from = "Nivel de gobierno", to = "Sector") |>
+    add_custom_edge(from = "Nivel de gobierno", to = "Gob local o mancomunidad") |>
+    add_custom_edge(from = "Sector", to = "Pliego") |> 
+    add_custom_edge(from = "Pliego", to = "Unidad ejecutora") |> 
+    add_custom_edge(from = "Gob local o mancomunidad", to = "Departamento") |> 
+    add_custom_edge(from = "Gob local o mancomunidad", to = "Mancomunidad") |> 
+    add_custom_edge(from = "Departamento", to = "Provincia") |> 
+    add_custom_edge(from = "Departamento", to = "Municipalidad") |> 
+    add_custom_edge(from = "Provincia", to = "Municipalidad") |> 
+    render_graph()
+```
+
+
+```{r}
+seguimiento_ep() |> 
+    elegir_quien_gasta()
+```
+
+
+
+
