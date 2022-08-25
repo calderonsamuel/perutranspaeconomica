@@ -18,6 +18,14 @@ knitr::opts_chunk$set(
 ```{r, include=FALSE}
 library(DiagrammeR)
 
+add_starter_node <- function(graph, label) {
+    add_node(
+        graph = graph, 
+        label = stringr::str_wrap(label, 12), 
+        node_aes = node_aes(shape = "circle", fontsize = 5)
+    )
+}
+
 add_custom_node <- function(graph, label) {
     add_node(
         graph = graph, 
@@ -87,6 +95,7 @@ seguimiento_ep() |>
 
 ```{r, echo=FALSE}
 create_graph(attr_theme = "lr") |> 
+    add_starter_node(label = "Consulta base") |> 
     add_custom_node(label = "Nivel de gobierno") |> 
     add_custom_node(label = "Sector") |> 
     add_custom_node(label = "Gob local o mancomunidad") |> 
@@ -96,6 +105,7 @@ create_graph(attr_theme = "lr") |>
     add_custom_node(label = "Mancomunidad") |> 
     add_custom_node(label = "Provincia") |> 
     add_custom_node(label = "Municipalidad") |> 
+    add_custom_edge(from = "Consulta base", to = "Nivel de gobierno") |>
     add_custom_edge(from = "Nivel de gobierno", to = "Sector") |>
     add_custom_edge(from = "Nivel de gobierno", to = "Gob local o mancomunidad") |>
     add_custom_edge(from = "Sector", to = "Pliego") |> 
@@ -113,6 +123,18 @@ create_graph(attr_theme = "lr") |>
 seguimiento_ep() |> 
     elegir_quien_gasta()
 ```
+
+### Elegir en qué se gasta
+
+
+
+### Elegir con qué se financian los gastos
+
+### Elegir cómo se estructura el gasto
+
+### Elegir dónde se gasta
+
+### Elegir cuándo se hizo el gasto
 
 
 
