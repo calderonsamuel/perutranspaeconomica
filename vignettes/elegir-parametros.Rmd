@@ -26,11 +26,12 @@ add_starter_node <- function(graph, label) {
     )
 }
 
-add_custom_node <- function(graph, label) {
+add_custom_node <- function(graph, label, type = NULL) {
     add_node(
         graph = graph, 
         label = stringr::str_wrap(label, 12), 
-        node_aes = node_aes(shape = "rectangle", fontsize = 5)
+        node_aes = node_aes(shape = "rectangle", fontsize = 5), 
+        type = type
     )
 }
 
@@ -38,11 +39,104 @@ add_custom_edge <- function(graph, from, to) {
     add_edge(
         graph = graph,
         from = stringr::str_wrap(from, 12),
-        to = stringr::str_wrap(to, 12)
+        to = stringr::str_wrap(to, 12), 
     )
 }
 ```
 
+```{r, eval=FALSE}
+grViz(
+    "digraph {
+
+    graph [layout = 'dot',
+           rankdir = 'LR',
+           outputorder = 'edgesfirst',
+           bgcolor = 'white']
+    
+    node [fontname = 'Helvetica',
+          fontsize = '5',
+          shape = 'rectangle',
+          fixedsize = 'true',
+          width = '0.5',
+          style = 'filled',
+          fillcolor = 'aliceblue',
+          color = 'gray70',
+          fontcolor = 'gray50']
+    cp; pp; ac; fu; df; gf; me;
+    
+    node [
+        fontname = 'Helvetica',
+          fontsize = '5',
+          shape = 'circle',
+          fixedsize = 'true',
+          width = '0.5',
+          style = 'filled',
+          fillcolor = 'aliceblue',
+          color = 'gray70',
+          fontcolor = 'gray50'
+    ]
+    cb;
+    
+    node [shape = point, width = 0, height = 0]
+    i1; i2; i3; i4;
+    
+    edge [fontname = 'Helvetica',
+         fontsize = '8',
+         minlen = '1.5',
+         color = 'gray80',
+         arrowsize = '0.5']
+    
+    subgraph {
+        fu -> df
+        df -> gf
+        gf -> me
+    }
+    
+    subgraph {
+        cp -> pp
+        pp -> ac
+    }
+    
+    subgraph {
+        i1 -> i2 [dir=back]
+        i2 -> i3 [dir=back]
+        i3 -> i4 [dir=back]
+    }
+    
+    subgraph {
+    {rank = same cp i1 fu}
+        cp -> i1 [dir=back]
+        i1 -> fu 
+    }
+    
+    subgraph {
+    {rank = same pp i2 df}
+        pp -> i2 
+        i2 -> df [dir=back]
+    }
+    
+    subgraph {
+    {rank = same ac i3 gf}
+        ac -> i3 
+        i3 -> gf [dir=back]
+    }
+    
+    subgraph {
+    {rank = same me i4}
+        # me -> i4
+        i4 -> me [dir=back]
+    }
+    
+    cb -> cp
+    cb -> fu
+    # cb -> i1 [len=1]
+    # cp -> i1
+    # fu -> i1
+    
+
+}"
+)
+```
 
 
 A pesar de que este paquete brinda una manera de interactuar con la plataforma de seguimiento a la ejecución presupuestal, es necesario mencionar que yo (el autor del paquete) no he tenido ningún tipo de participación en el diseño, programación o mantenimiento de la plataforma del MEF. La plataforma no parece haber sido diseñada pensando en consultas fuera de su interfaz gráfica, que protege al usuario típico de tener que conocer las maneras tan distintas en que se definen sus parámetros, tanto en sus nombres como en sus valores esperados.
@@ -94,7 +188,7 @@ seguimiento_ep() |>
 ### Elegir quién gasta
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
+graph_quien_gasta <- create_graph(attr_theme = "lr") |> 
     add_starter_node(label = "Consulta base") |> 
     add_custom_node(label = "Nivel de gobierno") |> 
     add_custom_node(label = "Sector") |> 
@@ -116,6 +210,8 @@ create_graph(attr_theme = "lr") |>
     add_custom_edge(from = "Departamento", to = "Municipalidad") |> 
     add_custom_edge(from = "Provincia", to = "Municipalidad") |> 
     render_graph()
+
+graph_quien_gasta
 ```
 
 
@@ -126,15 +222,143 @@ seguimiento_ep() |>
 
 ### Elegir en qué se gasta
 
+```{r}
+presupuestarios <- c("Categoría Presupuestal", "Producto o proyecto", "Actividad o acción de inversión u obra")
+funcionales <- c("Función", "División funcional", "Grupo funcional", "Meta")
+
+en_que_se_gasta_nodes <- create_node_df(
+    # id = 1:3,
+    n = 7,
+    label = c(presupuestarios, funcionales) |> stringr::str_wrap(12),
+    cluster = rep("Parámetros Presupuestarios", 3) |> c(rep("Funcionales", 4)),
+    shape = "rectangle", 
+    fontsize = 5
+) #|> 
+    # dplyr::mutate(label = stringr::str_wrap(label, 12))
+
+en_que_se_gasta_edges <- create_edge_df(
+    from = c(1, 2, 4, 5, 6),
+    to = c(2, 3, 5, 6, 7)
+)
+
+en_que_se_gasta_graph <- create_graph(attr_theme = "lr", nodes_df = en_que_se_gasta_nodes, edges_df = en_que_se_gasta_edges)
+```
+
+```{r, eval=FALSE}
+create_graph(attr_theme = "lr") |> 
+    add_starter_node("Consulta base") |> 
+    combine_graphs(en_que_se_gasta_graph) |> 
+    add_edge(1, 2) |>
+    add_edge(1, 5) |>
+    add_node(label = "invisible", ) |> 
+    add_custom_edge(from = "Categoría Presupuestal", to = "invisible") |>
+    add_custom_edge(from = "Producto o proyecto", to = "invisible") |>
+    add_custom_edge(from = "Actividad o acción de inversión u obra", to = "invisible") |>
+    add_custom_edge(from = "Función", to =  "invisible") |>
+    add_custom_edge(from = "División funcional", to =  "invisible") |>
+    add_custom_edge(from = "Grupo funcional", to =  "invisible") |>
+    add_custom_edge(from = "Meta", to =  "invisible") |>
+    # add_edge(2, 5) |> 
+    # add_edge(3, 5) |> 
+    # add_edge(4, 5) |> 
+    # add_edge(5, 2) |> 
+    # add_edge(6, 2) |> 
+    # add_edge(7, 2) |> 
+    # add_edge(8, 2) |> 
+    render_graph()
+```
+
+
+
+```{r}
+graph1 <- create_graph(attr_theme = "lr") |> 
+    add_custom_node("Categoría Presupuestal", type = "A") |> 
+    add_custom_node("Producto o proyecto", type = "A") |> 
+    add_custom_node("Actividad o acción de inversión u obra", type = "A") |> 
+    add_starter_node("Consulta base") |> 
+    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") |> 
+    add_custom_edge(from = "Categoría Presupuestal", to = "Producto o proyecto") |> 
+    add_custom_edge(from = "Producto o proyecto", to = "Actividad o acción de inversión u obra")
+
+render_graph(graph1)
+```
+
+```{r}
+graph2 <- create_graph(attr_theme = "lr") |> 
+    add_custom_node("Función") |> 
+    add_custom_node("División funcional") |> 
+    add_custom_node("Grupo funcional") |> 
+    add_custom_node("Meta") |> 
+    add_starter_node("Consulta base") |> 
+    add_custom_edge(from = "Consulta base", to = "Función") |> 
+    add_custom_edge(from = "Función", to = "División funcional") |> 
+    add_custom_edge(from = "División funcional", to = "Grupo funcional") |> 
+    add_custom_edge(from = "Grupo funcional", to = "Meta")
+
+render_graph(graph2)
+```
 
 
 ### Elegir con qué se financian los gastos
 
+```{r}
+create_graph(attr_theme = "lr") |> 
+    add_starter_node("Consulta base") |> 
+    add_custom_node("Fuente de financiamiento") |> 
+    add_custom_node("Rubro") |> 
+    add_custom_node("Tipo de recurso") |> 
+    add_custom_edge(from = "Consulta base", "Fuente de financiamiento") |> 
+    add_custom_edge(from = "Fuente de financiamiento", "Rubro") |> 
+    add_custom_edge(from = "Rubro", "Tipo de recurso") |> 
+    render_graph()
+```
+
+
 ### Elegir cómo se estructura el gasto
+
+```{r}
+create_graph(attr_theme = "lr") |> 
+    add_starter_node("Consulta base") |> 
+    add_custom_node("Genérica") |> 
+    add_custom_node("Subgenérica") |> 
+    add_custom_node("Detalle de subgenérica") |> 
+    add_custom_node("Específica") |> 
+    add_custom_node("Detalle de específica") |> 
+    add_custom_edge(from = "Consulta base", "Genérica") |>
+    add_custom_edge(from = "Genérica", "Subgenérica") |>
+    add_custom_edge(from = "Subgenérica", "Detalle de subgenérica") |>
+    add_custom_edge(from = "Detalle de subgenérica", "Específica") |>
+    add_custom_edge(from = "Específica", "Detalle de específica") |>
+    render_graph()
+```
+
 
 ### Elegir dónde se gasta
 
+```{r}
+graph_donde_se_gasta <- create_graph(attr_theme = "lr") |> 
+    add_starter_node(label = "Consulta base") |> 
+    add_custom_node("Departamento meta") |> 
+    add_custom_edge(from = "Consulta base", to = "Departamento meta") |> 
+    render_graph()
+
+graph_donde_se_gasta
+```
+
+
 ### Elegir cuándo se hizo el gasto
+
+```{r}
+create_graph(attr_theme = "lr") |> 
+    add_starter_node(label = "Consulta base") |> 
+    add_custom_node("Trimestre") |> 
+    add_custom_node("Mes") |> 
+    add_custom_edge(from = "Consulta base", to = "Trimestre") |> 
+    add_custom_edge(from = "Consulta base", to = "Mes") |> 
+    add_custom_edge(from = "Trimestre", to = "Mes") |> 
+    render_graph()
+```
+
 
 
 
