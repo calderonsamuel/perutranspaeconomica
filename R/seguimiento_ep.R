@@ -6,7 +6,7 @@
 #' @export
 seguimiento_ep <- function(actualizacion = "diaria") {
     query <- list(
-        years = NULL,
+        periodo = NULL,
         quien_gasta = set_quien_gasta(),
         en_que_se_gasta = set_en_que_se_gasta(),
         con_que_se_financia = set_con_que_se_financia(),

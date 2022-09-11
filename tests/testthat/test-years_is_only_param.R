@@ -1,5 +1,5 @@
 test_that("years_is_only_param() works for all elegir_*()", {
-  df <- seguimiento_ep() |> elegir_years()
+  df <- seguimiento_ep() |> elegir_periodo_anual()
   test_years_is_only_param <- function(x) get_query(x) |> purrr::flatten() |> years_is_only_param()
   expect_true(df |> test_years_is_only_param())
   expect_false(df |> elegir_quien_gasta("todos") |> test_years_is_only_param())

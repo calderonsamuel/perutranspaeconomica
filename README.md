@@ -96,21 +96,21 @@ La elección de parámetros de consulta se hace con las funciones que
 `elegir_*()`. Por ejemplo, para consultas en el módulo de gasto
 presupuestal, se pueden utilizar las siguientes:
 
--   `elegir_years()`
+-   `elegir_periodo_anual()`
 -   `elegir_quien_gasta()`
 -   `elegir_en_que_se_gasta()`
 -   `elegir_como_se_estructura()`
 -   `elegir_cuando_se_hizo_gasto()`
 -   `elegir_donde_se_gasta()`
 
-De todas ellas, la mínima requerida es `elegir_years()`.
+De todas ellas, la mínima requerida es `elegir_periodo_anual()`.
 
 Una vez que se le agrega parámetros a la consulta, la interfaz lo
-refleja. `elegir_years()` utiliza por defecto el año en curso
+refleja. `elegir_periodo_anual()` utiliza por defecto el año en curso
 
 ``` r
 seguimiento_ep() |> 
-    elegir_years()
+    elegir_periodo_anual()
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -129,7 +129,7 @@ más de un elemento para una consulta más potente.
 
 ``` r
 seguimiento_ep() |> 
-    elegir_years(years = 2020:2022)
+    elegir_periodo_anual(periodo = 2020:2022)
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -150,7 +150,7 @@ contrario la consulta no prosperará.
 ``` r
 # malo. dos argumentos definidos como "todos"
 seguimiento_ep() |> 
-    elegir_years() |> 
+    elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "todos") |> 
     elegir_donde_se_gasta(departamento_meta = "todos")
 ```
@@ -158,7 +158,7 @@ seguimiento_ep() |>
 ``` r
 # bueno. solo un argumento definido como "todos"
 seguimiento_ep() |> 
-    elegir_years() |> 
+    elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "E") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") 
 #> 
@@ -193,7 +193,7 @@ requerida.
 ``` r
 # ¿Cómo va la ejecución presupuestal por departamento en el gobierno nacional?
 seguimiento_ep() |> 
-    elegir_years() |> 
+    elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "E") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()
@@ -239,7 +239,7 @@ parámetros con vectores más grandes.
 ``` r
 # ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
 mi_consulta <- seguimiento_ep() |> 
-    elegir_years(2015:2021) |> 
+    elegir_periodo_anual(2015:2021) |> 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
     elegir_como_se_estructura(generica = "todos") |> 
     consultar()
@@ -285,7 +285,7 @@ ahora) producirá un incomprensible.
 ``` r
 # malo. dos argumentos definidos como "todos"
 seguimiento_ep() |> 
-    elegir_years() |> 
+    elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "todos") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()

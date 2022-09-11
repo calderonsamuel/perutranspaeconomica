@@ -88,5 +88,5 @@ empty_str_to_last <- function(x) {
 
 years_is_only_param <- function(query) {
     qn <- names(query)
-    length(qn) == 1 && qn == "years"
+    length(qn) == 1 && qn == "periodo"
 }

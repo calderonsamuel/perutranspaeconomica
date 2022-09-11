@@ -1,6 +1,6 @@
 check_years <- function(years) {
     if (is.null(years)) {
-        cli::cli_abort("Debe especificar periodo anual de consulta usando `elegir_years()`")
+        cli::cli_abort("Debe especificar periodo anual de consulta usando `elegir_periodo_anual()`")
     }
     if (is.list(years)) {
         cli::cli_abort("Periodo anual debe especificarse en un vector numerico")
