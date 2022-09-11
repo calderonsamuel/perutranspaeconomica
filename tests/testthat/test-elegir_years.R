@@ -12,3 +12,10 @@ test_that("elegir_periodo_anual() returns expected objects", {
     expect_type(get_query(df)$periodo[[1]], type = "integer")
 })
 
+test_that("periodos anuales distintos dan diferentes PIA", {
+    df1 <- seguimiento_ep() |> elegir_periodo_anual(2020) |> consultar() |> suppressMessages()
+    df2 <- seguimiento_ep() |> elegir_periodo_anual(2021) |> consultar() |> suppressMessages()
+
+    expect_false(identical(df1$pia, df2$pia))
+})
+

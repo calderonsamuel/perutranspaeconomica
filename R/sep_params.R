@@ -1,5 +1,5 @@
 sep_params <- list(
-    "y" = "periodo_anual",
+    "y" = "periodo",
     "1" = "nivel",
     "2" = "sector",
     "3" = "pliego",
