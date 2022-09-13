@@ -44,122 +44,27 @@ add_custom_edge <- function(graph, from, to) {
 }
 ```
 
-```{r, eval=FALSE}
-grViz(
-    "digraph {
-
-    graph [layout = 'dot',
-           rankdir = 'LR',
-           outputorder = 'edgesfirst',
-           bgcolor = 'white']
-    
-    node [fontname = 'Helvetica',
-          fontsize = '5',
-          shape = 'rectangle',
-          fixedsize = 'true',
-          width = '0.5',
-          style = 'filled',
-          fillcolor = 'aliceblue',
-          color = 'gray70',
-          fontcolor = 'gray50']
-    cp; pp; ac; fu; df; gf; me;
-    
-    node [
-        fontname = 'Helvetica',
-          fontsize = '5',
-          shape = 'circle',
-          fixedsize = 'true',
-          width = '0.5',
-          style = 'filled',
-          fillcolor = 'aliceblue',
-          color = 'gray70',
-          fontcolor = 'gray50'
-    ]
-    cb;
-    
-    node [shape = point, width = 0, height = 0]
-    i1; i2; i3; i4;
-    
-    edge [fontname = 'Helvetica',
-         fontsize = '8',
-         minlen = '1.5',
-         color = 'gray80',
-         arrowsize = '0.5']
-    
-    subgraph {
-        fu -> df
-        df -> gf
-        gf -> me
-    }
-    
-    subgraph {
-        cp -> pp
-        pp -> ac
-    }
-    
-    subgraph {
-        i1 -> i2 [dir=back]
-        i2 -> i3 [dir=back]
-        i3 -> i4 [dir=back]
-    }
-    
-    subgraph {
-    {rank = same cp i1 fu}
-        cp -> i1 [dir=back]
-        i1 -> fu 
-    }
-    
-    subgraph {
-    {rank = same pp i2 df}
-        pp -> i2 
-        i2 -> df [dir=back]
-    }
-    
-    subgraph {
-    {rank = same ac i3 gf}
-        ac -> i3 
-        i3 -> gf [dir=back]
-    }
-    
-    subgraph {
-    {rank = same me i4}
-        # me -> i4
-        i4 -> me [dir=back]
-    }
-    
-    cb -> cp
-    cb -> fu
-    # cb -> i1 [len=1]
-    # cp -> i1
-    # fu -> i1
-    
-
-}"
-)
-```
-
-
 A pesar de que este paquete brinda una manera de interactuar con la plataforma de seguimiento a la ejecución presupuestal, es necesario mencionar que yo (el autor del paquete) no he tenido ningún tipo de participación en el diseño, programación o mantenimiento de la plataforma del MEF. La plataforma no parece haber sido diseñada pensando en consultas fuera de su interfaz gráfica, que protege al usuario típico de tener que conocer las maneras tan distintas en que se definen sus parámetros, tanto en sus nombres como en sus valores esperados.
 
 Pero si estás leyendo esto significa que la interfaz definida por el equipo del MEF no es suficiente para tus propósitos, y tienes la disposición necesaria para invertir un poco de esfuerzo para obtener la gran recompensa de aprovechar de manera más eficiente la información de la plataforma. Siéntete libre de consultar este documento cuantas veces sea necesario.
 
-
 ## El flujo de trabajo
 
-Como pasa con cualquier paquete en R, para usarlo debemos cargarlo. 
+Como pasa con cualquier paquete en R, para usarlo debemos cargarlo.
 
 ```{r setup}
 library(perutranspaeconomica)
 ```
 
-
 El flujo de trabajo propuesto por `{perutranspaeconomica}` consiste en:
 
-1. Iniciar
-2. Elegir
-3. Consultar
+1.  Iniciar
+2.  Elegir
+3.  Consultar
 
 Por lo pronto, iniciar no requiere más trabajo que el uso de `seguimiento_ep()`. Este documento busca explicar con mayor detalle la manera en que se deben definir los parámetros pasados a las funciones `elegir_*()` para, en combinación con `consultar()`, poder hacer consultas exitosas.
+
+La interacción con el sistema del MEF es mejor aprovechable si se tienen conocimientos acerca de Sistema Nacional de Presupuesto Público. Para ello, recomiendo la lectura del [Decreto Legislativo Nº 1440 Decreto Legislativo del Sistema Nacional de Presupuesto Público](https://www.gob.pe/institucion/mef/normas-legales/201360-1440). En especial del sub capítulo II y III.
 
 ## Funciones de elección
 
@@ -167,25 +72,29 @@ El paquete permite especificar todas las consultas que se pueden hacer desde la 
 
 ### Elegir periodo anual
 
-Para esto usamos `elegir_years()`. Toda consulta requiere que se defina el periodo anual. Cuando no se especifica ningún año dentro de esta función, se usa por defecto el año en curso. 
+Para esto usamos `elegir_periodo_anual()`. Toda consulta requiere que se defina el periodo anual. Cuando no se especifica ningún año dentro de esta función, se usa por defecto el año en curso.
 
 ```{r}
 seguimiento_ep() |> 
-    elegir_years() |> 
+    elegir_periodo_anual() |> 
     consultar()
 ```
 
-Debido a que no estamos  especificando ningún otro parámetro aún, `consultar()` nos devuelve los datos del presupuesto total. Es la misma información que se obtiene al ingresar a la plataforma de manera normal.
+Debido a que no estamos especificando ningún otro parámetro aún, `consultar()` nos devuelve los datos del presupuesto total. Es la misma información que se obtiene al ingresar a la plataforma de manera normal.
 
 Es posible especificar más de un año de consulta. Para ello basta con especificar un vector numérico con los años que nos interesan.
 
 ```{r}
 seguimiento_ep() |> 
-    elegir_years(c(2012, 2014, 2016)) |> 
+    elegir_periodo_anual(c(2012, 2014, 2016)) |> 
     consultar()
 ```
 
+Cada sección que viene a continuación muestra un tipo de elección de detalle con uno o dos gráficos que explican la posible *ruta* tomando en cuenta los argumentos de la consulta. Al terminar de repasar cada tipo de elección se aclarará a qué se hace referencia con "Consulta base".
+
 ### Elegir quién gasta
+
+Esta función permite buscar la información de ejecución presupuestal según el tipo de entidad que queremos consultar. En su grado más alto de especificidad se puede llegar a diferenciar según Unidad Ejecutora, Municipio o Mancomunidad. El gráfico muestra todos los elementos de consulta intermedios a los que se puede acceder. Debe tenerse en cuenta que una vez tomada una "ruta" de consulta no es posible acceder a otra. Por ejemplo, no es posible consultar por pliego y departamento al mismo tiempo.
 
 ```{r, echo=FALSE}
 graph_quien_gasta <- create_graph(attr_theme = "lr") |> 
@@ -214,13 +123,54 @@ graph_quien_gasta <- create_graph(attr_theme = "lr") |>
 graph_quien_gasta
 ```
 
+A manera de ejemplo, si quisiéramos ver todos los niveles de gobierno disponibles lo especificamos en el argumento `nivel`. Recuerda que siempre es necesario usar `elegir_periodo_anual()`.
 
 ```{r}
 seguimiento_ep() |> 
-    elegir_quien_gasta()
+    elegir_periodo_anual() |> 
+    elegir_quien_gasta(nivel = "todos") |> 
+    consultar()
+```
+
+Con esto podemos ver que existen tres niveles de gobierno. En caso se escoja profundizar la consulta por Gobierno Nacional o Gobiernos Regionales se estaría tomando el camino de Sector. En este caso, escogemos Gobierno Nacional para ver el presupuesto por sector. Para ello, usamos el código del nivel de gobierno escogido. Nótese que para mayor comodidad en el procesamiento de los datos, se incluyen columnas extras con la metadata de la consulta.
+
+```{r}
+seguimiento_ep() |> 
+    elegir_periodo_anual() |> 
+    elegir_quien_gasta(nivel = "E", sector = "todos") |> 
+    consultar()
+```
+
+Ahora que se sabe cuáles son los sectores que conforman al gobierno nacional, podemos priorizar conocer la ejecución de alguno en específico. Por ejemplo, el sector salud. Para ello, actualizamos nuestros parámetros de búsqueda indicando el código del sector correspondiente y especificando conocer todos los pliegos que lo conforman.
+
+```{r}
+seguimiento_ep() |> 
+    elegir_periodo_anual() |> 
+    elegir_quien_gasta(nivel = "E", sector = "11", pliego = "todos") |> 
+    consultar()
+```
+
+Con esto, ahora podemos ver que el sector salud está conformado por cinco pliegos. Puede que ahora querramos ver los datos de las unidades ejecutoras del Ministerio de salud. Nuevamente, especificamos esto en la consulta.
+
+```{r}
+seguimiento_ep() |> 
+    elegir_periodo_anual() |> 
+    elegir_quien_gasta(nivel = "E", sector = "11", pliego = "011", unidad_ejecutora = "todos") |> 
+    consultar()
+```
+
+Este ha sido el nivel de detalle más profundo que brinda la consulta por esta ruta. El ejercicio es muy similar si se quiere obtener los datos por municipio. Por ejemplo, para conocer los datos de los distritos de la provincia de Cangallo, región Ayacucho.
+
+```{r}
+seguimiento_ep() |> 
+    elegir_periodo_anual() |> 
+    elegir_quien_gasta(nivel = "M", goblocal_o_manc = "M", departamento = "05", provincia = "02", municipalidad = "todos") |> 
+    consultar()
 ```
 
 ### Elegir en qué se gasta
+
+Para esta consulta hace falta encadenar la función `elegir_en_que_se_gasta()`. El sistema de consulta amigable del MEF hace pensar que
 
 ```{r}
 presupuestarios <- c("Categoría Presupuestal", "Producto o proyecto", "Actividad o acción de inversión u obra")
@@ -268,8 +218,6 @@ create_graph(attr_theme = "lr") |>
     render_graph()
 ```
 
-
-
 ```{r}
 graph1 <- create_graph(attr_theme = "lr") |> 
     add_custom_node("Categoría Presupuestal", type = "A") |> 
@@ -298,7 +246,6 @@ graph2 <- create_graph(attr_theme = "lr") |>
 render_graph(graph2)
 ```
 
-
 ### Elegir con qué se financian los gastos
 
 ```{r}
@@ -312,7 +259,6 @@ create_graph(attr_theme = "lr") |>
     add_custom_edge(from = "Rubro", "Tipo de recurso") |> 
     render_graph()
 ```
-
 
 ### Elegir cómo se estructura el gasto
 
@@ -332,7 +278,6 @@ create_graph(attr_theme = "lr") |>
     render_graph()
 ```
 
-
 ### Elegir dónde se gasta
 
 ```{r}
@@ -344,7 +289,6 @@ graph_donde_se_gasta <- create_graph(attr_theme = "lr") |>
 
 graph_donde_se_gasta
 ```
-
 
 ### Elegir cuándo se hizo el gasto
 
@@ -358,8 +302,3 @@ create_graph(attr_theme = "lr") |>
     add_custom_edge(from = "Trimestre", to = "Mes") |> 
     render_graph()
 ```
-
-
-
-
-
