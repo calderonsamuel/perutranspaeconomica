@@ -54,8 +54,10 @@ ejecutar_consulta_individual <- function(query_params, request) {
 
     lista_amigable |>
         tibble::as_tibble() |>
-        dplyr::mutate(tabla = list(tabla)) |>
-        tidyr::unnest(tabla)
+        dplyr::mutate(tabla = list(tabla), .before = 1) |>
+        tidyr::unnest(tabla) |>
+        dplyr::relocate(periodo, .before = 1)
+        # dplyr::relocate(tidyselect::all_of(num_columns), .after = periodo)
 }
 
 split_by_row <- function(.df) {
