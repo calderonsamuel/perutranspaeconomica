@@ -1,14 +1,5 @@
 # perutranspaeconomica (development version)
 
-# perutranspaeconomica 0.0.0.9000
-
-* Added a `NEWS.md` file to track changes to the package.
-
-# Version 0.1.0
-
-- Se puede usar `gasto()` para hacer consultas sobre la ejecución presupuestal con actualización diaria o mensual.
-- Se puede *pipear* `make_gasto_query()` y `perform_gasto_query()` para usar `gasto()` aprovechando el autocompletado.
-
 # Version 0.2.0
 
 ## 'sep_df'
@@ -31,3 +22,13 @@
 
 - A partir de la versión 0.2.0, `main` pasa a ser la versión estable, por compatibilidad con la infraestructura de r-universe. La versión en desarrollo será trabajada en `devel`, que será el branch que recibirá pull requests.
 - El paquete deja de ser considerado experimental y pasa a ser estable. El README reflejará ese cambio.
+
+# Version 0.1.0
+
+- Se puede usar `gasto()` para hacer consultas sobre la ejecución presupuestal con actualización diaria o mensual.
+- Se puede *pipear* `make_gasto_query()` y `perform_gasto_query()` para usar `gasto()` aprovechando el autocompletado.
+
+
+# perutranspaeconomica 0.0.0.9000
+
+* Added a `NEWS.md` file to track changes to the package.
