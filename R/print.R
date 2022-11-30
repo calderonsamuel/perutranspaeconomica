@@ -35,10 +35,10 @@ cli_titulo <- function(x) {
 
 cli_years <- function(query) {
     query <- query |> purrr::flatten()
-    if (!is.null(query$years)) {
+    if (!is.null(query$periodo)) {
         cli::cli_li("{.strong Periodo anual:}")
         cli::cli_ul()
-        cli::cli_li(glue::glue_collapse(query$years, sep = ", ", last = " y "))
+        cli::cli_li(glue::glue_collapse(query$periodo, sep = ", ", last = " y "))
     }
 }
 
