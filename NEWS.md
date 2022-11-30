@@ -1,6 +1,10 @@
-# perutranspaeconomica (development version)
+# perutranspaeconomica 0.3.0
 
-# Version 0.2.0
+- Se corrigió un bug en la impresión de la metadata de consulta para el parámetro.
+- Se mejoró muchísimo la documentación de la funcionalidad existente. Consultar `vignette("elegir-parametros", pkg = "perutranspaeconomica")`
+- Se añade un sitio web para referencia
+
+# perutranspaeconomica 0.2.0
 
 ## 'sep_df'
 
@@ -23,7 +27,7 @@
 - A partir de la versión 0.2.0, `main` pasa a ser la versión estable, por compatibilidad con la infraestructura de r-universe. La versión en desarrollo será trabajada en `devel`, que será el branch que recibirá pull requests.
 - El paquete deja de ser considerado experimental y pasa a ser estable. El README reflejará ese cambio.
 
-# Version 0.1.0
+# perutranspaeconomica 0.1.0
 
 - Se puede usar `gasto()` para hacer consultas sobre la ejecución presupuestal con actualización diaria o mensual.
 - Se puede *pipear* `make_gasto_query()` y `perform_gasto_query()` para usar `gasto()` aprovechando el autocompletado.
