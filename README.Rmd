@@ -165,8 +165,8 @@ Una vez obtenida la consulta requerida, es posible tratar los datos obtenidos co
 library(dplyr)
 
 mi_consulta |> 
-    select(year, desc_generica, pim) |> 
-    group_by(year) |> 
+    select(periodo, desc_generica, pim) |> 
+    group_by(periodo) |> 
     mutate(porc_presupuesto = (pim/sum(pim)*100) |> round(1)) |> 
     ungroup() |> 
     filter(desc_generica == "PERSONAL Y OBLIGACIONES SOCIALES")
@@ -178,7 +178,7 @@ También es posible usar los datos obtenidos directamente para un gráfico con `
 library(ggplot2)
 
 mi_consulta |> 
-    ggplot(aes(year, pim, color = cod_generica)) +
+    ggplot(aes(periodo, pim, color = cod_generica)) +
     geom_line() +
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))
 ```

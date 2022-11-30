@@ -72,9 +72,10 @@ library(perutranspaeconomica)
 
 ### Iniciar consulta
 
-Para iniciar una consulta tan solo hace falta usar la función `seguimiento_ep()`.
-Esto crea un dataframe vacío y muestra los parámetros de consulta
-agregados. Al inicio no tenemos parámetros ni data.
+Para iniciar una consulta tan solo hace falta usar la función
+`seguimiento_ep()`. Esto crea un dataframe vacío y muestra los
+parámetros de consulta agregados. Al inicio no tenemos parámetros ni
+data.
 
 ``` r
 seguimiento_ep()
@@ -96,12 +97,12 @@ La elección de parámetros de consulta se hace con las funciones que
 `elegir_*()`. Por ejemplo, para consultas en el módulo de gasto
 presupuestal, se pueden utilizar las siguientes:
 
--   `elegir_periodo_anual()`
--   `elegir_quien_gasta()`
--   `elegir_en_que_se_gasta()`
--   `elegir_como_se_estructura()`
--   `elegir_cuando_se_hizo_gasto()`
--   `elegir_donde_se_gasta()`
+- `elegir_periodo_anual()`
+- `elegir_quien_gasta()`
+- `elegir_en_que_se_gasta()`
+- `elegir_como_se_estructura()`
+- `elegir_cuando_se_hizo_gasto()`
+- `elegir_donde_se_gasta()`
 
 De todas ellas, la mínima requerida es `elegir_periodo_anual()`.
 
@@ -214,22 +215,23 @@ seguimiento_ep() |>
 #> 
 #> ── Data ──
 #> 
-#> # A tibble: 26 × 11
-#>     year cod_departamento_meta desc_departamento_me…    pia    pim certificacion
-#>    <int> <chr>                 <chr>                  <dbl>  <dbl>         <dbl>
-#>  1  2022 01                    AMAZONAS              1.03e9 1.08e9     885621298
-#>  2  2022 02                    ANCASH                3.37e9 3.27e9    2631476015
-#>  3  2022 03                    APURIMAC              9.13e8 1.08e9     944808773
-#>  4  2022 04                    AREQUIPA              2.19e9 2.25e9    1935578841
-#>  5  2022 05                    AYACUCHO              1.14e9 1.29e9    1138568494
-#>  6  2022 06                    CAJAMARCA             2.03e9 2.32e9    1991342959
-#>  7  2022 07                    PROVINCIA CONSTITUCI… 2.72e9 3.15e9    2880961617
-#>  8  2022 08                    CUSCO                 3.20e9 3.34e9    2900200250
-#>  9  2022 09                    HUANCAVELICA          1.06e9 1.01e9     850755286
-#> 10  2022 10                    HUANUCO               1.64e9 1.66e9    1444721591
-#> # … with 16 more rows, and 5 more variables: compromiso_anual <dbl>,
-#> #   atencion_de_compromiso_mensual <dbl>, devengado <dbl>, girado <dbl>,
-#> #   avance_percent <dbl>
+#> # A tibble: 26 × 13
+#>    periodo cod_de…¹ desc_departamento_meta            pia    pim certi…² compr…³
+#>      <int> <chr>    <chr>                           <dbl>  <dbl>   <dbl>   <dbl>
+#>  1    2022 01       AMAZONAS                       1.03e9 1.07e9  1.02e9  9.61e8
+#>  2    2022 02       ANCASH                         3.37e9 3.04e9  2.75e9  2.67e9
+#>  3    2022 03       APURIMAC                       9.13e8 1.09e9  1.02e9  9.48e8
+#>  4    2022 04       AREQUIPA                       2.19e9 2.20e9  2.12e9  2.05e9
+#>  5    2022 05       AYACUCHO                       1.14e9 1.34e9  1.26e9  1.19e9
+#>  6    2022 06       CAJAMARCA                      2.03e9 2.26e9  2.15e9  2.07e9
+#>  7    2022 07       PROVINCIA CONSTITUCIONAL DEL … 2.72e9 3.07e9  2.95e9  2.78e9
+#>  8    2022 08       CUSCO                          3.20e9 3.44e9  3.15e9  2.90e9
+#>  9    2022 09       HUANCAVELICA                   1.06e9 9.60e8  8.59e8  8.24e8
+#> 10    2022 10       HUANUCO                        1.64e9 1.61e9  1.50e9  1.43e9
+#> # … with 16 more rows, 6 more variables: atencion_de_compromiso_mensual <dbl>,
+#> #   devengado <dbl>, girado <dbl>, avance_percent <dbl>,
+#> #   departamento_meta <chr>, nivel <chr>, and abbreviated variable names
+#> #   ¹​cod_departamento_meta, ²​certificacion, ³​compromiso_anual
 ```
 
 Se recomienda asignarle nombre a una consulta ejecutada para evitar
@@ -261,22 +263,23 @@ mi_consulta
 #>   • Generica: todos
 #> 
 #> ── Data ──
-#> # A tibble: 28 × 11
-#>     year cod_generica desc_generica    pia    pim certificacion compromiso_anual
-#>    <int> <chr>        <chr>          <dbl>  <dbl>         <dbl>            <dbl>
-#>  1  2015 5-21         PERSONAL Y O… 1.62e8 1.62e8     161903968        161903968
-#>  2  2015 5-23         BIENES Y SER… 1.04e8 8.25e7      78873581         77855263
-#>  3  2015 5-25         OTROS GASTOS  7   e6 7.93e6       7929712          7927213
-#>  4  2015 6-26         ADQUISICION … 2.61e7 2.51e7      22911882         22856652
-#>  5  2016 5-21         PERSONAL Y O… 2.08e8 2.08e8     208113793        208113793
-#>  6  2016 5-23         BIENES Y SER… 8.00e7 8.47e7      84200881         82404677
-#>  7  2016 5-25         OTROS GASTOS  7   e6 7.45e6       7448352          7214068
-#>  8  2016 6-26         ADQUISICION … 0      2.15e6       2146782          1319582
-#>  9  2017 5-21         PERSONAL Y O… 2.09e8 2.09e8     209308943        209308943
-#> 10  2017 5-23         BIENES Y SER… 8.42e7 9.08e7      88905681         87661656
-#> # … with 18 more rows, and 4 more variables:
-#> #   atencion_de_compromiso_mensual <dbl>, devengado <dbl>, girado <dbl>,
-#> #   avance_percent <dbl>
+#> # A tibble: 28 × 13
+#>    periodo cod_ge…¹ desc_generica                     pia    pim certi…² compr…³
+#>      <int> <chr>    <chr>                           <dbl>  <dbl>   <dbl>   <dbl>
+#>  1    2015 5-21     PERSONAL Y OBLIGACIONES SOCIA… 1.62e8 1.62e8  1.62e8  1.62e8
+#>  2    2015 5-23     BIENES Y SERVICIOS             1.04e8 8.25e7  7.89e7  7.79e7
+#>  3    2015 5-25     OTROS GASTOS                   7   e6 7.93e6  7.93e6  7.93e6
+#>  4    2015 6-26     ADQUISICION DE ACTIVOS NO FIN… 2.61e7 2.51e7  2.29e7  2.29e7
+#>  5    2016 5-21     PERSONAL Y OBLIGACIONES SOCIA… 2.08e8 2.08e8  2.08e8  2.08e8
+#>  6    2016 5-23     BIENES Y SERVICIOS             8.00e7 8.47e7  8.42e7  8.24e7
+#>  7    2016 5-25     OTROS GASTOS                   7   e6 7.45e6  7.45e6  7.21e6
+#>  8    2016 6-26     ADQUISICION DE ACTIVOS NO FIN… 0      2.15e6  2.15e6  1.32e6
+#>  9    2017 5-21     PERSONAL Y OBLIGACIONES SOCIA… 2.09e8 2.09e8  2.09e8  2.09e8
+#> 10    2017 5-23     BIENES Y SERVICIOS             8.42e7 9.08e7  8.89e7  8.77e7
+#> # … with 18 more rows, 6 more variables: atencion_de_compromiso_mensual <dbl>,
+#> #   devengado <dbl>, girado <dbl>, avance_percent <dbl>, generica <chr>,
+#> #   categoria_presupuestal <chr>, and abbreviated variable names ¹​cod_generica,
+#> #   ²​certificacion, ³​compromiso_anual
 ```
 
 Nunca definir más de un parámetro de consulta como `"todos"` porque (por
@@ -302,21 +305,21 @@ sociales por periodo anual.
 library(dplyr)
 
 mi_consulta |> 
-    select(year, desc_generica, pim) |> 
-    group_by(year) |> 
+    select(periodo, desc_generica, pim) |> 
+    group_by(periodo) |> 
     mutate(porc_presupuesto = (pim/sum(pim)*100) |> round(1)) |> 
     ungroup() |> 
     filter(desc_generica == "PERSONAL Y OBLIGACIONES SOCIALES")
 #> # A tibble: 7 × 4
-#>    year desc_generica                          pim porc_presupuesto
-#>   <int> <chr>                                <dbl>            <dbl>
-#> 1  2015 PERSONAL Y OBLIGACIONES SOCIALES 161903973             58.4
-#> 2  2016 PERSONAL Y OBLIGACIONES SOCIALES 208113793             68.8
-#> 3  2017 PERSONAL Y OBLIGACIONES SOCIALES 209308943             66.3
-#> 4  2018 PERSONAL Y OBLIGACIONES SOCIALES 180890881             61.9
-#> 5  2019 PERSONAL Y OBLIGACIONES SOCIALES 195441649             65.8
-#> 6  2020 PERSONAL Y OBLIGACIONES SOCIALES 183923246             67.9
-#> 7  2021 PERSONAL Y OBLIGACIONES SOCIALES 187842487             68.2
+#>   periodo desc_generica                          pim porc_presupuesto
+#>     <int> <chr>                                <dbl>            <dbl>
+#> 1    2015 PERSONAL Y OBLIGACIONES SOCIALES 161903973             58.4
+#> 2    2016 PERSONAL Y OBLIGACIONES SOCIALES 208113793             68.8
+#> 3    2017 PERSONAL Y OBLIGACIONES SOCIALES 209308943             66.3
+#> 4    2018 PERSONAL Y OBLIGACIONES SOCIALES 180890881             61.9
+#> 5    2019 PERSONAL Y OBLIGACIONES SOCIALES 195441649             65.8
+#> 6    2020 PERSONAL Y OBLIGACIONES SOCIALES 183923246             67.9
+#> 7    2021 PERSONAL Y OBLIGACIONES SOCIALES 187842487             68.2
 ```
 
 También es posible usar los datos obtenidos directamente para un gráfico
@@ -326,7 +329,7 @@ con `ggplot2`.
 library(ggplot2)
 
 mi_consulta |> 
-    ggplot(aes(year, pim, color = cod_generica)) +
+    ggplot(aes(periodo, pim, color = cod_generica)) +
     geom_line() +
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))
 ```
