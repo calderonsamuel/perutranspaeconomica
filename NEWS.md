@@ -1,7 +1,7 @@
 # perutranspaeconomica 0.3.0
 
 - Se corrigió un bug en la impresión de la metadata de consulta para el parámetro.
-- Se mejoró muchísimo la documentación de la funcionalidad existente. Consultar `vignette("elegir-parametros", pkg = "perutranspaeconomica")`
+- Se mejoró muchísimo la documentación de la funcionalidad existente. Consultar `vignette("elegir-parametros", package = "perutranspaeconomica")`
 - Se añade un sitio web para referencia
 
 # perutranspaeconomica 0.2.0
