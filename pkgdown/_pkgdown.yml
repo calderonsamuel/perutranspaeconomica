@@ -9,8 +9,7 @@ lang: es
 home:
     title: Seguimiento a la ejecución presupuestal-Peru
     description: Obtener datos del Portal de Transparencia Económica Perú
-    desde R, con una interfaz de programación consistente, clara y
-    escalable.
+    desde R, con una interfaz de programación consistente, clara y escalable.
 
 template:
     opengraph:
