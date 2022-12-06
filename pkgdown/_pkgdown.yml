@@ -1,9 +1,5 @@
 url: https://perutranspaeconomica.samuelenrique.com
 
-template:
-  bootstrap: 5
-  bootswatch: minty
-
 lang: es
 
 home:
@@ -11,6 +7,8 @@ home:
     description: Obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente, clara y escalable.
 
 template:
+    bootstrap: 5
+    bootswatch: minty
     opengraph:
         twitter:
             creator: "@samucalse"
