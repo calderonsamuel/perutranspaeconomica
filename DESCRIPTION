@@ -8,7 +8,7 @@ Description: Obtener datos del Portal de Transparencia Económica Perú
     desde R, con una interfaz de programación consistente, clara y
     escalable.
 License: MIT + file LICENSE
-URL: https://github.com/calderonsamuel/perutranspaeconomica
+URL: https://perutranspaeconomica.samuelenrique.com, https://github.com/calderonsamuel/perutranspaeconomica
 BugReports: https://github.com/calderonsamuel/perutranspaeconomica/issues
 Imports: 
     cli,
