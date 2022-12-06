@@ -1,6 +1,10 @@
 ---
 title: "Elección de parámetros"
 author: "Samuel Calderon"
+opengraph:
+  twitter:
+    card: summary
+    creator: "@samucalse"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{elegir-parametros}

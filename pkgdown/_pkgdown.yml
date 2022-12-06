@@ -1,9 +1,23 @@
 url: https://perutranspaeconomica.samuelenrique.com
+
 template:
   bootstrap: 5
-  bootswatch: cerulean
+  bootswatch: minty
+
 lang: es
-title: Consulta el sistema de transparencia economica del MEF-Peru desde R
-description: Obtener datos del Portal de Transparencia Económica Perú
+
+home:
+    title: Seguimiento a la ejecución presupuestal-Peru
+    description: Obtener datos del Portal de Transparencia Económica Perú
     desde R, con una interfaz de programación consistente, clara y
     escalable.
+
+template:
+    opengraph:
+        twitter:
+            creator: "@samucalse"
+            card: summary_large_image
+
+authors:
+    Samuel Calderon:
+        href: https://www.samuelenrique.com
