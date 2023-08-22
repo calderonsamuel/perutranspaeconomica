@@ -5,9 +5,9 @@ process_tbl <- function(tbl) {
     tbl |>
         # janitor::remove_empty("cols") |>
         dplyr::select(-1L) |>
-        dplyr::distinct(dplyr::across()) |>
+        dplyr::distinct(dplyr::across(.cols = dplyr::everything())) |>
         dplyr::filter(!is.na(readr::parse_number(.data$certificacion))) |>
         separate_cod_desc() |>
-        dplyr::mutate(dplyr::across(tidyselect::all_of(num_columns), readr::parse_number)) |>
+        dplyr::mutate(dplyr::across(.cols = tidyselect::all_of(num_columns), .fns = readr::parse_number)) |>
         suppressWarnings()
 }

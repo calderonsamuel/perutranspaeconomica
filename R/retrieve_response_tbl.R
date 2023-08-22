@@ -13,7 +13,7 @@ retrieve_response_tbl <- function(response){
 
     retrieve_html_tbl(response, "data") |>
         stats::setNames(column_names) |>
-        dplyr::mutate(dplyr::across(.fns = as.character))
+        dplyr::mutate(dplyr::across(.cols = dplyr::everything(), .fns = as.character))
 }
 
 retrieve_html_tbl <- function(response, target = "data") {
