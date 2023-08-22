@@ -1,3 +1,7 @@
+# perutranspaeconomica 0.3.1
+
+- Cambios para evitar warnings de dplyr v1.1.0
+
 # perutranspaeconomica 0.3.0
 
 - Se corrigió un bug en la impresión de la metadata de consulta para el parámetro.
