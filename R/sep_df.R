@@ -10,7 +10,7 @@ new_sep_df <- function(query = query,
     attr(x, "modulo") <- modulo
     attr(x, "actualizacion") <-  actualizacion
     attr(x, "query") <-  query
-    attr(x, "req_url") <-  set_req_url_query(actualizacion)
+    attr(x, "req_url") <-  set_req_url_query(actualizacion = actualizacion, modulo = modulo)
     x
 }
 

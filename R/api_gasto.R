@@ -1,6 +1,7 @@
 #' Escoger API de gasto segun actualizacion
 #'
 #' @param actualizacion chr. Uno de c("mensual", "diaria")
+#' @param modulo chr. Uno de c("gasto", "ingreso")
 #'
 #' @return chr. La URL base de una API de seguimiento a la ejecucion del gasto
 #'

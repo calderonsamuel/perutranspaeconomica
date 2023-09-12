@@ -19,3 +19,10 @@ test_that("periodos anuales distintos dan diferentes PIA", {
     expect_false(identical(df1$pia, df2$pia))
 })
 
+test_that("Se pueden consultar varios periodos al mismo tiempo", {
+    seguimiento_ep() %>%
+        elegir_periodo_anual(2019:2021) %>%
+        consultar() %>%
+        suppressMessages() %>%
+        expect_s3_class(class = c("sep_df", "tbl"))
+})

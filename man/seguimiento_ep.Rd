@@ -4,10 +4,12 @@
 \alias{seguimiento_ep}
 \title{Iniciar una consulta de seguimiento de ejecución presupuestal}
 \usage{
-seguimiento_ep(actualizacion = "diaria")
+seguimiento_ep(actualizacion = "diaria", modulo = "gasto")
 }
 \arguments{
 \item{actualizacion}{chr. Uno de c("mensual", "diaria")}
+
+\item{modulo}{chr. Uno de c("gasto", "ingreso")}
 }
 \value{
 Objeto con clase 'sep_df' en el que se pueden agregar parámetros de consulta

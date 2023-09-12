@@ -4,10 +4,12 @@
 \alias{api_gasto}
 \title{Escoger API de gasto segun actualizacion}
 \usage{
-api_gasto(actualizacion = "mensual")
+api_gasto(actualizacion = "mensual", modulo = "gasto")
 }
 \arguments{
 \item{actualizacion}{chr. Uno de c("mensual", "diaria")}
+
+\item{modulo}{chr. Uno de c("gasto", "ingreso")}
 }
 \value{
 chr. La URL base de una API de seguimiento a la ejecucion del gasto

@@ -4,7 +4,7 @@
 #'
 #' @return Objeto con clase 'sep_df' en el que se pueden agregar parámetros de consulta
 #' @export
-seguimiento_ep <- function(actualizacion = "diaria") {
+seguimiento_ep <- function(actualizacion = "diaria", modulo = "gasto") {
     query <- list(
         periodo = NULL,
         quien_gasta = set_quien_gasta(),
@@ -15,5 +15,5 @@ seguimiento_ep <- function(actualizacion = "diaria") {
         cuando_se_hizo_gasto = set_cuando_se_hizo_gasto()
     )
     # 'R/sep_df.R' defines the S3 class
-    sep_df(query = query, actualizacion = actualizacion)
+    sep_df(query = query, actualizacion = actualizacion, modulo = modulo)
 }

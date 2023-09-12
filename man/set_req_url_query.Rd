@@ -4,10 +4,12 @@
 \alias{set_req_url_query}
 \title{Definir el query URL de la consulta}
 \usage{
-set_req_url_query(actualizacion = "diaria")
+set_req_url_query(actualizacion = "diaria", modulo = "gasto")
 }
 \arguments{
 \item{actualizacion}{chr. Uno de c("mensual", "diaria")}
+
+\item{modulo}{chr. Uno de c("gasto", "ingreso")}
 }
 \value{
 Objeto con clase "httr2_request"
