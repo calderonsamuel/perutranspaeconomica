@@ -9,6 +9,24 @@ transpaeco <- S7::new_class(
             class = S7::class_character, 
             default = "diaria"
         ),
+        req_url = S7::new_property(
+            class = S7::class_character,
+            getter = function(self) {
+                api_gasto(
+                    actualizacion = S7::prop(self, "actualizacion"),
+                    modulo = S7::prop(self, "modulo")
+                )
+            }
+        ),
+        base_request = S7::new_property(
+            class = S7::as_class(S7::new_S3_class("httr2_request")),
+            getter = function(self) {
+                S7::prop(self, "req_url") |>
+                    httr2::request() |>
+                    httr2::req_user_agent("perutranspaeconomica (https://perutranspaeconomica.samuelenrique.com)") |>
+                    httr2::req_url_query(`_tgt` = "json", `_uhc` = "yes", cpage = 1, psize = 1000)
+            }
+        ),
         parametros = S7::new_property(
             class = pte_params, 
             default = pte_params()
@@ -16,22 +34,26 @@ transpaeco <- S7::new_class(
         traduccion = S7::new_property(
             class = S7::class_list,
             getter = function(self) {
-                self@parametros |> 
-                    props() |> 
+                self |> 
+                    S7::prop("parametros") |> 
+                    S7::props() |> 
                     purrr::flatten() |> 
                     purrr::discard(is.null)
             }
         )
     ), 
     validator = function(self) {
-        propiedades_de_desagregacion <- purrr::map_lgl(self@traduccion, ~any(.x == "todos")) |> sum()
+        propiedades_de_desagregacion <- self |> 
+            S7::prop("traduccion") |> 
+            purrr::map_lgl(~any(.x == "todos")) |> 
+            sum()
         
         if (!self@modulo %in% c("ingreso", "gasto")) {
             "@modulo debe ser ingreso o gasto"
         } else if (!self@actualizacion %in% c("diaria", "mensual")) {
             "@actualizacion debe ser diaria o mensual"
         } else if (propiedades_de_desagregacion > 1) {
-            "No puede haber más de una propiedad con valor \"todos\""
+            "Debe haber solo una propiedad con valor \"todos\""
         }
     }
 )
@@ -59,8 +81,8 @@ S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
 create_query_grid <- S7::new_generic("create_query_grid", "x")
 
 S7::method(create_query_grid, transpaeco) <- function(x) {
-    query_as_list <- prop(x, "parametros") |> 
-        props() |> 
+    query_as_list <- S7::prop(x, "parametros") |> 
+        S7::props() |> 
         purrr::flatten() |> 
         purrr::discard(is.null)
     

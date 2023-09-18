@@ -77,7 +77,7 @@ S7::method(update_single_prop, pte_params) <- function(x, param, prop, value) {
     }
     
     if (sum(value == "todos") > 1) {
-        cli::cli_abort("{.str todos} aparece más de una vez en {.code {prop}}")
+        cli::cli_abort("{.str todos} debe aparecer solo una vez en {.code {prop}}")
     }
     
     param_content[[prop]] <- value

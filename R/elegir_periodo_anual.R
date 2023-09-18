@@ -1,7 +1,7 @@
 elegir_periodo_anual2 <- function(x, periodo = NULL) {
     
     if (!is.numeric(periodo)) {
-        cli::cli_abort("Periodo anual debe especificarse en un vector numérico")
+        cli::cli_abort("Periodo anual debe especificarse en un vector numerico")
     }
     if(!all(periodo %in% seq(from = 2012, to = current_year()))) {
         cli::cli_abort("Periodo anual debe estar entre 2012 y {current_year()}")
