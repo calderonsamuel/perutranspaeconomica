@@ -1,15 +1,14 @@
-#' @import S7
-pte_params <- new_class(
+pte_params <- S7::new_class(
     name = "pte_params",
     properties = list(
-        periodo_anual = new_property(
-            class = class_list,
+        periodo_anual = S7::new_property(
+            class = S7::class_list,
             default = list(
                 periodo = NULL
             )
         ),
-        institucion = new_property(
-            class = class_list,
+        institucion = S7::new_property(
+            class = S7::class_list,
             default = list(
                 nivel = NULL,
                 sector = NULL,
@@ -22,8 +21,8 @@ pte_params <- new_class(
                 municipalidad = NULL
             )
         ),
-        destino = new_property(
-            class = class_list,
+        destino = S7::new_property(
+            class = S7::class_list,
             default = list(
                 categoria_presupuestal = NULL,
                 producto = NULL,
@@ -34,16 +33,16 @@ pte_params <- new_class(
                 meta = NULL
             )
         ),
-        origen = new_property(
-            class = class_list,
+        origen = S7::new_property(
+            class = S7::class_list,
             default = list(
                 fuente_financiamiento = NULL,
                 rubro = NULL,
                 tipo_de_recurso = NULL
             )
         ),
-        estructura = new_property(
-            class = class_list,
+        estructura = S7::new_property(
+            class = S7::class_list,
             default = list(
                 generica = NULL,
                 subgenerica = NULL,
@@ -52,14 +51,14 @@ pte_params <- new_class(
                 detalle_especifica = NULL
             )
         ),
-        lugar = new_property(
-            class = class_list,
+        lugar = S7::new_property(
+            class = S7::class_list,
             default = list(
                 departamento_meta = NULL
             )
         ),
-        tiempo = new_property(
-            class = class_list,
+        tiempo = S7::new_property(
+            class = S7::class_list,
             default = list(
                 trimestre = NULL,
                 mes = NULL
@@ -68,10 +67,10 @@ pte_params <- new_class(
     )
 )
 
-update_single_prop <- new_generic("update_single_prop", "x")
+update_single_prop <- S7::new_generic("update_single_prop", "x")
 
-method(update_single_prop, pte_params) <- function(x, param, prop, value) {
-    param_content <- prop(x, param)
+S7::method(update_single_prop, pte_params) <- function(x, param, prop, value) {
+    param_content <- S7::prop(x, param)
     
     if (! prop %in% names(param_content)) {
         cli::cli_abort("{.str {prop}} no es una propiedad de {.code {param}}")
@@ -82,7 +81,7 @@ method(update_single_prop, pte_params) <- function(x, param, prop, value) {
     }
     
     param_content[[prop]] <- value
-    prop(x, param) <- param_content
+    S7::prop(x, param) <- param_content
     
     x
 }
