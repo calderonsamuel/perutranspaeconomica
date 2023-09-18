@@ -40,24 +40,19 @@ transpaeco <- S7::new_class(
                     purrr::flatten() |> 
                     purrr::discard(is.null)
             }
-        ),
-        nivel_desagregacion = S7::new_property(
-            class = S7::class_integer,
-            getter = function(self) {
-                self |> 
-                    S7::prop("traduccion") |> 
-                    purrr::map_lgl(~any(.x == "todos")) |> 
-                    sum()
-            }
         )
     ), 
     validator = function(self) {
+        propiedades_de_desagregacion <- self |> 
+            S7::prop("traduccion") |> 
+            purrr::map_lgl(~any(.x == "todos")) |> 
+            sum()
         
         if (!self@modulo %in% c("ingreso", "gasto")) {
             "@modulo debe ser ingreso o gasto"
         } else if (!self@actualizacion %in% c("diaria", "mensual")) {
             "@actualizacion debe ser diaria o mensual"
-        } else if (self@nivel_desagregacion > 1) {
+        } else if (propiedades_de_desagregacion > 1) {
             "Debe haber solo una propiedad con valor \"todos\""
         }
     }
