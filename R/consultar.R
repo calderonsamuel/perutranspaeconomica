@@ -12,26 +12,21 @@ consultar.sep_df <- function(x) {
     expanded <- expand_query(x)
 
     splitted <- expanded |>
-        split_by_row()
-
-    n_consultas <- length(splitted)
-    consultas_recibidas <- vector("list", length = n_consultas)
+        purrr::pmap(tibble::tibble)
 
     cli::cli_alert_info("Iniciando consulta")
-
-    cli::cli_progress_bar("Ejecutando consulta", total = n_consultas, type = "tasks")
-
-    for(i in seq_len(n_consultas)) {
-        consultas_recibidas[[i]] <- ejecutar_consulta_individual(splitted[[i]], request)
-        cli::cli_progress_update()
-    }
-
-    cli::cli_progress_done()
+    
+    consultas_recibidas <- splitted |>
+        purrr::map(
+            .f = ejecutar_consulta_individual,
+            .progress = list(name = "Ejecutando consulta", type = "tasks"),
+            request
+        )
 
     cli::cli_alert_info("Unificando consultas...")
 
     consultas_unificadas <- consultas_recibidas |>
-        purrr::map_dfr(~.x) |>
+        purrr::list_rbind() |>
         inherit_attr(inherit_from = x)
 
     cli::cli_alert_success("Consultas realizadas y unificadas")
@@ -57,18 +52,8 @@ ejecutar_consulta_individual <- function(query_params, request) {
         dplyr::mutate(tabla = list(tabla), .before = 1) |>
         tidyr::unnest(tabla) |>
         dplyr::relocate(periodo, .before = 1)
-        # dplyr::relocate(tidyselect::all_of(num_columns), .after = periodo)
 }
 
-split_by_row <- function(.df) {
-    .df[[".id"]] <- seq_len(nrow(.df))
-    .df |>
-        split(~.id) |>
-       lapply(\(.x){
-            .x[[".id"]] <- NULL
-            .x
-        })
-}
 
 inherit_attr <- function(new_df, inherit_from) {
     class(new_df) <- c("sep_df", class(new_df))
