@@ -37,12 +37,13 @@ consultar.sep_df <- function(x) {
 ejecutar_consulta_individual <- function(query_params, request) {
     lista_amigable <- as.list(query_params)
     lista_translated <- sep_params_translate(lista_amigable)
+    
     if (!years_is_only_param(query_params)) {
         lista_translated <- empty_str_to_last(lista_translated)
     }
-
-    params <- purrr::list_modify(.req = request, lista_translated)
-    tabla <- do.call(httr2::req_url_query, params) |>
+    
+    tabla <- request |> 
+        httr2::req_url_query(!!!lista_translated) |> 
         retrieve_html_body() |>
         retrieve_response_tbl() |>
         process_tbl()
