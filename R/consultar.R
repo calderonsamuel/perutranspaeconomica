@@ -44,6 +44,7 @@ ejecutar_consulta_individual <- function(query_params, request) {
     
     tabla <- request |> 
         httr2::req_url_query(!!!lista_translated) |> 
+        httr2::req_perform() |> 
         retrieve_html_body() |>
         retrieve_response_tbl() |>
         process_tbl()
@@ -75,6 +76,5 @@ empty_str_to_last <- function(x) {
 }
 
 years_is_only_param <- function(query) {
-    qn <- names(query)
-    length(qn) == 1 && qn == "periodo"
+    (length(query) == 1L) && (names(query) == "periodo")
 }
