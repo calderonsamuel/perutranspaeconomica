@@ -4,16 +4,15 @@
 \alias{retrieve_html_body}
 \title{Obtener el cuerpo de la respuesta HTML}
 \usage{
-retrieve_html_body(request)
+retrieve_html_body(response)
 }
 \arguments{
-\item{request}{Objeto de clase "httr2_request"}
+\item{response}{Objeto de clase "httr2_response"}
 }
 \value{
 Objeto de clase "html_node"
 }
 \description{
-Esta operación toma la "httr2_request" definida, la realiza en el servidor remoto
-y obtiene solo el cuerpo de la respuesta HTML. Ha sido definido así porque
+Esta operación toma la "httr2_response" definida y obtiene solo el cuerpo de la respuesta HTML. Ha sido definido así porque
 sirve como paso intermedio para la obtención de la tabla.
 }
