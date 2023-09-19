@@ -1,5 +1,6 @@
 transpaeco <- S7::new_class(
-    name = "transpaeco",
+    name = "transpaeco", 
+    parent = S7::class_data.frame,
     properties = list(
         modulo = S7::new_property(
             class = S7::class_character, 
