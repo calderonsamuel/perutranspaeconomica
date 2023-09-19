@@ -5,29 +5,18 @@
 #' @return Un tibble
 #'
 retrieve_response_tbl <- function(response){
-    column_names <- retrieve_html_tbl(response, "header") |>
+    tbl_ids <- list(data = ".Data", header = ".MapTable", history = ".History")
+    
+    column_names <- response |> 
+        rvest::html_element(tbl_ids[["header"]]) |>
+        rvest::html_table() |> 
         janitor::row_to_names(2) |>
         janitor::clean_names() |>
         names() |>
         suppressWarnings()
 
-    retrieve_html_tbl(response, "data") |>
-        stats::setNames(column_names) |>
-        dplyr::mutate(dplyr::across(.cols = dplyr::everything(), .fns = as.character))
+    response |> 
+        rvest::html_element(tbl_ids[["data"]]) |>
+        rvest::html_table(convert = FALSE) |> 
+        stats::setNames(column_names)
 }
-
-retrieve_html_tbl <- function(response, target = "data") {
-    id <- match.arg(target, c("data", "header", "history"))
-    id <- if (target == "data") ".Data" else if (target == "header")".MapTable" else ".History"
-
-    response |>
-        rvest::html_element(id) |>
-        rvest::html_table()
-}
-
-resp_get_history <- function(response) {
-    # Por alguna razon retorna una tabla vacía
-    response |>
-        retrieve_html_tbl("history")
-}
-
