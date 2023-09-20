@@ -36,9 +36,9 @@ consultar.sep_df <- function(x) {
 
 ejecutar_consulta_individual <- function(query_params, request) {
     lista_amigable <- as.list(query_params)
-    lista_translated <- sep_params_translate(lista_amigable)
+    lista_translated <- translate_params_list(lista_amigable)
     
-    if (!years_is_only_param(query_params)) {
+    if (!periodo_is_the_only_param(query_params)) {
         lista_translated <- empty_str_to_last(lista_translated)
     }
     
@@ -75,6 +75,6 @@ empty_str_to_last <- function(x) {
     remaining
 }
 
-years_is_only_param <- function(query) {
+periodo_is_the_only_param <- function(query) {
     (length(query) == 1L) && (names(query) == "periodo")
 }
