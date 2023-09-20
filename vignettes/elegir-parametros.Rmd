@@ -85,7 +85,7 @@ El flujo de trabajo propuesto por `{perutranspaeconomica}` consiste en:
 2.  Elegir
 3.  Consultar
 
-Por lo pronto, iniciar no requiere más trabajo que el uso de `peru_transparencia_economica()`. Este documento busca explicar con mayor detalle la manera en que se deben definir los parámetros pasados a las funciones `elegir_*()` para, en combinación con `consultar()`, poder hacer consultas exitosas.
+Por lo pronto, iniciar no requiere más trabajo que el uso de `iniciar_transparencia_economica()`. Este documento busca explicar con mayor detalle la manera en que se deben definir los parámetros pasados a las funciones `elegir_*()` para, en combinación con `consultar()`, poder hacer consultas exitosas.
 
 La interacción con el sistema del MEF es mejor aprovechable si se tienen conocimientos acerca de Sistema Nacional de Presupuesto Público. Para ello, recomiendo la lectura del [Decreto Legislativo Nº 1440 Decreto Legislativo del Sistema Nacional de Presupuesto Público](https://www.gob.pe/institucion/mef/normas-legales/201360-1440). En especial del sub capítulo II y III.
 
@@ -98,8 +98,8 @@ El paquete permite especificar todas las consultas que se pueden hacer desde la 
 Para esto usamos `elegir_periodo_anual()`. Toda consulta requiere que se defina el periodo anual. Cuando no se especifica ningún año dentro de esta función, se usa por defecto el año en curso.
 
 ```{r, message=TRUE}
-peru_transparencia_economica() |> 
-    elegir_periodo_anual() |> 
+iniciar_transparencia_economica() |> 
+    elegir_periodo_anual(2022) |> 
     consultar()
 ```
 
@@ -108,7 +108,7 @@ Debido a que no estamos especificando ningún otro parámetro aún, `consultar()
 Es posible especificar más de un año de consulta. Para ello basta con especificar un vector numérico con los años que nos interesan.
 
 ```{r, message=TRUE}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(c(2012, 2014, 2016)) |> 
     consultar()
 ```
@@ -151,8 +151,8 @@ graph_quien_gasta
 A manera de ejemplo, si quisiéramos ver todos los niveles de gobierno disponibles lo especificamos en el argumento `nivel`. Recuerda que siempre es necesario usar `elegir_periodo_anual()`.
 
 ```{r}
-peru_transparencia_economica() |> 
-    elegir_periodo_anual() |> 
+iniciar_transparencia_economica() |> 
+    elegir_periodo_anual(2022) |> 
     elegir_quien_gasta(nivel = "todos") |> 
     consultar()
 ```
@@ -160,8 +160,8 @@ peru_transparencia_economica() |>
 Con esto podemos ver que existen tres niveles de gobierno. En caso se escoja profundizar la consulta por Gobierno Nacional o Gobiernos Regionales se estaría tomando el camino de Sector. En este caso, escogemos Gobierno Nacional para ver el presupuesto por sector. Para ello, usamos el código del nivel de gobierno escogido. Nótese que para mayor comodidad en el procesamiento de los datos, se incluyen columnas extras con la metadata de la consulta.
 
 ```{r}
-peru_transparencia_economica() |> 
-    elegir_periodo_anual() |> 
+iniciar_transparencia_economica() |> 
+    elegir_periodo_anual(2022) |> 
     elegir_quien_gasta(nivel = "E", sector = "todos") |> 
     consultar()
 ```
@@ -169,8 +169,8 @@ peru_transparencia_economica() |>
 Ahora que se sabe cuáles son los sectores que conforman al gobierno nacional, podemos priorizar conocer la ejecución de alguno en específico. Por ejemplo, el sector salud. Para ello, actualizamos nuestros parámetros de búsqueda indicando el código del sector correspondiente y especificando conocer todos los pliegos que lo conforman.
 
 ```{r}
-peru_transparencia_economica() |> 
-    elegir_periodo_anual() |> 
+iniciar_transparencia_economica() |> 
+    elegir_periodo_anual(2022) |> 
     elegir_quien_gasta(nivel = "E", sector = "11", pliego = "todos") |> 
     consultar()
 ```
@@ -178,8 +178,8 @@ peru_transparencia_economica() |>
 Con esto, ahora podemos ver que el sector salud está conformado por cinco pliegos. Puede que ahora querramos ver los datos de las unidades ejecutoras del Ministerio de salud. Nuevamente, especificamos esto en la consulta.
 
 ```{r}
-peru_transparencia_economica() |> 
-    elegir_periodo_anual() |> 
+iniciar_transparencia_economica() |> 
+    elegir_periodo_anual(2022) |> 
     elegir_quien_gasta(nivel = "E", sector = "11", pliego = "011", unidad_ejecutora = "todos") |> 
     consultar()
 ```
@@ -187,8 +187,8 @@ peru_transparencia_economica() |>
 Este ha sido el nivel de detalle más profundo que brinda la consulta por esta ruta. El ejercicio es muy similar si se quiere obtener los datos por municipio. Por ejemplo, para conocer los datos de los distritos de la provincia de Cangallo, región Ayacucho.
 
 ```{r}
-peru_transparencia_economica() |> 
-    elegir_periodo_anual() |> 
+iniciar_transparencia_economica() |> 
+    elegir_periodo_anual(2022) |> 
     elegir_quien_gasta(nivel = "M", goblocal_o_manc = "M", departamento = "05", provincia = "02", municipalidad = "todos") |> 
     consultar()
 ```
@@ -248,7 +248,7 @@ create_graph(attr_theme = "lr") |>
 A continuación un ejemplo para ilustrar la explicación. Empezamos viendo las categorías presupuestales. Recordemos que estas se nombran (o al menos se deberían nombrar) como una acción respecto a un problema a resolver. En este caso hacemos la búsqueda para el 2021.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(categoria_presupuestal = "todos") |>
     consultar()
@@ -257,7 +257,7 @@ peru_transparencia_economica() |>
 Vemos que para el 2021 se definieron 92 categorías presupuestales. Sabemos que en el país se produce una alta cantidad de drogas cocaínicas, así que nos interesa ver qué productos se han definido para el Programa Presupuestal 0031 "Reducción del tráfico ilícito de drogas".
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031", producto =  "todos") |>
     consultar() 
@@ -266,7 +266,7 @@ peru_transparencia_economica() |>
 La tabla obtenida nos muestra información de los productos de este programa presupuestal, pero también de proyectos de inversión vinculados. Podemos reconocer los productos porque cuentan con una codificación que empieza con "30". Debido a que el insumo de primordial es la hoja de coca, nos interesa ver qué presupuesto tienen las actividades que se hacen para reducir los cultivos ilícitos. La tabla nos muestra que dicho producto cuenta con código "3000490".
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         categoria_presupuestal = "0031", 
@@ -281,7 +281,7 @@ La nueva consulta nos indica que la actividad específica de "Reducción de hect
 Es posible consultar el mismo tema a través de la clasificación funcional. Empecemos viendo todas las funciones del 2021.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(funcion = "todos") |> 
     consultar()
@@ -296,7 +296,7 @@ En cambio, la Clasificación Funcional abarca las funciones primordiales del Est
 Para seguir con el ejemplo, el tema del tráfico ilícito de drogas se aborda dentro de la Función Orden Público y Seguridad (código 05). Procedemos con la consulta para conocer las divisiones funcionales.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         funcion = "05",
@@ -308,7 +308,7 @@ peru_transparencia_economica() |>
 En las divisiones funcionales podemos ver de manera más específica aquello que el Estado debe brindar en relación al Orden Interno y Seguridad. Nuevamente vemos que independientemente de los problemas existentes, un Estado debe ser capaz de proveer Asistencia Social, Seguridad Jurídica, Gestión de Riesgos y Emergencias, entre otras cosas. Podemos suponer que el tráfico ilícito de drogas se abarca dentro del Control de drogas (código 015). Procedemos a consultar sus grupos funcionales.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         funcion = "05", 
@@ -323,7 +323,7 @@ De esta manera, podemos ver que en la división funcional Control de Drogas, se 
 En este punto, podemos empezar a consultar también según la Clasificación Programática. Recordemos que estábamos consultando acerca de la reducción de cultivos ilícitos. En los grupos funcionales encontrados, el de "Interdicción, lavado de dinero y delitos conexos" parece más relacionado. Veamos qué programas presupuestales abordan este grupo funcional.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         funcion = "05", 
@@ -337,7 +337,7 @@ peru_transparencia_economica() |>
 Vemos que son dos. En este punto, no debería causar sorpresa que uno de ellos sea el Programa Presupuestal 0031 que vimos anteriormente. Podemos seguir viendo cuáles de sus productos son abordados en el grupo funcional.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         funcion = "05", 
@@ -352,7 +352,7 @@ peru_transparencia_economica() |>
 A diferencia de cuando consultamos partiendo sólo de la Clasificación Programática, vemos que el grupo funcional escogido no incluye el producto de "PROCESOS JUDICIALES CON INTERVENCION DE LA PROCURADURIA PUBLICA CONTRA EL TRAFICO ILICITO DE DROGAS Y LAVADO DE ACTIVOS". Lógicamente, podemos ver qué actividades de la reducción de cultivos ilícitos se incluyen.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         funcion = "05", 
@@ -368,7 +368,7 @@ peru_transparencia_economica() |>
 Vemos que dentro del grupo funcional se incluyen todas las actividades del producto, así como todo el presupuesto. Puede parecer redundante, pero hacer todo este camino es esencial para identificar el presupuesto asignado a cada meta de las actividades. En este caso, veremos las metas de la actividad "5003057 Operaciones de seguridad para la reducción de las áreas de cultivo ilícito" que tuvo una ejecución del 94.7%.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(
         funcion = "05", 
@@ -403,7 +403,7 @@ create_graph(attr_theme = "lr") |>
 Para ilustrar este punto, veamos aporta el canon al presupuesto nacional. Recordemos que el presupuesto total del 2021.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     consultar()
 ```
@@ -411,7 +411,7 @@ peru_transparencia_economica() |>
 En términos de Presupuesto Institucional Modificado, el Estado contó con 227932 217930 soles en el 2021. Para llegar a la cifra del canon empezamos consultando qué Fuentes de financiamiento tuvo el Estado en el 2021.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_con_que_se_financia(fuente_financiamiento = "todos") |> 
     consultar()
@@ -422,7 +422,7 @@ El canon es un recurso que por Ley le corresponde a los gobiernos locales y regi
 [^2]: Para mayor información, revisar <https://www.mef.gob.pe/es/?option=com_content&language=es-ES&Itemid=100959&lang=es-ES&view=article&id=454>
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_con_que_se_financia(
         fuente_financiamiento = "5",
@@ -434,7 +434,7 @@ peru_transparencia_economica() |>
 Se puede ver que el rubro de "Canon y Sobrecanon, regalías, renta de aduanas y participaciones" financió 17116846439 soles del presupuesto de 2021. Para mayor detalle se puede consultar el tipo de recurso.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_con_que_se_financia(
         fuente_financiamiento = "5",
@@ -475,7 +475,7 @@ create_graph(attr_theme = "lr") |>
 Para ilustrar esta clasificación voy a reproducir el camino para determinar cuánto se gastó el 2021 en personal CAS. Se empieza por ver las genéricas de gasto.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_como_se_estructura(generica = "todos") |> 
     consultar()
@@ -484,7 +484,7 @@ peru_transparencia_economica() |>
 En este punto podríamos cometer el error de continuar la búsqueda en la genérica de Personal y Obligaciones Sociales, pero en realidad los CAS forman parte de la genérica de Bienes y Servicios. Los trabajadores del Estado Peruano tienen muy variados regímenes laborales, y no es propósito de este documento discutirlos a detalle. Para seguir continuar, consultamos por las subgenéricas de Bienes y Servicios. Nótese que el código "5-23" debe ingresarse como "5-2-3".
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_como_se_estructura(
         generica = "5-2-3", 
@@ -496,7 +496,7 @@ peru_transparencia_economica() |>
 Continuamos con la búsqueda escogiendo la subgenérica "Contratación de Servicios". Nótese que el código de subgenérica debe añadirse al código de la genérica omitiendo el primer número. Lamentablemente, el sistema del MEF ha establecido así su manera de construir las consultas y haría falta mucho esfuerzo por cambiarlo.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_como_se_estructura(
         generica = "5-2-3", 
@@ -509,7 +509,7 @@ peru_transparencia_economica() |>
 Por fin encontramos los Contratos Administrativos de Servicios. Para comprobar si hay otro tipo de gastos incluidos, consultamos las Específicas de este gasto. Agregamos el código del detalle de subgenérica al código de subgenérica de la consulta anterior.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_como_se_estructura(
         generica = "5-2-3", 
@@ -523,7 +523,7 @@ peru_transparencia_economica() |>
 Vemos que es la única específica disponible, con lo que damos por finalizada nuestra búsqueda. Esto significa que el Estado gastó 14287679937 soles en contratos CAS el 2021. Recordemos el presupuesto nacional de ese mismo año.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     consultar()
 ```
@@ -553,7 +553,7 @@ graph_donde_se_gasta
 Con esto, podemos ver rápidamente cuánto presupuesto tuvo cada departamento el 2021. Nótese la diferencia entre el argumento `departamento_meta` de esta función y el argumento `departamento` de la función `elegir_quien_gasta()`.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_donde_se_gasta(departamento_meta = "todos") |> 
     consultar()
@@ -577,7 +577,7 @@ create_graph(attr_theme = "lr") |>
 En caso se utilice esta función, debe tenerse en cuenta que la consulta omitirá la información de PIA, PIM y porcentaje de avance.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_cuando_se_hizo_gasto(trimestre = "todos") |> 
     consultar()
@@ -586,7 +586,7 @@ peru_transparencia_economica() |>
 Es posible escoger un trimestre específico para acotar la consulta por meses.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_cuando_se_hizo_gasto(trimestre = "1", mes = "todos") |> 
     consultar()
@@ -595,7 +595,7 @@ peru_transparencia_economica() |>
 Si no se especifica un trimestre, se obtiene el resultado de todos los meses.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_cuando_se_hizo_gasto(mes = "todos") |> 
     consultar()
@@ -608,7 +608,7 @@ En la sección anterior se explicó el uso de cada función por separado, pero p
 Viendo la Clasificación Programática del gasto, habíamos visto que el Programa Presupuestal 0031 busca combatir el tráfico ilícito de drogas. Para saber cuál fue la ejecución presupuestal de este programa por departamento debemos encadenar un llamado a `elegir_en_que_se_gasta()` y `elegir_donde_se_gasta()`. Para poder reusar los datos obtenidos, se le asigna el nombre `pp0031_departamentos` al resultado de la consulta.
 
 ```{r}
-pp0031_departamentos <- peru_transparencia_economica() |> 
+pp0031_departamentos <- iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") |> 
@@ -629,9 +629,9 @@ create_graph(attr_theme = "lr") |>
     custom_render_graph()
 ```
 
-Teniendo `pp0031_departamentos`, podemos aplicarle herramientas estándar de análisis de datos. Por ejemplo, ordenar los departamentos de manera descendente según su PIM usando `{dplyr}`.
+Teniendo `pp0031_departamentos`, podemos aplicarle herramientas estándar de análisis de datos. Por ejemplo, para ordenar los departamentos de manera descendente según su PIM usando `{dplyr}` usaríamos este código.
 
-```{r}
+```{r, eval=FALSE}
 pp0031_departamentos |> 
     dplyr::arrange(dplyr::desc(pim))
 ```
@@ -639,7 +639,7 @@ pp0031_departamentos |>
 Vemos que Huánuco es, después de Lima, el departamento en el que se contó con mayor presupuesto (17016801 soles). Lo siguiente que podemos consultar es qué porción correspondió a presupuestos de viaje. Para ello, especificamos el `departamento_meta` con el código de Huánuco y buscamos el detalle de subgenérica "5-23.2" correspondiente a Contratación de Servicios.
 
 ```{r}
-peru_transparencia_economica() |> 
+iniciar_transparencia_economica() |> 
     elegir_periodo_anual(2021) |> 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
     elegir_donde_se_gasta(departamento_meta = "10") |>
