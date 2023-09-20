@@ -4,7 +4,7 @@ print.sep_df <- function(x, ...) {
     cli::cli_h2("Parametros de consulta")
     cli_query(x)
     cli::cli_h2("Data")
-    if(nrow(x) == 0) cli_sin_consulta() else NextMethod()
+    if(nrow(x) == 0) cli_sin_consulta() else NextMethod("print", x, ...)
     invisible(x)
 }
 

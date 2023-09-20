@@ -64,7 +64,7 @@ transpaeco <- S7::new_class(
     }
 )
 
-update_parameter <- S7::new_generic("set_param", "x")
+update_parameter <- S7::new_generic("update_parameter", "x")
 
 S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
     params_list <- S7::prop(x, "parametros")
@@ -94,4 +94,32 @@ S7::method(create_query_grid, transpaeco) <- function(x) {
     
     query_as_list |> 
         expand.grid(stringsAsFactors = FALSE)
+}
+
+S7::method(print, transpaeco) <- function(x) {
+    cli::cli_h1("Seguimiento al {x@modulo} presupuestal ({.emph actualizacion {x@actualizacion}})")
+    
+    cli::cli_h2("Parametros de consulta")
+    
+    all_params <- params_for_query()
+    
+    cli::cli_ul()
+    
+    x@traduccion |> 
+        purrr::iwalk(function(value, name) {
+            if(value == "todos") {
+                cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {.strong *{value}*}")
+            } else {
+                cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {value}")
+            }
+        })
+    
+    cli::cli_h2("Data")
+    
+    if(nrow(x) == 0){
+        cli::cli_alert_info("No se ha ejecutado ninguna consulta")
+    } else {
+        NextMethod("print", x)
+    } 
+    invisible(x)
 }
