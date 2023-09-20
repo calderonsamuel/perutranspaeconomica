@@ -22,7 +22,7 @@
 
 ## Iniciar, elegir y consultar.
 
-- Para hacer consultas es necesario combinar las funciones `seguimiento_ep()`, alguna o varias del grupo `elegir_*()` y `consultar()`.
+- Para hacer consultas es necesario combinar las funciones `peru_transparencia_economica()`, alguna o varias del grupo `elegir_*()` y `consultar()`.
 - Todos los parámetros indicados con funciones `elegir_*()` aceptan vectores con longitud mayor a 1. De esta manera se pueden hacer múltiples consultas a la vez.
 - Todos los parámetros indicados con funciones `elegir_*()` pueden aceptar el string `'todos'`. De hecho, cualquier consulta requiere que al menos un parámetro esté indicado como `'todos'`.
 

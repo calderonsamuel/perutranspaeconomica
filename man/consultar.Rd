@@ -4,7 +4,7 @@
 \alias{consultar}
 \title{Ejecutar consulta de seguimiento a la ejecución presupuestal}
 \usage{
-consultar(x)
+consultar(x, ...)
 }
 \arguments{
 \item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}

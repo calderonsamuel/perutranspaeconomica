@@ -4,16 +4,18 @@
 #'
 #' @return sep_df. Tabla que contiene el resultado de la consulta solicitada
 #' @export
-consultar <- function(x) UseMethod("consultar")
+consultar <- S7::new_generic("consultar", "x")
 
-#' @export
-consultar.sep_df <- function(x) {
-    request <- get_req_url(x)
-    expanded <- expand_query(x)
-
+S7::method(consultar, transpaeco) <- function(x) {
+    
+    check_pre_consulta(x)
+    
+    request <- S7::prop(x, "base_request")
+    expanded <- create_query_grid(x)
+    
     splitted <- expanded |>
         purrr::pmap(tibble::tibble)
-
+    
     cli::cli_alert_info("Iniciando consulta")
     
     consultas_recibidas <- splitted |>
@@ -22,16 +24,33 @@ consultar.sep_df <- function(x) {
             .progress = list(name = "Ejecutando consulta", type = "tasks"),
             request
         )
-
+    
     cli::cli_alert_info("Unificando consultas...")
-
+    
     consultas_unificadas <- consultas_recibidas |>
-        purrr::list_rbind() |>
-        inherit_attr(inherit_from = x)
-
+        purrr::list_rbind()
+    
     cli::cli_alert_success("Consultas realizadas y unificadas")
+    
+    transpaeco(
+        .data = consultas_unificadas,
+        modulo = x@modulo,
+        actualizacion = x@actualizacion,
+        parametros = x@parametros
+    )
+}
 
-    consultas_unificadas
+check_pre_consulta <- function(x) {
+    current_periodo <- x@parametros@periodo_anual$periodo
+    current_nivel_desagregacion <- S7::prop(x, "nivel_desagregacion")
+    
+    if (is.null(current_periodo)) {
+        cli::cli_abort("Se requiere {.code elegir_periodo_anual()}")
+    }
+    
+    if (current_nivel_desagregacion == 0 && !periodo_is_the_only_param(x@traduccion)) {
+        cli::cli_abort("Se debe elegir un parametro de desagregacion con {.str todos}")
+    }
 }
 
 ejecutar_consulta_individual <- function(query_params, request) {
@@ -48,22 +67,12 @@ ejecutar_consulta_individual <- function(query_params, request) {
         retrieve_html_body() |>
         retrieve_response_tbl() |>
         process_tbl()
-
+    
     lista_amigable |>
         tibble::as_tibble() |>
         dplyr::mutate(tabla = list(tabla), .before = 1) |>
         tidyr::unnest(tabla) |>
         dplyr::relocate(periodo, .before = 1)
-}
-
-
-inherit_attr <- function(new_df, inherit_from) {
-    class(new_df) <- c("sep_df", class(new_df))
-    attr(new_df, "modulo") <- attr(inherit_from, "modulo")
-    attr(new_df, "actualizacion") <-  attr(inherit_from, "actualizacion")
-    attr(new_df, "query") <-  attr(inherit_from, "query")
-    attr(new_df, "req_url") <-  attr(inherit_from, "req_url")
-    new_df
 }
 
 empty_str_to_last <- function(x) {

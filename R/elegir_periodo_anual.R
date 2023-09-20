@@ -1,4 +1,4 @@
-elegir_periodo_anual2 <- function(x, periodo = NULL) {
+elegir_periodo_anual <- function(x, periodo = NULL) {
     
     if (!is.numeric(periodo)) {
         cli::cli_abort("Periodo anual debe especificarse en un vector numerico")

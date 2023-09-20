@@ -73,12 +73,12 @@ library(perutranspaeconomica)
 ### Iniciar consulta
 
 Para iniciar una consulta tan solo hace falta usar la función
-`seguimiento_ep()`. Esto crea un dataframe vacío y muestra los
+`peru_transparencia_economica()`. Esto crea un dataframe vacío y muestra los
 parámetros de consulta agregados. Al inicio no tenemos parámetros ni
 data.
 
 ``` r
-seguimiento_ep()
+peru_transparencia_economica()
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
 #> 
@@ -110,7 +110,7 @@ Una vez que se le agrega parámetros a la consulta, la interfaz lo
 refleja. `elegir_periodo_anual()` utiliza por defecto el año en curso
 
 ``` r
-seguimiento_ep() |> 
+peru_transparencia_economica() |> 
     elegir_periodo_anual()
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
@@ -129,7 +129,7 @@ Cada argumento de las funciones `elegir_*()` puede aceptar vectores con
 más de un elemento para una consulta más potente.
 
 ``` r
-seguimiento_ep() |> 
+peru_transparencia_economica() |> 
     elegir_periodo_anual(periodo = 2020:2022)
 #> 
 #> ── Seguimiento a la ejecucion presupuestal (actualizacion diaria) ──────────────
@@ -150,7 +150,7 @@ contrario la consulta no prosperará.
 
 ``` r
 # malo. dos argumentos definidos como "todos"
-seguimiento_ep() |> 
+peru_transparencia_economica() |> 
     elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "todos") |> 
     elegir_donde_se_gasta(departamento_meta = "todos")
@@ -158,7 +158,7 @@ seguimiento_ep() |>
 
 ``` r
 # bueno. solo un argumento definido como "todos"
-seguimiento_ep() |> 
+peru_transparencia_economica() |> 
     elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "E") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") 
@@ -193,7 +193,7 @@ requerida.
 
 ``` r
 # ¿Cómo va la ejecución presupuestal por departamento en el gobierno nacional?
-seguimiento_ep() |> 
+peru_transparencia_economica() |> 
     elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "E") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") |> 
@@ -240,7 +240,7 @@ parámetros con vectores más grandes.
 
 ``` r
 # ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
-mi_consulta <- seguimiento_ep() |> 
+mi_consulta <- peru_transparencia_economica() |> 
     elegir_periodo_anual(2015:2021) |> 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
     elegir_como_se_estructura(generica = "todos") |> 
@@ -287,7 +287,7 @@ ahora) producirá un incomprensible.
 
 ``` r
 # malo. dos argumentos definidos como "todos"
-seguimiento_ep() |> 
+peru_transparencia_economica() |> 
     elegir_periodo_anual() |> 
     elegir_quien_gasta(nivel = "todos") |> 
     elegir_donde_se_gasta(departamento_meta = "todos") |> 
