@@ -39,6 +39,7 @@ elegir_destino <- function(x,
 }
 
 #' @rdname elegir_destino
+#' @export
 elegir_en_que_se_gasta <- function(x,
                                    categoria_presupuestal = NULL,
                                    producto = NULL,

@@ -21,6 +21,7 @@ elegir_lugar <- function(x, departamento_meta = NULL) {
 }
 
 #' @rdname elegir_lugar
+#' @export
 elegir_donde_se_gasta <- function(x, departamento_meta = NULL) {
     elegir_lugar(x = x, departamento_meta = departamento_meta)
 }

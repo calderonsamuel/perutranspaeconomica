@@ -48,6 +48,7 @@ elegir_institucion <- function(x,
 }
 
 #' @rdname elegir_institucion
+#' @export
 elegir_quien_gasta <- function(x,
                                nivel = NULL,
                                sector = NULL,

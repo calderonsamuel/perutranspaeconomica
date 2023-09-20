@@ -21,6 +21,7 @@ elegir_tiempo <- function(x,
 }
 
 #' @rdname elegir_tiempo
+#' @export
 elegir_cuando_se_hizo_gasto <- function(x,
                                         trimestre = NULL,
                                         mes = NULL) {

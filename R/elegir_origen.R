@@ -30,6 +30,7 @@ elegir_origen <- function(x,
 }
 
 #' @rdname elegir_origen
+#' @export
 elegir_con_que_se_financia <- function(x,
                                        fuente_financiamiento = NULL,
                                        rubro = NULL,

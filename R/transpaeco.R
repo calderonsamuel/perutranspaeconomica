@@ -107,7 +107,7 @@ S7::method(print, transpaeco) <- function(x) {
     
     x@traduccion |> 
         purrr::iwalk(function(value, name) {
-            if(value == "todos") {
+            if(length(value) == 1L && value == "todos") {
                 cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {.strong *{value}*}")
             } else {
                 cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {value}")

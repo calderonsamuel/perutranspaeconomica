@@ -42,6 +42,7 @@ elegir_estructura <- function(x,
 }
 
 #' @rdname elegir_estructura
+#' @export
 elegir_como_se_estructura <- function(x,
                                       generica = NULL,
                                       subgenerica = NULL,

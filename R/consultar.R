@@ -2,7 +2,7 @@
 #'
 #' @param x Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada
 #'
-#' @return sep_df. Tabla que contiene el resultado de la consulta solicitada
+#' @return Un data.frame con clase <transpaeco> que contiene el resultado de la consulta solicitada
 #' @export
 consultar <- S7::new_generic("consultar", "x")
 
