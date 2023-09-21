@@ -1,18 +1,18 @@
 test_that("consultar() falla si no se especifica año de búsqueda", {
-    df <- peru_transparencia_economica()
+    df <- iniciar_transparencia_economica()
     expect_error(df |> consultar() |> suppressMessages())
 
 })
 
 test_that("consultar() devuelve un objeto <transpaeco>", {
-    df <- peru_transparencia_economica() |> 
+    df <- iniciar_transparencia_economica() |> 
         elegir_periodo_anual(periodo = current_year())
     
     expect_s3_class(df |> consultar() |> suppressMessages(), "transpaeco")
 })
 
 test_that("consultar() sirve para todos los elementos de query()", {
-    df <- peru_transparencia_economica() |> 
+    df <- iniciar_transparencia_economica() |> 
         elegir_periodo_anual(periodo = current_year())
     
     expect_s3_class(df |> elegir_quien_gasta(nivel = "todos") |> consultar() |> suppressMessages(), "transpaeco")

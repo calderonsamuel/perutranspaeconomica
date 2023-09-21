@@ -1,5 +1,5 @@
 test_that("elegir_periodo_anual() falla con malos inputs", {
-    df <- peru_transparencia_economica()
+    df <- iniciar_transparencia_economica()
     expect_error(df |> elegir_periodo_anual())
     expect_error(df |> elegir_periodo_anual(2011))
     expect_error(df |> elegir_periodo_anual(list(2022)))
@@ -7,20 +7,20 @@ test_that("elegir_periodo_anual() falla con malos inputs", {
 })
 
 test_that("elegir_periodo_anual() returns expected objects", {
-    df <- peru_transparencia_economica() |> 
+    df <- iniciar_transparencia_economica() |> 
         elegir_periodo_anual(periodo = current_year())
     expect_s3_class(df, "transpaeco")
 })
 
 test_that("periodos anuales distintos dan diferentes PIA", {
-    df1 <- peru_transparencia_economica() |> elegir_periodo_anual(2020) |> consultar() |> suppressMessages()
-    df2 <- peru_transparencia_economica() |> elegir_periodo_anual(2021) |> consultar() |> suppressMessages()
+    df1 <- iniciar_transparencia_economica() |> elegir_periodo_anual(2020) |> consultar() |> suppressMessages()
+    df2 <- iniciar_transparencia_economica() |> elegir_periodo_anual(2021) |> consultar() |> suppressMessages()
 
     expect_false(identical(df1$pia, df2$pia))
 })
 
 test_that("Se pueden consultar varios periodos al mismo tiempo", {
-    peru_transparencia_economica() %>%
+    iniciar_transparencia_economica() %>%
         elegir_periodo_anual(2019:2021) %>%
         consultar() %>%
         suppressMessages() %>%
