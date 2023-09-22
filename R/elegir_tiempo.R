@@ -1,4 +1,4 @@
-#' Definir la seccion de '¿Cuándo se hizo el gasto?'
+#' Elegir el tiempo en que se usa el presupuesto
 #'
 #' @inheritParams consultar
 #' @param trimestre int. Número del 1 al 4

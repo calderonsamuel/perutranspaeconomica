@@ -7,7 +7,7 @@ opengraph:
     creator: "@samucalse"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{elegir-parametros}
+  %\VignetteIndexEntry{Elección de parámetros}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

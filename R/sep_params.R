@@ -38,5 +38,5 @@ translate_params_list <- function(params_list_from_query) {
     
     params_list_from_query %>% 
         purrr::map(~ifelse(.x == "todos", "", .x)) %>%
-        setNames(params_names)
+        stats::setNames(params_names)
 }

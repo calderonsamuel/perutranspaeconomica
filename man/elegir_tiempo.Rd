@@ -3,7 +3,7 @@
 \name{elegir_tiempo}
 \alias{elegir_tiempo}
 \alias{elegir_cuando_se_hizo_gasto}
-\title{Definir la seccion de '¿Cuándo se hizo el gasto?'}
+\title{Elegir el tiempo en que se usa el presupuesto}
 \usage{
 elegir_tiempo(x, trimestre = NULL, mes = NULL)
 
@@ -20,5 +20,5 @@ elegir_cuando_se_hizo_gasto(x, trimestre = NULL, mes = NULL)
 Un data.frame con clase \if{html}{\out{<transpaeco>}}
 }
 \description{
-Definir la seccion de '¿Cuándo se hizo el gasto?'
+Elegir el tiempo en que se usa el presupuesto
 }

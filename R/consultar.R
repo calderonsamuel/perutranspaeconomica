@@ -4,7 +4,9 @@
 #'
 #' @return Un data.frame con clase <transpaeco> que contiene el resultado de la consulta solicitada
 #' @export
-consultar <- S7::new_generic("consultar", "x")
+consultar <- S7::new_generic("consultar", "x", function(x) {
+    S7::S7_dispatch()
+})
 
 S7::method(consultar, transpaeco) <- function(x) {
     
@@ -68,7 +70,7 @@ ejecutar_consulta_individual <- function(query_params, request) {
         tibble::as_tibble() %>%
         dplyr::mutate(tabla = list(tabla), .before = 1) %>%
         tidyr::unnest(tabla) %>%
-        dplyr::relocate(periodo, .before = 1)
+        dplyr::relocate(.data$periodo, .before = 1)
 }
 
 empty_str_to_last <- function(x) {
