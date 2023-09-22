@@ -71,6 +71,7 @@ transpaeco <- S7::new_class(
 update_parameter <- S7::new_generic("set_param", "x")
 
 S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
+    
     params_list <- S7::prop(x, "parametros")
     
     periodo_anual_is_not_set <- S7::prop(params_list, "periodo_anual") %>% 
@@ -79,6 +80,10 @@ S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
     
     if (param != "periodo_anual" && periodo_anual_is_not_set) {
         cli::cli_abort("Se debe usar {.code elegir_periodo_anual() antes de elegir otros parametros}")
+    }
+    
+    if (S7::prop(x, "modulo") == "ingreso" && param %in% c("destino", "lugar")) {
+        cli::cli_abort("No es posible consultar {.strong {param}} para modulo de {.strong ingreso}")
     }
     
     update_list <- purrr::discard(update_list, is.null)
