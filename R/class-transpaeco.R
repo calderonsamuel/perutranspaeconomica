@@ -117,11 +117,13 @@ S7::method(print, transpaeco) <- function(x) {
     
     cli::cli_ul()
     
-    x@traduccion %>% 
+    x %>%
+        S7::prop("traduccion") %>% 
         purrr::iwalk(function(value, name) {
             if(length(value) == 1L && value == "todos") {
                 cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {.strong *{value}*}")
             } else {
+                value <- glue::glue_collapse(value, sep = ", ", last = " y ")
                 cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {value}")
             }
         })
