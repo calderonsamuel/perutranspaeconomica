@@ -22,9 +22,9 @@ transpaeco <- S7::new_class(
         base_request = S7::new_property(
             class = S7::as_class(S7::new_S3_class("httr2_request")),
             getter = function(self) {
-                S7::prop(self, "req_url") |>
-                    httr2::request() |>
-                    httr2::req_user_agent("perutranspaeconomica (https://perutranspaeconomica.samuelenrique.com)") |>
+                S7::prop(self, "req_url") %>%
+                    httr2::request() %>%
+                    httr2::req_user_agent("perutranspaeconomica (https://perutranspaeconomica.samuelenrique.com)") %>%
                     httr2::req_url_query(`_tgt` = "json", `_uhc` = "yes", cpage = 1, psize = 1000)
             }
         ),
@@ -35,27 +35,27 @@ transpaeco <- S7::new_class(
         traduccion = S7::new_property(
             class = S7::class_list,
             getter = function(self) {
-                self |> 
-                    S7::prop("parametros") |> 
-                    S7::props() |> 
-                    purrr::flatten() |> 
+                self %>% 
+                    S7::prop("parametros") %>% 
+                    S7::props() %>% 
+                    purrr::flatten() %>% 
                     purrr::discard(is.null)
             }
         ),
         nivel_desagregacion = S7::new_property(
             class = S7::class_integer,
             getter = function(self) {
-                self |> 
-                    S7::prop("traduccion") |> 
-                    purrr::map_lgl(~any(.x == "todos")) |> 
+                self %>% 
+                    S7::prop("traduccion") %>% 
+                    purrr::map_lgl(~any(.x == "todos")) %>% 
                     sum()
             }
         )
     ), 
     validator = function(self) {
-        propiedades_de_desagregacion <- self |> 
-            S7::prop("traduccion") |> 
-            purrr::map_lgl(~any(.x == "todos")) |> 
+        propiedades_de_desagregacion <- self %>% 
+            S7::prop("traduccion") %>% 
+            purrr::map_lgl(~any(.x == "todos")) %>% 
             sum()
         
         if (!self@modulo %in% c("ingreso", "gasto")) {
@@ -73,8 +73,8 @@ update_parameter <- S7::new_generic("set_param", "x")
 S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
     params_list <- S7::prop(x, "parametros")
     
-    periodo_anual_is_not_set <- S7::prop(params_list, "periodo_anual") |> 
-        purrr::pluck("periodo") |> 
+    periodo_anual_is_not_set <- S7::prop(params_list, "periodo_anual") %>% 
+        purrr::pluck("periodo") %>% 
         is.null()
     
     if (param != "periodo_anual" && periodo_anual_is_not_set) {
@@ -99,12 +99,12 @@ S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
 create_query_grid <- S7::new_generic("create_query_grid", "x")
 
 S7::method(create_query_grid, transpaeco) <- function(x) {
-    query_as_list <- S7::prop(x, "parametros") |> 
-        S7::props() |> 
-        purrr::flatten() |> 
+    query_as_list <- S7::prop(x, "parametros") %>% 
+        S7::props() %>% 
+        purrr::flatten() %>% 
         purrr::discard(is.null)
     
-    query_as_list |> 
+    query_as_list %>% 
         expand.grid(stringsAsFactors = FALSE)
 }
 
@@ -117,7 +117,7 @@ S7::method(print, transpaeco) <- function(x) {
     
     cli::cli_ul()
     
-    x@traduccion |> 
+    x@traduccion %>% 
         purrr::iwalk(function(value, name) {
             if(length(value) == 1L && value == "todos") {
                 cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {.strong *{value}*}")

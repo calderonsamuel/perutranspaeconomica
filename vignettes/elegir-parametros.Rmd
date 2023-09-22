@@ -98,8 +98,8 @@ El paquete permite especificar todas las consultas que se pueden hacer desde la 
 Para esto usamos `elegir_periodo_anual()`. Toda consulta requiere que se defina el periodo anual. Cuando no se especifica ningún año dentro de esta función, se usa por defecto el año en curso.
 
 ```{r, message=TRUE}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
     consultar()
 ```
 
@@ -108,8 +108,8 @@ Debido a que no estamos especificando ningún otro parámetro aún, `consultar()
 Es posible especificar más de un año de consulta. Para ello basta con especificar un vector numérico con los años que nos interesan.
 
 ```{r, message=TRUE}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(c(2012, 2014, 2016)) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(c(2012, 2014, 2016)) %>% 
     consultar()
 ```
 
@@ -122,27 +122,27 @@ Para el resto de la explicación se omite mostrar la metadata de la consulta par
 Esta función permite buscar la información de ejecución presupuestal según el tipo de entidad que queremos consultar. En su grado más alto de especificidad se puede llegar a diferenciar según Unidad Ejecutora, Municipio o Mancomunidad. El gráfico muestra todos los elementos de consulta intermedios a los que se puede acceder. Debe tenerse en cuenta que una vez tomada una "ruta" de consulta no es posible acceder a otra. Por ejemplo, no es posible consultar por pliego y departamento al mismo tiempo.
 
 ```{r, echo=FALSE}
-graph_quien_gasta <- create_graph(attr_theme = "lr") |> 
-    add_starter_node(label = "Consulta base") |> 
-    add_custom_node(label = "Nivel de gobierno") |> 
-    add_custom_node(label = "Sector") |> 
-    add_custom_node(label = "Gob local o mancomunidad") |> 
-    add_custom_node(label = "Pliego") |> 
-    add_custom_node(label = "Unidad ejecutora") |> 
-    add_custom_node(label = "Departamento") |> 
-    add_custom_node(label = "Mancomunidad") |> 
-    add_custom_node(label = "Provincia") |> 
-    add_custom_node(label = "Municipalidad") |> 
-    add_custom_edge(from = "Consulta base", to = "Nivel de gobierno") |>
-    add_custom_edge(from = "Nivel de gobierno", to = "Sector") |>
-    add_custom_edge(from = "Nivel de gobierno", to = "Gob local o mancomunidad") |>
-    add_custom_edge(from = "Sector", to = "Pliego") |> 
-    add_custom_edge(from = "Pliego", to = "Unidad ejecutora") |> 
-    add_custom_edge(from = "Gob local o mancomunidad", to = "Departamento") |> 
-    add_custom_edge(from = "Gob local o mancomunidad", to = "Mancomunidad") |> 
-    add_custom_edge(from = "Departamento", to = "Provincia") |> 
-    add_custom_edge(from = "Departamento", to = "Municipalidad") |> 
-    add_custom_edge(from = "Provincia", to = "Municipalidad") |> 
+graph_quien_gasta <- create_graph(attr_theme = "lr") %>% 
+    add_starter_node(label = "Consulta base") %>% 
+    add_custom_node(label = "Nivel de gobierno") %>% 
+    add_custom_node(label = "Sector") %>% 
+    add_custom_node(label = "Gob local o mancomunidad") %>% 
+    add_custom_node(label = "Pliego") %>% 
+    add_custom_node(label = "Unidad ejecutora") %>% 
+    add_custom_node(label = "Departamento") %>% 
+    add_custom_node(label = "Mancomunidad") %>% 
+    add_custom_node(label = "Provincia") %>% 
+    add_custom_node(label = "Municipalidad") %>% 
+    add_custom_edge(from = "Consulta base", to = "Nivel de gobierno") %>%
+    add_custom_edge(from = "Nivel de gobierno", to = "Sector") %>%
+    add_custom_edge(from = "Nivel de gobierno", to = "Gob local o mancomunidad") %>%
+    add_custom_edge(from = "Sector", to = "Pliego") %>% 
+    add_custom_edge(from = "Pliego", to = "Unidad ejecutora") %>% 
+    add_custom_edge(from = "Gob local o mancomunidad", to = "Departamento") %>% 
+    add_custom_edge(from = "Gob local o mancomunidad", to = "Mancomunidad") %>% 
+    add_custom_edge(from = "Departamento", to = "Provincia") %>% 
+    add_custom_edge(from = "Departamento", to = "Municipalidad") %>% 
+    add_custom_edge(from = "Provincia", to = "Municipalidad") %>% 
     custom_render_graph()
 
 graph_quien_gasta
@@ -151,45 +151,45 @@ graph_quien_gasta
 A manera de ejemplo, si quisiéramos ver todos los niveles de gobierno disponibles lo especificamos en el argumento `nivel`. Recuerda que siempre es necesario usar `elegir_periodo_anual()`.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "todos") %>% 
     consultar()
 ```
 
 Con esto podemos ver que existen tres niveles de gobierno. En caso se escoja profundizar la consulta por Gobierno Nacional o Gobiernos Regionales se estaría tomando el camino de Sector. En este caso, escogemos Gobierno Nacional para ver el presupuesto por sector. Para ello, usamos el código del nivel de gobierno escogido. Nótese que para mayor comodidad en el procesamiento de los datos, se incluyen columnas extras con la metadata de la consulta.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "E", sector = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E", sector = "todos") %>% 
     consultar()
 ```
 
 Ahora que se sabe cuáles son los sectores que conforman al gobierno nacional, podemos priorizar conocer la ejecución de alguno en específico. Por ejemplo, el sector salud. Para ello, actualizamos nuestros parámetros de búsqueda indicando el código del sector correspondiente y especificando conocer todos los pliegos que lo conforman.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "E", sector = "11", pliego = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E", sector = "11", pliego = "todos") %>% 
     consultar()
 ```
 
 Con esto, ahora podemos ver que el sector salud está conformado por cinco pliegos. Puede que ahora querramos ver los datos de las unidades ejecutoras del Ministerio de salud. Nuevamente, especificamos esto en la consulta.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "E", sector = "11", pliego = "011", unidad_ejecutora = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E", sector = "11", pliego = "011", unidad_ejecutora = "todos") %>% 
     consultar()
 ```
 
 Este ha sido el nivel de detalle más profundo que brinda la consulta por esta ruta. El ejercicio es muy similar si se quiere obtener los datos por municipio. Por ejemplo, para conocer los datos de los distritos de la provincia de Cangallo, región Ayacucho.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "M", goblocal_o_manc = "M", departamento = "05", provincia = "02", municipalidad = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "M", goblocal_o_manc = "M", departamento = "05", provincia = "02", municipalidad = "todos") %>% 
     consultar()
 ```
 
@@ -206,13 +206,13 @@ En primer lugar, se puede buscar los gastos según su Clasificación Programáti
 -   Actividad: ¿qué voy a hacer de manera más específica para lograr brindar esos bienes o servicios?
 
 ```{r, echo=FALSE}
-graph1 <- create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Categoría Presupuestal", type = "B") |> 
-    add_custom_node("Producto o proyecto", type = "B") |> 
-    add_custom_node("Actividad o acción de inversión u obra", type = "B") |> 
-    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") |> 
-    add_custom_edge(from = "Categoría Presupuestal", to = "Producto o proyecto") |> 
+graph1 <- create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Categoría Presupuestal", type = "B") %>% 
+    add_custom_node("Producto o proyecto", type = "B") %>% 
+    add_custom_node("Actividad o acción de inversión u obra", type = "B") %>% 
+    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") %>% 
+    add_custom_edge(from = "Categoría Presupuestal", to = "Producto o proyecto") %>% 
     add_custom_edge(from = "Producto o proyecto", to = "Actividad o acción de inversión u obra")
 
 custom_render_graph(graph1)
@@ -223,13 +223,13 @@ La segunda clasificación es la Funcional, en la que es posible llegar hasta el 
 [^1]: Ministerio de Economía y Finanzas. Recuperado de: <https://d2oilkmr0fadqd.cloudfront.net/La+Universidad/Logistica/manual_clasificador_gastos.pdf>
 
 ```{r, echo=FALSE}
-graph2 <- create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Función", type = "B") |> 
-    add_custom_node("División funcional", type = "B") |> 
-    add_custom_node("Grupo funcional", type = "B") |> 
-    add_custom_edge(from = "Consulta base", to = "Función") |> 
-    add_custom_edge(from = "Función", to = "División funcional") |> 
+graph2 <- create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Función", type = "B") %>% 
+    add_custom_node("División funcional", type = "B") %>% 
+    add_custom_node("Grupo funcional", type = "B") %>% 
+    add_custom_edge(from = "Consulta base", to = "Función") %>% 
+    add_custom_edge(from = "Función", to = "División funcional") %>% 
     add_custom_edge(from = "División funcional", to = "Grupo funcional") 
 
 custom_render_graph(graph2)
@@ -238,41 +238,41 @@ custom_render_graph(graph2)
 Habiendo llegado hasta el nivel de detalle de Actividad según la Clasificación Programática y al mismo tiempo hasta el nivel de Grupo Funcional según la Clasificación Funcional, es posible obtener la información de la Meta Presupuestaria, que indica cómo se mide el avance de lo programado.
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Meta", type = "B") |> 
-    add_custom_edge(from = "Consulta base", to = "Meta") |> 
+create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Meta", type = "B") %>% 
+    add_custom_edge(from = "Consulta base", to = "Meta") %>% 
     custom_render_graph()
 ```
 
 A continuación un ejemplo para ilustrar la explicación. Empezamos viendo las categorías presupuestales. Recordemos que estas se nombran (o al menos se deberían nombrar) como una acción respecto a un problema a resolver. En este caso hacemos la búsqueda para el 2021.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "todos") |>
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "todos") %>%
     consultar()
 ```
 
 Vemos que para el 2021 se definieron 92 categorías presupuestales. Sabemos que en el país se produce una alta cantidad de drogas cocaínicas, así que nos interesa ver qué productos se han definido para el Programa Presupuestal 0031 "Reducción del tráfico ilícito de drogas".
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "0031", producto =  "todos") |>
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031", producto =  "todos") %>%
     consultar() 
 ```
 
 La tabla obtenida nos muestra información de los productos de este programa presupuestal, pero también de proyectos de inversión vinculados. Podemos reconocer los productos porque cuentan con una codificación que empieza con "30". Debido a que el insumo de primordial es la hoja de coca, nos interesa ver qué presupuesto tienen las actividades que se hacen para reducir los cultivos ilícitos. La tabla nos muestra que dicho producto cuenta con código "3000490".
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         categoria_presupuestal = "0031", 
         producto =  "3000490", 
         actividad = "todos"
-    ) |>
+    ) %>%
     consultar()
 ```
 
@@ -281,9 +281,9 @@ La nueva consulta nos indica que la actividad específica de "Reducción de hect
 Es posible consultar el mismo tema a través de la clasificación funcional. Empecemos viendo todas las funciones del 2021.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_en_que_se_gasta(funcion = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_en_que_se_gasta(funcion = "todos") %>% 
     consultar()
 ```
 
@@ -296,25 +296,25 @@ En cambio, la Clasificación Funcional abarca las funciones primordiales del Est
 Para seguir con el ejemplo, el tema del tráfico ilícito de drogas se aborda dentro de la Función Orden Público y Seguridad (código 05). Procedemos con la consulta para conocer las divisiones funcionales.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         funcion = "05",
         division_funcional = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
 En las divisiones funcionales podemos ver de manera más específica aquello que el Estado debe brindar en relación al Orden Interno y Seguridad. Nuevamente vemos que independientemente de los problemas existentes, un Estado debe ser capaz de proveer Asistencia Social, Seguridad Jurídica, Gestión de Riesgos y Emergencias, entre otras cosas. Podemos suponer que el tráfico ilícito de drogas se abarca dentro del Control de drogas (código 015). Procedemos a consultar sus grupos funcionales.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         funcion = "05", 
         division_funcional = "015",
         grupo_funcional = "todos"
-    ) |>
+    ) %>%
     consultar()
 ```
 
@@ -323,37 +323,37 @@ De esta manera, podemos ver que en la división funcional Control de Drogas, se 
 En este punto, podemos empezar a consultar también según la Clasificación Programática. Recordemos que estábamos consultando acerca de la reducción de cultivos ilícitos. En los grupos funcionales encontrados, el de "Interdicción, lavado de dinero y delitos conexos" parece más relacionado. Veamos qué programas presupuestales abordan este grupo funcional.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         funcion = "05", 
         division_funcional = "015",
         grupo_funcional = "0034",
         categoria_presupuestal = "todos"
-    ) |>
+    ) %>%
     consultar()
 ```
 
 Vemos que son dos. En este punto, no debería causar sorpresa que uno de ellos sea el Programa Presupuestal 0031 que vimos anteriormente. Podemos seguir viendo cuáles de sus productos son abordados en el grupo funcional.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         funcion = "05", 
         division_funcional = "015",
         grupo_funcional = "0034",
         categoria_presupuestal = "0031",
         producto = "todos"
-    ) |>
+    ) %>%
     consultar()
 ```
 
 A diferencia de cuando consultamos partiendo sólo de la Clasificación Programática, vemos que el grupo funcional escogido no incluye el producto de "PROCESOS JUDICIALES CON INTERVENCION DE LA PROCURADURIA PUBLICA CONTRA EL TRAFICO ILICITO DE DROGAS Y LAVADO DE ACTIVOS". Lógicamente, podemos ver qué actividades de la reducción de cultivos ilícitos se incluyen.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         funcion = "05", 
         division_funcional = "015",
@@ -361,15 +361,15 @@ iniciar_transparencia_economica() |>
         categoria_presupuestal = "0031",
         producto = "3000490",
         actividad = "todos"
-    ) |>
+    ) %>%
     consultar()
 ```
 
 Vemos que dentro del grupo funcional se incluyen todas las actividades del producto, así como todo el presupuesto. Puede parecer redundante, pero hacer todo este camino es esencial para identificar el presupuesto asignado a cada meta de las actividades. En este caso, veremos las metas de la actividad "5003057 Operaciones de seguridad para la reducción de las áreas de cultivo ilícito" que tuvo una ejecución del 94.7%.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(
         funcion = "05", 
         division_funcional = "015",
@@ -378,7 +378,7 @@ iniciar_transparencia_economica() |>
         producto = "3000490",
         actividad = "5003057",
         meta = "todos"
-    ) |>
+    ) %>%
     consultar()
 ```
 
@@ -389,31 +389,31 @@ En este caso, la tabla nos muestra que la meta fueron 736 Operaciones, de las cu
 El sistema del MEF permite conocer de dónde proviene el presupuesto que las entidades utilizan. Esto corresponde a la Clasificación por Fuentes de Financiamiento de los ingresos públicos.
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Fuente de financiamiento", type = "C") |> 
-    add_custom_node("Rubro", type = "C") |> 
-    add_custom_node("Tipo de recurso", type = "C") |> 
-    add_custom_edge(from = "Consulta base", "Fuente de financiamiento") |> 
-    add_custom_edge(from = "Fuente de financiamiento", "Rubro") |> 
-    add_custom_edge(from = "Rubro", "Tipo de recurso") |> 
+create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Fuente de financiamiento", type = "C") %>% 
+    add_custom_node("Rubro", type = "C") %>% 
+    add_custom_node("Tipo de recurso", type = "C") %>% 
+    add_custom_edge(from = "Consulta base", "Fuente de financiamiento") %>% 
+    add_custom_edge(from = "Fuente de financiamiento", "Rubro") %>% 
+    add_custom_edge(from = "Rubro", "Tipo de recurso") %>% 
     custom_render_graph()
 ```
 
 Para ilustrar este punto, veamos aporta el canon al presupuesto nacional. Recordemos que el presupuesto total del 2021.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     consultar()
 ```
 
 En términos de Presupuesto Institucional Modificado, el Estado contó con 227932 217930 soles en el 2021. Para llegar a la cifra del canon empezamos consultando qué Fuentes de financiamiento tuvo el Estado en el 2021.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_con_que_se_financia(fuente_financiamiento = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_con_que_se_financia(fuente_financiamiento = "todos") %>% 
     consultar()
 ```
 
@@ -422,25 +422,25 @@ El canon es un recurso que por Ley le corresponde a los gobiernos locales y regi
 [^2]: Para mayor información, revisar <https://www.mef.gob.pe/es/?option=com_content&language=es-ES&Itemid=100959&lang=es-ES&view=article&id=454>
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_con_que_se_financia(
         fuente_financiamiento = "5",
         rubro = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
 Se puede ver que el rubro de "Canon y Sobrecanon, regalías, renta de aduanas y participaciones" financió 17116846439 soles del presupuesto de 2021. Para mayor detalle se puede consultar el tipo de recurso.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_con_que_se_financia(
         fuente_financiamiento = "5",
         rubro = "18",
         tipo_de_recurso = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
@@ -457,74 +457,74 @@ El canon representó el 7.5% del presupuesto nacional en el 2021.
 En esta sección nos referimos a la Clasificación Económica. En otras palabras, se muestra la manera en que los gastos se organizan según su naturaleza económica. Por ejemplo, pagos de salarios, pagos de deudas, pagos de obligaciones sociales, compra de inmuebles, donaciones, etc.
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Genérica", type = "D") |> 
-    add_custom_node("Subgenérica", type = "D") |> 
-    add_custom_node("Detalle de subgenérica", type = "D") |> 
-    add_custom_node("Específica", type = "D") |> 
-    add_custom_node("Detalle de específica", type = "D") |> 
-    add_custom_edge(from = "Consulta base", "Genérica") |>
-    add_custom_edge(from = "Genérica", "Subgenérica") |>
-    add_custom_edge(from = "Subgenérica", "Detalle de subgenérica") |>
-    add_custom_edge(from = "Detalle de subgenérica", "Específica") |>
-    add_custom_edge(from = "Específica", "Detalle de específica") |>
+create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Genérica", type = "D") %>% 
+    add_custom_node("Subgenérica", type = "D") %>% 
+    add_custom_node("Detalle de subgenérica", type = "D") %>% 
+    add_custom_node("Específica", type = "D") %>% 
+    add_custom_node("Detalle de específica", type = "D") %>% 
+    add_custom_edge(from = "Consulta base", "Genérica") %>%
+    add_custom_edge(from = "Genérica", "Subgenérica") %>%
+    add_custom_edge(from = "Subgenérica", "Detalle de subgenérica") %>%
+    add_custom_edge(from = "Detalle de subgenérica", "Específica") %>%
+    add_custom_edge(from = "Específica", "Detalle de específica") %>%
     custom_render_graph()
 ```
 
 Para ilustrar esta clasificación voy a reproducir el camino para determinar cuánto se gastó el 2021 en personal CAS. Se empieza por ver las genéricas de gasto.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_como_se_estructura(generica = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_como_se_estructura(generica = "todos") %>% 
     consultar()
 ```
 
 En este punto podríamos cometer el error de continuar la búsqueda en la genérica de Personal y Obligaciones Sociales, pero en realidad los CAS forman parte de la genérica de Bienes y Servicios. Los trabajadores del Estado Peruano tienen muy variados regímenes laborales, y no es propósito de este documento discutirlos a detalle. Para seguir continuar, consultamos por las subgenéricas de Bienes y Servicios. Nótese que el código "5-23" debe ingresarse como "5-2-3".
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_como_se_estructura(
         generica = "5-2-3", 
         subgenerica = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
 Continuamos con la búsqueda escogiendo la subgenérica "Contratación de Servicios". Nótese que el código de subgenérica debe añadirse al código de la genérica omitiendo el primer número. Lamentablemente, el sistema del MEF ha establecido así su manera de construir las consultas y haría falta mucho esfuerzo por cambiarlo.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_como_se_estructura(
         generica = "5-2-3", 
         subgenerica = "2-3-2",
         detalle_subgenerica = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
 Por fin encontramos los Contratos Administrativos de Servicios. Para comprobar si hay otro tipo de gastos incluidos, consultamos las Específicas de este gasto. Agregamos el código del detalle de subgenérica al código de subgenérica de la consulta anterior.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     elegir_como_se_estructura(
         generica = "5-2-3", 
         subgenerica = "2-3-2",
         detalle_subgenerica = "2-3-2-8",
         especifica = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
 Vemos que es la única específica disponible, con lo que damos por finalizada nuestra búsqueda. Esto significa que el Estado gastó 14287679937 soles en contratos CAS el 2021. Recordemos el presupuesto nacional de ese mismo año.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
     consultar()
 ```
 
@@ -541,10 +541,10 @@ Esto significa que el 6.27% del presupuesto del 2021 se utilizó en pagos de obl
 La función `elegir_donde_se_gasta()` permite obtener una división del gasto por departamento.
 
 ```{r, echo=FALSE}
-graph_donde_se_gasta <- create_graph(attr_theme = "lr") |> 
-    add_starter_node(label = "Consulta base") |> 
-    add_custom_node("Departamento meta", type = "E") |> 
-    add_custom_edge(from = "Consulta base", to = "Departamento meta") |> 
+graph_donde_se_gasta <- create_graph(attr_theme = "lr") %>% 
+    add_starter_node(label = "Consulta base") %>% 
+    add_custom_node("Departamento meta", type = "E") %>% 
+    add_custom_edge(from = "Consulta base", to = "Departamento meta") %>% 
     custom_render_graph()
 
 graph_donde_se_gasta
@@ -553,9 +553,9 @@ graph_donde_se_gasta
 Con esto, podemos ver rápidamente cuánto presupuesto tuvo cada departamento el 2021. Nótese la diferencia entre el argumento `departamento_meta` de esta función y el argumento `departamento` de la función `elegir_quien_gasta()`.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos") %>% 
     consultar()
 ```
 
@@ -564,40 +564,40 @@ iniciar_transparencia_economica() |>
 Con la función `elegir_cuando_se_hizo_gasto()` se puede dividir el gasto según el trimestres o meses del periodo anual.
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
-    add_starter_node(label = "Consulta base") |> 
-    add_custom_node("Trimestre", type = "F") |> 
-    add_custom_node("Mes", type = "F") |> 
-    add_custom_edge(from = "Consulta base", to = "Trimestre") |> 
-    add_custom_edge(from = "Consulta base", to = "Mes") |> 
-    add_custom_edge(from = "Trimestre", to = "Mes") |> 
+create_graph(attr_theme = "lr") %>% 
+    add_starter_node(label = "Consulta base") %>% 
+    add_custom_node("Trimestre", type = "F") %>% 
+    add_custom_node("Mes", type = "F") %>% 
+    add_custom_edge(from = "Consulta base", to = "Trimestre") %>% 
+    add_custom_edge(from = "Consulta base", to = "Mes") %>% 
+    add_custom_edge(from = "Trimestre", to = "Mes") %>% 
     custom_render_graph()
 ```
 
 En caso se utilice esta función, debe tenerse en cuenta que la consulta omitirá la información de PIA, PIM y porcentaje de avance.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_cuando_se_hizo_gasto(trimestre = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_cuando_se_hizo_gasto(trimestre = "todos") %>% 
     consultar()
 ```
 
 Es posible escoger un trimestre específico para acotar la consulta por meses.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_cuando_se_hizo_gasto(trimestre = "1", mes = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_cuando_se_hizo_gasto(trimestre = "1", mes = "todos") %>% 
     consultar()
 ```
 
 Si no se especifica un trimestre, se obtiene el resultado de todos los meses.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_cuando_se_hizo_gasto(mes = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_cuando_se_hizo_gasto(mes = "todos") %>% 
     consultar()
 ```
 
@@ -608,10 +608,10 @@ En la sección anterior se explicó el uso de cada función por separado, pero p
 Viendo la Clasificación Programática del gasto, habíamos visto que el Programa Presupuestal 0031 busca combatir el tráfico ilícito de drogas. Para saber cuál fue la ejecución presupuestal de este programa por departamento debemos encadenar un llamado a `elegir_en_que_se_gasta()` y `elegir_donde_se_gasta()`. Para poder reusar los datos obtenidos, se le asigna el nombre `pp0031_departamentos` al resultado de la consulta.
 
 ```{r}
-pp0031_departamentos <- iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") |> 
+pp0031_departamentos <- iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos") %>% 
     consultar()
 
 pp0031_departamentos
@@ -620,52 +620,52 @@ pp0031_departamentos
 Hasta el momento, la Consulta Base mostrada en los diagramas correspondió a la elección del periodo anual, al que se le podía encadenar una de las funciones detalladas. Sin embargo, la Consulta Base en realidad representa cualquier nivel de encadenamiento de funciones. El último código utilizado puede representarse de la siguiente manera.
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Categoría Presupuestal", type = "B") |> 
-    add_custom_node("Departamento meta", type = "E") |> 
-    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") |> 
-    add_custom_edge(from = "Categoría Presupuestal", to = "Departamento meta") |> 
+create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Categoría Presupuestal", type = "B") %>% 
+    add_custom_node("Departamento meta", type = "E") %>% 
+    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") %>% 
+    add_custom_edge(from = "Categoría Presupuestal", to = "Departamento meta") %>% 
     custom_render_graph()
 ```
 
 Teniendo `pp0031_departamentos`, podemos aplicarle herramientas estándar de análisis de datos. Por ejemplo, para ordenar los departamentos de manera descendente según su PIM usando `{dplyr}` usaríamos este código.
 
 ```{r, eval=FALSE}
-pp0031_departamentos |> 
+pp0031_departamentos %>% 
     dplyr::arrange(dplyr::desc(pim))
 ```
 
 Vemos que Huánuco es, después de Lima, el departamento en el que se contó con mayor presupuesto (17016801 soles). Lo siguiente que podemos consultar es qué porción correspondió a presupuestos de viaje. Para ello, especificamos el `departamento_meta` con el código de Huánuco y buscamos el detalle de subgenérica "5-23.2" correspondiente a Contratación de Servicios.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
-    elegir_donde_se_gasta(departamento_meta = "10") |>
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
+    elegir_donde_se_gasta(departamento_meta = "10") %>%
     elegir_como_se_estructura(
         generica = "5-2-3", 
         subgenerica = "2-3-2",
         detalle_subgenerica = "todos"
-    ) |> 
+    ) %>% 
     consultar()
 ```
 
 El diagrama que ilustra esta consulta es el siguiente:
 
 ```{r, echo=FALSE}
-create_graph(attr_theme = "lr") |> 
-    add_starter_node("Consulta base") |> 
-    add_custom_node("Categoría Presupuestal", type = "B") |> 
-    add_custom_node("Departamento meta", type = "E") |> 
-    add_custom_node("Genérica", type = "D") |> 
-    add_custom_node("Subgenérica", type = "D") |> 
-    add_custom_node("Detalle de subgenérica", type = "D") |> 
-    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") |> 
-    add_custom_edge(from = "Categoría Presupuestal", to = "Departamento meta") |> 
-    add_custom_edge(from = "Departamento meta", to = "Genérica") |> 
-    add_custom_edge(from = "Genérica", to = "Subgenérica") |> 
-    add_custom_edge(from = "Subgenérica", to = "Detalle de subgenérica") |> 
+create_graph(attr_theme = "lr") %>% 
+    add_starter_node("Consulta base") %>% 
+    add_custom_node("Categoría Presupuestal", type = "B") %>% 
+    add_custom_node("Departamento meta", type = "E") %>% 
+    add_custom_node("Genérica", type = "D") %>% 
+    add_custom_node("Subgenérica", type = "D") %>% 
+    add_custom_node("Detalle de subgenérica", type = "D") %>% 
+    add_custom_edge(from = "Consulta base", to = "Categoría Presupuestal") %>% 
+    add_custom_edge(from = "Categoría Presupuestal", to = "Departamento meta") %>% 
+    add_custom_edge(from = "Departamento meta", to = "Genérica") %>% 
+    add_custom_edge(from = "Genérica", to = "Subgenérica") %>% 
+    add_custom_edge(from = "Subgenérica", to = "Detalle de subgenérica") %>% 
     custom_render_graph()
 ```
 

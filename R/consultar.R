@@ -13,12 +13,12 @@ S7::method(consultar, transpaeco) <- function(x) {
     request <- S7::prop(x, "base_request")
     expanded <- create_query_grid(x)
     
-    splitted <- expanded |>
+    splitted <- expanded %>%
         purrr::pmap(tibble::tibble)
     
     cli::cli_alert_info("Iniciando consulta")
     
-    consultas_recibidas <- splitted |>
+    consultas_recibidas <- splitted %>%
         purrr::map(
             .f = ejecutar_consulta_individual,
             .progress = list(name = "Ejecutando consulta", type = "tasks"),
@@ -27,7 +27,7 @@ S7::method(consultar, transpaeco) <- function(x) {
     
     cli::cli_alert_info("Unificando consultas...")
     
-    consultas_unificadas <- consultas_recibidas |>
+    consultas_unificadas <- consultas_recibidas %>%
         purrr::list_rbind()
     
     cli::cli_alert_success("Consultas realizadas y unificadas")
@@ -57,22 +57,22 @@ ejecutar_consulta_individual <- function(query_params, request) {
         lista_translated <- empty_str_to_last(lista_translated)
     }
     
-    tabla <- request |> 
-        httr2::req_url_query(!!!lista_translated) |> 
-        httr2::req_perform() |> 
-        retrieve_html_body() |>
-        retrieve_response_tbl() |>
+    tabla <- request %>% 
+        httr2::req_url_query(!!!lista_translated) %>% 
+        httr2::req_perform() %>% 
+        retrieve_html_body() %>%
+        retrieve_response_tbl() %>%
         process_tbl()
     
-    lista_amigable |>
-        tibble::as_tibble() |>
-        dplyr::mutate(tabla = list(tabla), .before = 1) |>
-        tidyr::unnest(tabla) |>
+    lista_amigable %>%
+        tibble::as_tibble() %>%
+        dplyr::mutate(tabla = list(tabla), .before = 1) %>%
+        tidyr::unnest(tabla) %>%
         dplyr::relocate(periodo, .before = 1)
 }
 
 empty_str_to_last <- function(x) {
-    empty_item_name <- purrr::keep(x, ~.x == "") |> names()
+    empty_item_name <- purrr::keep(x, ~.x == "") %>% names()
     x[[empty_item_name]] <- NULL
     x[[empty_item_name]] <- ""
     x

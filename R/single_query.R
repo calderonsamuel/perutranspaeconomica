@@ -38,11 +38,11 @@ S7::method(single_perform, single_request) <- function(x, max_tries = NULL, max_
     url <- S7::prop(x, "url")
     params <- S7::prop(x, "params")
     
-    response <- httr2::request(url) |> 
-        httr2::req_user_agent("perutranspaeconomica (https://perutranspaeconomica.samuelenrique.com)") |>
-        httr2::req_url_query(`_tgt` = "json", `_uhc` = "yes", cpage = 1, psize = 1000) |> 
-        httr2::req_url_query(!!!params) |> 
-        httr2::req_retry(max_tries = max_tries, max_seconds = max_seconds) |> 
+    response <- httr2::request(url) %>% 
+        httr2::req_user_agent("perutranspaeconomica (https://perutranspaeconomica.samuelenrique.com)") %>%
+        httr2::req_url_query(`_tgt` = "json", `_uhc` = "yes", cpage = 1, psize = 1000) %>% 
+        httr2::req_url_query(!!!params) %>% 
+        httr2::req_retry(max_tries = max_tries, max_seconds = max_seconds) %>% 
         httr2::req_perform()
     
     prop(x, "response") <- list(response)

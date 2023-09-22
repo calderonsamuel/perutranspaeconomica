@@ -7,16 +7,16 @@
 retrieve_response_tbl <- function(response){
     tbl_ids <- list(data = ".Data", header = ".MapTable", history = ".History")
     
-    column_names <- response |> 
-        rvest::html_element(tbl_ids[["header"]]) |>
-        rvest::html_table() |> 
-        janitor::row_to_names(2) |>
-        janitor::clean_names() |>
-        names() |>
+    column_names <- response %>% 
+        rvest::html_element(tbl_ids[["header"]]) %>%
+        rvest::html_table() %>% 
+        janitor::row_to_names(2) %>%
+        janitor::clean_names() %>%
+        names() %>%
         suppressWarnings()
 
-    response |> 
-        rvest::html_element(tbl_ids[["data"]]) |>
-        rvest::html_table(convert = FALSE) |> 
+    response %>% 
+        rvest::html_element(tbl_ids[["data"]]) %>%
+        rvest::html_table(convert = FALSE) %>% 
         stats::setNames(column_names)
 }

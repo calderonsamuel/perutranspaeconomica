@@ -108,7 +108,7 @@ Una vez que se le agrega parámetros a la consulta, la interfaz lo
 refleja.
 
 ``` r
-iniciar_transparencia_economica() |> 
+iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(periodo = 2023)
 #> 
 #> ── Seguimiento al gasto presupuestal (actualizacion diaria) ────────────────────
@@ -126,7 +126,7 @@ Cada argumento de las funciones `elegir_*()` puede aceptar vectores con
 más de un elemento para una consulta más potente.
 
 ``` r
-iniciar_transparencia_economica() |> 
+iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(periodo = 2020:2023)
 #> 
 #> ── Seguimiento al gasto presupuestal (actualizacion diaria) ────────────────────
@@ -145,9 +145,9 @@ argumento esté definido como `"todos"`. Más adelante se verá que en caso
 contrario la consulta no prosperará.
 
 ``` r
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(periodo = 2023) |> 
-    elegir_quien_gasta(nivel = "E") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(periodo = 2023) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
     elegir_donde_se_gasta(departamento_meta = "todos") # <- aquí se usó "todos"
 #> 
 #> ── Seguimiento al gasto presupuestal (actualizacion diaria) ────────────────────
@@ -172,9 +172,9 @@ La elección de parámetros no prosperará si se intenta definir más de un
 parámetro como “todos”.
 
 ``` r
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "todos") %>% 
     elegir_donde_se_gasta(departamento_meta = "todos")
 #> Error: <transpaeco> object is invalid:
 #> - Debe haber solo una propiedad con valor "todos"
@@ -190,10 +190,10 @@ requerida.
 ``` r
 # ¿Cuál fue la ejecución presupuestal por departamento en el gobierno nacional?
 # Para el año 2022
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "E") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos") %>% 
     consultar()
 #> ℹ Iniciando consulta
 #> ℹ Unificando consultas...
@@ -276,18 +276,18 @@ iniciar_transparencia_economica() |>
 #> 10                     1475112099  1471209527  1466651678           97.2     E
 #> 11                     1421314432  1419639756  1416439356           94.5     E
 #> 12                     1888351903  1886999754  1876680505           97.3     E
-#> 13                     2253257637  2251684245  2238642982           95.0     E
+#> 13                     2253257637  2251684245  2238642268           95.0     E
 #> 14                     1771081518  1770746387  1765822188           95.8     E
-#> 15                    87160571254 87074015084 86889533118           94.1     E
-#> 16                     1539524338  1530487863  1521208194           93.5     E
+#> 15                    87160571254 87074015084 86889342084           94.1     E
+#> 16                     1539524338  1530487863  1521208091           93.5     E
 #> 17                      605330423   605234132   603564506           98.1     E
 #> 18                      503384955   503159303   502025888           94.6     E
 #> 19                      609378839   605519671   603863610           96.8     E
-#> 20                     3692838873  3683522218  3675015213           95.7     E
+#> 20                     3692838873  3683522218  3675014044           95.7     E
 #> 21                     2684740400  2678825596  2669412816           97.6     E
-#> 22                     1523636892  1521096526  1517399488           97.8     E
-#> 23                      696939213   692520046   690820013           92.0     E
-#> 24                      728375097   728143484   727500085           96.5     E
+#> 22                     1523636892  1521096526  1517398132           97.8     E
+#> 23                      696939213   692520046   690810942           92.0     E
+#> 24                      728375097   728143484   727314482           96.5     E
 #> 25                      720863499   720424963   715893885           95.9     E
 #> 26                      847741942   847713116   846078615           98.2     E
 #>    departamento_meta
@@ -325,13 +325,13 @@ parámetros con vectores más grandes.
 
 ``` r
 # ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
-mi_consulta <- iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2015:2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
-    elegir_como_se_estructura(generica = "todos") |> 
+mi_consulta <- iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2015:2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
+    elegir_como_se_estructura(generica = "todos") %>% 
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 1/7 ETA:  8s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  4s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...
+#> ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  5s | Ejecutando consulta  ⠸ 3/7 ETA:  4s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 
 mi_consulta
@@ -442,10 +442,10 @@ sociales por periodo anual.
 ``` r
 library(dplyr)
 
-mi_consulta |> 
-    group_by(periodo) |> 
-    mutate(porc_presupuesto = (pim/sum(pim)*100) |> round(1)) |> 
-    ungroup() |> 
+mi_consulta %>% 
+    group_by(periodo) %>% 
+    mutate(porc_presupuesto = (pim/sum(pim)*100) %>% round(1)) %>% 
+    ungroup() %>% 
     filter(desc_generica == "PERSONAL Y OBLIGACIONES SOCIALES")
 #> # A tibble: 7 × 14
 #>   periodo cod_generica desc_generica                          pia       pim
@@ -469,7 +469,7 @@ con `ggplot2`.
 ``` r
 library(ggplot2)
 
-mi_consulta |> 
+mi_consulta %>% 
     ggplot(aes(periodo, pim, color = cod_generica)) +
     geom_line() +
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))

@@ -17,6 +17,7 @@ Imports:
     glue,
     httr2,
     janitor,
+    magrittr,
     purrr,
     readr,
     rlang,

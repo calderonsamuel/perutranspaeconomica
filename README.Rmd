@@ -91,23 +91,23 @@ De todas ellas, la mínima requerida es `elegir_periodo_anual()`.
 Una vez que se le agrega parámetros a la consulta, la interfaz lo refleja. 
 
 ```{r}
-iniciar_transparencia_economica() |> 
+iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(periodo = 2023)
 ```
 
 Cada argumento de las funciones `elegir_*()` puede aceptar vectores con más de un elemento para una consulta más potente.
 
 ```{r}
-iniciar_transparencia_economica() |> 
+iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(periodo = 2020:2023)
 ```
 
 Sin embargo, en el resto de parámetros, es necesario que al menos un argumento esté definido como `"todos"`. Más adelante se verá que en caso contrario la consulta no prosperará.
 
 ```{r}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(periodo = 2023) |> 
-    elegir_quien_gasta(nivel = "E") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(periodo = 2023) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
     elegir_donde_se_gasta(departamento_meta = "todos") # <- aquí se usó "todos"
 ```
 
@@ -116,9 +116,9 @@ Todos los métodos `elegir_*()` cuentan con documentación referente a cómo deb
 La elección de parámetros no prosperará si se intenta definir más de un parámetro como "todos".
 
 ```{r, error=TRUE}
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "todos") %>% 
     elegir_donde_se_gasta(departamento_meta = "todos")
 ```
 
@@ -129,10 +129,10 @@ Una vez definidos los parámetros de la consulta, solo hace falta ejecutarla. Pa
 ```{r}
 # ¿Cuál fue la ejecución presupuestal por departamento en el gobierno nacional?
 # Para el año 2022
-iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2022) |> 
-    elegir_quien_gasta(nivel = "E") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") |> 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos") %>% 
     consultar()
 ```
 
@@ -140,10 +140,10 @@ Se recomienda asignarle nombre a una consulta ejecutada para evitar posibles ted
 
 ```{r}
 # ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
-mi_consulta <- iniciar_transparencia_economica() |> 
-    elegir_periodo_anual(2015:2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
-    elegir_como_se_estructura(generica = "todos") |> 
+mi_consulta <- iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2015:2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
+    elegir_como_se_estructura(generica = "todos") %>% 
     consultar()
 
 mi_consulta
@@ -154,10 +154,10 @@ Una vez obtenida la consulta requerida, es posible tratar los datos obtenidos co
 ```{r, warning=FALSE, message=FALSE}
 library(dplyr)
 
-mi_consulta |> 
-    group_by(periodo) |> 
-    mutate(porc_presupuesto = (pim/sum(pim)*100) |> round(1)) |> 
-    ungroup() |> 
+mi_consulta %>% 
+    group_by(periodo) %>% 
+    mutate(porc_presupuesto = (pim/sum(pim)*100) %>% round(1)) %>% 
+    ungroup() %>% 
     filter(desc_generica == "PERSONAL Y OBLIGACIONES SOCIALES")
 ```
 
@@ -166,7 +166,7 @@ También es posible usar los datos obtenidos directamente para un gráfico con `
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
 
-mi_consulta |> 
+mi_consulta %>% 
     ggplot(aes(periodo, pim, color = cod_generica)) +
     geom_line() +
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))
