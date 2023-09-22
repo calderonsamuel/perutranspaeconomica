@@ -1,5 +1,6 @@
 transpaeco <- S7::new_class(
     name = "transpaeco",
+    parent = S7::class_data.frame,
     properties = list(
         modulo = S7::new_property(
             class = S7::class_character, 
@@ -40,6 +41,15 @@ transpaeco <- S7::new_class(
                     purrr::flatten() |> 
                     purrr::discard(is.null)
             }
+        ),
+        nivel_desagregacion = S7::new_property(
+            class = S7::class_integer,
+            getter = function(self) {
+                self |> 
+                    S7::prop("traduccion") |> 
+                    purrr::map_lgl(~any(.x == "todos")) |> 
+                    sum()
+            }
         )
     ), 
     validator = function(self) {
@@ -62,6 +72,14 @@ update_parameter <- S7::new_generic("set_param", "x")
 
 S7::method(update_parameter, transpaeco) <- function(x, param, update_list) {
     params_list <- S7::prop(x, "parametros")
+    
+    periodo_anual_is_not_set <- S7::prop(params_list, "periodo_anual") |> 
+        purrr::pluck("periodo") |> 
+        is.null()
+    
+    if (param != "periodo_anual" && periodo_anual_is_not_set) {
+        cli::cli_abort("Se debe usar {.code elegir_periodo_anual() antes de elegir otros parametros}")
+    }
     
     update_list <- purrr::discard(update_list, is.null)
     
@@ -88,4 +106,32 @@ S7::method(create_query_grid, transpaeco) <- function(x) {
     
     query_as_list |> 
         expand.grid(stringsAsFactors = FALSE)
+}
+
+S7::method(print, transpaeco) <- function(x) {
+    cli::cli_h1("Seguimiento al {x@modulo} presupuestal ({.emph actualizacion {x@actualizacion}})")
+    
+    cli::cli_h2("Parametros de consulta")
+    
+    all_params <- params_for_query()
+    
+    cli::cli_ul()
+    
+    x@traduccion |> 
+        purrr::iwalk(function(value, name) {
+            if(length(value) == 1L && value == "todos") {
+                cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {.strong *{value}*}")
+            } else {
+                cli::cli_li("{all_params[[name]][[\"print_name\"]]}: {value}")
+            }
+        })
+    
+    cli::cli_h2("Data")
+    
+    if(nrow(x) == 0){
+        cli::cli_alert_info("No se ha ejecutado ninguna consulta")
+    } else {
+        NextMethod("print", x)
+    } 
+    invisible(x)
 }
