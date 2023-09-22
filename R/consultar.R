@@ -44,10 +44,6 @@ check_pre_consulta <- function(x) {
     current_periodo <- x@parametros@periodo_anual$periodo
     current_nivel_desagregacion <- S7::prop(x, "nivel_desagregacion")
     
-    if (is.null(current_periodo)) {
-        cli::cli_abort("Se requiere {.code elegir_periodo_anual()}")
-    }
-    
     if (current_nivel_desagregacion == 0 && !periodo_is_the_only_param(x@traduccion)) {
         cli::cli_abort("Se debe elegir un parametro de desagregacion con {.str todos}")
     }
@@ -76,12 +72,10 @@ ejecutar_consulta_individual <- function(query_params, request) {
 }
 
 empty_str_to_last <- function(x) {
-    empty_str <- purrr::keep(x, ~.x == "")
-    empty_str_name <- names(empty_str)
-    empty_str_value <- empty_str[[1]]
-    remaining <- purrr::discard(x, ~.x == "")
-    remaining[[empty_str_name]] <- empty_str_value
-    remaining
+    empty_item_name <- purrr::keep(x, ~.x == "") |> names()
+    x[[empty_item_name]] <- NULL
+    x[[empty_item_name]] <- ""
+    x
 }
 
 periodo_is_the_only_param <- function(query) {
