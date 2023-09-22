@@ -23,7 +23,7 @@ options(pillar.min_chars = 30)
 [![Codecov test coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
 [![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente y clara.
@@ -69,10 +69,10 @@ library(perutranspaeconomica)
 
 ### Iniciar consulta
 
-Para iniciar una consulta tan solo hace falta usar la función `seguimiento_ep()`. Esto crea un dataframe vacío y muestra los parámetros de consulta agregados. Al inicio no tenemos parámetros ni data.
+Para iniciar una consulta tan solo hace falta usar la función `iniciar_transparencia_economica()`. Esto crea un dataframe vacío y muestra los parámetros de consulta agregados. Al inicio no tenemos parámetros ni data.
 
 ```{r}
-seguimiento_ep()
+iniciar_transparencia_economica()
 ```
 
 ### Elegir parámetros de consulta
@@ -88,50 +88,51 @@ La elección de parámetros de consulta se hace con las funciones que `elegir_*(
 
 De todas ellas, la mínima requerida es `elegir_periodo_anual()`. 
 
-Una vez que se le agrega parámetros a la consulta, la interfaz lo refleja. `elegir_periodo_anual()` utiliza por defecto el año en curso
+Una vez que se le agrega parámetros a la consulta, la interfaz lo refleja. 
 
 ```{r}
-seguimiento_ep() |> 
-    elegir_periodo_anual()
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(periodo = 2023)
 ```
 
 Cada argumento de las funciones `elegir_*()` puede aceptar vectores con más de un elemento para una consulta más potente.
 
 ```{r}
-seguimiento_ep() |> 
-    elegir_periodo_anual(periodo = 2020:2022)
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(periodo = 2020:2023)
 ```
 
 Sin embargo, en el resto de parámetros, es necesario que al menos un argumento esté definido como `"todos"`. Más adelante se verá que en caso contrario la consulta no prosperará.
 
-```r
-# malo. dos argumentos definidos como "todos"
-seguimiento_ep() |> 
-    elegir_periodo_anual() |> 
-    elegir_quien_gasta(nivel = "todos") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos")
-```
-
 ```{r}
-# bueno. solo un argumento definido como "todos"
-seguimiento_ep() |> 
-    elegir_periodo_anual() |> 
-    elegir_quien_gasta(nivel = "E") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") 
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(periodo = 2023) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos") # <- aquí se usó "todos"
 ```
 
 Todos los métodos `elegir_*()` cuentan con documentación referente a cómo deben ser definidos. Para mayor detalle consultar el método específico. Por ejemplo, `help("elegir_quien_gasta")` o `?elegir_quien_gasta`.
+
+La elección de parámetros no prosperará si se intenta definir más de un parámetro como "todos".
+
+```{r, error=TRUE}
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "todos") %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos")
+```
 
 ### Consultar
 
 Una vez definidos los parámetros de la consulta, solo hace falta ejecutarla. Para ello, usamos la función `consultar()`. Esto nos devolverá la interfaz de consulta, pero ahora contendrá la data requerida. 
 
 ```{r}
-# ¿Cómo va la ejecución presupuestal por departamento en el gobierno nacional?
-seguimiento_ep() |> 
-    elegir_periodo_anual() |> 
-    elegir_quien_gasta(nivel = "E") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") |> 
+# ¿Cuál fue la ejecución presupuestal por departamento en el gobierno nacional?
+# Para el año 2022
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
+    elegir_donde_se_gasta(departamento_meta = "todos") %>% 
     consultar()
 ```
 
@@ -139,24 +140,13 @@ Se recomienda asignarle nombre a una consulta ejecutada para evitar posibles ted
 
 ```{r}
 # ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?
-mi_consulta <- seguimiento_ep() |> 
-    elegir_periodo_anual(2015:2021) |> 
-    elegir_en_que_se_gasta(categoria_presupuestal = "0031") |> 
-    elegir_como_se_estructura(generica = "todos") |> 
+mi_consulta <- iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2015:2021) %>% 
+    elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
+    elegir_como_se_estructura(generica = "todos") %>% 
     consultar()
 
 mi_consulta
-```
-
-Nunca definir más de un parámetro de consulta como `"todos"` porque (por ahora) producirá un incomprensible.
-
-```{r, error=TRUE}
-# malo. dos argumentos definidos como "todos"
-seguimiento_ep() |> 
-    elegir_periodo_anual() |> 
-    elegir_quien_gasta(nivel = "todos") |> 
-    elegir_donde_se_gasta(departamento_meta = "todos") |> 
-    consultar()
 ```
 
 Una vez obtenida la consulta requerida, es posible tratar los datos obtenidos como cualquier otro dataframe en R. Por ejemplo, para calcular el porcentaje de presupuesto destinado a personal y obligaciones sociales por periodo anual.
@@ -164,11 +154,10 @@ Una vez obtenida la consulta requerida, es posible tratar los datos obtenidos co
 ```{r, warning=FALSE, message=FALSE}
 library(dplyr)
 
-mi_consulta |> 
-    select(periodo, desc_generica, pim) |> 
-    group_by(periodo) |> 
-    mutate(porc_presupuesto = (pim/sum(pim)*100) |> round(1)) |> 
-    ungroup() |> 
+mi_consulta %>% 
+    group_by(periodo) %>% 
+    mutate(porc_presupuesto = (pim/sum(pim)*100) %>% round(1)) %>% 
+    ungroup() %>% 
     filter(desc_generica == "PERSONAL Y OBLIGACIONES SOCIALES")
 ```
 
@@ -177,7 +166,7 @@ También es posible usar los datos obtenidos directamente para un gráfico con `
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
 
-mi_consulta |> 
+mi_consulta %>% 
     ggplot(aes(periodo, pim, color = cod_generica)) +
     geom_line() +
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))

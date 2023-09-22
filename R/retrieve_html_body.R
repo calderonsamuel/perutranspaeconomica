@@ -8,7 +8,7 @@
 #' @return Objeto de clase "html_node"
 #'
 retrieve_html_body <- function(response) {
-    response |>
-        httr2::resp_body_html() |>
+    response %>%
+        httr2::resp_body_html() %>%
         rvest::html_element("body")
 }

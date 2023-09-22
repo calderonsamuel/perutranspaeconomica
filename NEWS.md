@@ -1,3 +1,12 @@
+# perutranspaeconomica (development version)
+
+## Breaking
+
+- Se ha creado la clase `transpaeco()` como reemplazo de `sep_df`. Esta nueva clase está basada en `S7`, usa los mismos métodos definidos previamente, y permitirá soporte para consultas del módulo de ingresos. `sep_df` llevaba ese nombre porque solo permitía hacer **S**eguimiento a la **E**jecución **P**resupuestal (gasto).
+- En línea con dicho cambio, la función que inicia el flujo de consulta pasa a llamarse `iniciar_transparencia_economica()` en lugar de `seguimiento_ep()`.
+- Se requerirá usar `elegir_periodo_anual()` obligatoriamente antes de cualquier otro parámetro. De esta manera se recibe feedback al instante y no solo al momento de ejecutar la consulta.
+- `elegir_periodo_anual()` ya no tiene valores por defecto y requerirá que se le especifice un vector numérico de años. Anteriormente tomaba como referencia el año en curso, pero esto podría generar problemas al re-ejecutar código escrito previamente, especialmente en los primeros meses del año.
+
 # perutranspaeconomica 0.3.1
 
 - Cambios para evitar warnings de dplyr v1.1.0
