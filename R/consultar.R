@@ -43,9 +43,9 @@ S7::method(consultar, transpaeco) <- function(x) {
 }
 
 check_pre_consulta <- function(x) {
-    current_periodo <- x |> 
-        S7::prop("parametros") |> 
-        S7::prop("periodo_anual") |> 
+    current_periodo <- x %>% 
+        S7::prop("parametros") %>% 
+        S7::prop("periodo_anual") %>% 
         purrr::pluck("periodo")
         
     current_nivel_desagregacion <- S7::prop(x, "nivel_desagregacion")
