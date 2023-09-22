@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">perutranspaeconomica</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Cambiar la navegación">
@@ -51,6 +51,17 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="perutranspaeconomica-development-version">perutranspaeconomica (development version)<a class="anchor" aria-label="anchor" href="#perutranspaeconomica-development-version"></a></h2>
+<div class="section level3">
+<h3 id="breaking-development-version">Breaking<a class="anchor" aria-label="anchor" href="#breaking-development-version"></a></h3>
+<ul><li>Se ha creado la clase <code>transpaeco()</code> como reemplazo de <code>sep_df</code>. Esta nueva clase está basada en <code>S7</code>, usa los mismos métodos definidos previamente, y permitirá soporte para consultas del módulo de ingresos. <code>sep_df</code> llevaba ese nombre porque solo permitía hacer <strong>S</strong>eguimiento a la <strong>E</strong>jecución <strong>P</strong>resupuestal (gasto).</li>
+<li>En línea con dicho cambio, la función que inicia el flujo de consulta pasa a llamarse <code><a href="../reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica()</a></code> en lugar de <code>seguimiento_ep()</code>.</li>
+<li>Se requerirá usar <code><a href="../reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code> obligatoriamente antes de cualquier otro parámetro. De esta manera se recibe feedback al instante y no solo al momento de ejecutar la consulta.</li>
+<li>
+<code><a href="../reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code> ya no tiene valores por defecto y requerirá que se le especifice un vector numérico de años. Anteriormente tomaba como referencia el año en curso, pero esto podría generar problemas al re-ejecutar código escrito previamente, especialmente en los primeros meses del año.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.1" id="perutranspaeconomica-031">perutranspaeconomica 0.3.1<a class="anchor" aria-label="anchor" href="#perutranspaeconomica-031"></a></h2>
 <ul><li>Cambios para evitar warnings de dplyr v1.1.0</li>
 </ul></div>
@@ -75,7 +86,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="iniciar-elegir-y-consultar-0-2-0">Iniciar, elegir y consultar.<a class="anchor" aria-label="anchor" href="#iniciar-elegir-y-consultar-0-2-0"></a></h3>
-<ul><li>Para hacer consultas es necesario combinar las funciones <code><a href="../reference/seguimiento_ep.html">seguimiento_ep()</a></code>, alguna o varias del grupo <code>elegir_*()</code> y <code><a href="../reference/consultar.html">consultar()</a></code>.</li>
+<ul><li>Para hacer consultas es necesario combinar las funciones <code>seguimiento_ep()</code>, alguna o varias del grupo <code>elegir_*()</code> y <code><a href="../reference/consultar.html">consultar()</a></code>.</li>
 <li>Todos los parámetros indicados con funciones <code>elegir_*()</code> aceptan vectores con longitud mayor a 1. De esta manera se pueden hacer múltiples consultas a la vez.</li>
 <li>Todos los parámetros indicados con funciones <code>elegir_*()</code> pueden aceptar el string <code>'todos'</code>. De hecho, cualquier consulta requiere que al menos un parámetro esté indicado como <code>'todos'</code>.</li>
 </ul></div>
