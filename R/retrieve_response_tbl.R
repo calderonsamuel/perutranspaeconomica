@@ -7,10 +7,12 @@
 retrieve_response_tbl <- function(response){
     tbl_ids <- list(data = ".Data", header = ".MapTable", history = ".History")
     
-    column_names <- response %>% 
+    header_table <- response %>% 
         rvest::html_element(tbl_ids[["header"]]) %>%
-        rvest::html_table() %>% 
-        janitor::row_to_names(2) %>%
+        rvest::html_table() 
+        
+    column_names <- header_table %>%
+        janitor::row_to_names(nrow(header_table)) %>%
         janitor::clean_names() %>%
         names() %>%
         suppressWarnings()
