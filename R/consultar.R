@@ -43,10 +43,14 @@ S7::method(consultar, transpaeco) <- function(x) {
 }
 
 check_pre_consulta <- function(x) {
-    current_periodo <- x@parametros@periodo_anual$periodo
+    current_periodo <- x |> 
+        S7::prop("parametros") |> 
+        S7::prop("periodo_anual") |> 
+        purrr::pluck("periodo")
+        
     current_nivel_desagregacion <- S7::prop(x, "nivel_desagregacion")
     
-    if (current_nivel_desagregacion == 0 && !periodo_is_the_only_param(x@traduccion)) {
+    if (current_nivel_desagregacion == 0 && !periodo_is_the_only_param(S7::prop(x, "traduccion"))) {
         cli::cli_abort("Se debe elegir un parametro de desagregacion con {.str todos}")
     }
 }
@@ -70,7 +74,7 @@ ejecutar_consulta_individual <- function(query_params, request) {
         tibble::as_tibble() %>%
         dplyr::mutate(tabla = list(tabla), .before = 1) %>%
         tidyr::unnest(tabla) %>%
-        dplyr::relocate(.data$periodo, .before = 1)
+        dplyr::relocate("periodo", .before = 1)
 }
 
 empty_str_to_last <- function(x) {
@@ -81,5 +85,5 @@ empty_str_to_last <- function(x) {
 }
 
 periodo_is_the_only_param <- function(query) {
-    (length(query) == 1L) && (names(query) == "periodo")
+    (length(query) == 1L) && (names(query) == "periodo") 
 }
