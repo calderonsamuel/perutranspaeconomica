@@ -18,14 +18,19 @@ elegir_origen <- function(x,
                           rubro = NULL,
                           tipo_de_recurso = NULL) {
     
+    update_list <- list(
+        fuente_financiamiento = fuente_financiamiento,
+        rubro = rubro,
+        tipo_de_recurso = tipo_de_recurso
+    )
+    
+    names(update_list) <- names(update_list) %>%
+        paste0("_", S7::prop(x, "modulo"))
+    
     update_parameter(
         x = x,
         param = "origen",
-        update_list = list(
-            fuente_financiamiento = fuente_financiamiento,
-            rubro = rubro,
-            tipo_de_recurso = tipo_de_recurso
-        )
+        update_list = update_list
     )
 }
 

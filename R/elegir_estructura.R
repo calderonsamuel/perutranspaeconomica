@@ -28,16 +28,21 @@ elegir_estructura <- function(x,
                               especifica = NULL,
                               detalle_especifica = NULL) {
     
+    update_list <- list(
+        generica = generica,
+        subgenerica = subgenerica,
+        detalle_subgenerica = detalle_subgenerica,
+        especifica = especifica,
+        detalle_especifica = detalle_especifica
+    )
+    
+    names(update_list) <- names(update_list) %>%
+        paste0("_", S7::prop(x, "modulo"))
+    
     update_parameter(
         x = x,
         param = "estructura",
-        update_list = list(
-            generica = generica,
-            subgenerica = subgenerica,
-            detalle_subgenerica = detalle_subgenerica,
-            especifica = especifica,
-            detalle_especifica = detalle_especifica
-        )
+        update_list = update_list
     )
 }
 

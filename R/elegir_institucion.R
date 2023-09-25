@@ -30,20 +30,25 @@ elegir_institucion <- function(x,
                                provincia = NULL,
                                municipalidad = NULL) {
     
+    update_list <- list(
+        nivel = nivel,
+        sector = sector,
+        pliego = pliego,
+        unidad_ejecutora = unidad_ejecutora,
+        goblocal_o_manc = goblocal_o_manc,
+        mancomunidad = mancomunidad,
+        departamento = departamento,
+        provincia = provincia,
+        municipalidad = municipalidad
+    )
+    
+    names(update_list) <- names(update_list) %>%
+        paste0("_", S7::prop(x, "modulo"))
+    
     update_parameter(
         x = x, 
         param = "institucion",
-        update_list =  list(
-            nivel = nivel,
-            sector = sector,
-            pliego = pliego,
-            unidad_ejecutora = unidad_ejecutora,
-            goblocal_o_manc = goblocal_o_manc,
-            mancomunidad = mancomunidad,
-            departamento = departamento,
-            provincia = provincia,
-            municipalidad = municipalidad
-        )
+        update_list =  update_list
     )
 }
 

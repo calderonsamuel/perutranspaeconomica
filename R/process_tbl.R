@@ -6,7 +6,8 @@ process_tbl <- function(tbl) {
     tbl %>%
         remove_first_column() %>%
         unique() %>% # keep only unique permutations, returns data.frame
-        dplyr::filter(!is.na(readr::parse_number(.data$pim))) %>%
+        # dplyr::filter(!is.na(readr::parse_number(.data$pim))) %>%
+        dplyr::filter(dplyr::across(.cols = tidyselect::any_of(c("certificacion", "recaudado")), ~!is.na(readr::parse_number(.x)))) %>%
         separate_cod_desc() %>%
         dplyr::mutate(dplyr::across(.cols = tidyselect::any_of(num_columns), .fns = readr::parse_number)) %>%
         suppressWarnings()

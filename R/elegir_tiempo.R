@@ -10,13 +10,18 @@ elegir_tiempo <- function(x,
                           trimestre = NULL,
                           mes = NULL) {
     
+    update_list <- list(
+        trimestre = trimestre,
+        mes = mes
+    )
+    
+    names(update_list) <- names(update_list) %>%
+        paste0("_", S7::prop(x, "modulo"))
+    
     update_parameter(
         x = x,
         param = "tiempo",
-        update_list = list(
-            trimestre = trimestre,
-            mes = mes
-        )
+        update_list = update_list
     )
 }
 

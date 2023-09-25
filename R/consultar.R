@@ -34,12 +34,14 @@ S7::method(consultar, transpaeco) <- function(x) {
     
     cli::cli_alert_success("Consultas realizadas y unificadas")
     
-    transpaeco(
-        .data = consultas_unificadas,
-        modulo = x@modulo,
-        actualizacion = x@actualizacion,
-        parametros = x@parametros
-    )
+    # transpaeco(
+    #     .data = consultas_unificadas,
+    #     modulo = x@modulo,
+    #     actualizacion = x@actualizacion,
+    #     parametros = x@parametros
+    # )
+    
+    consultas_unificadas
 }
 
 check_pre_consulta <- function(x) {
@@ -74,7 +76,9 @@ ejecutar_consulta_individual <- function(query_params, request) {
         tibble::as_tibble() %>%
         dplyr::mutate(tabla = list(tabla), .before = 1) %>%
         tidyr::unnest(tabla) %>%
-        dplyr::relocate("periodo", .before = 1)
+        dplyr::relocate("periodo", .before = 1) %>%
+        dplyr::rename_with(~stringr::str_remove(.x, "_ingreso$")) %>%
+        dplyr::rename_with(~stringr::str_remove(.x, "_gasto$"))
 }
 
 empty_str_to_last <- function(x) {
