@@ -1,8 +1,8 @@
 #' Ejecutar consulta de seguimiento a la ejecución presupuestal
 #'
-#' @param x Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada
+#' @param x Objeto de clase `<transpaeco>` recipiente de los parámetros de la consulta deseada
 #'
-#' @return Un data.frame con clase <transpaeco> que contiene el resultado de la consulta solicitada
+#' @return Un data.frame con clase `<transpaeco>` que contiene el resultado de la consulta solicitada
 #' @export
 consultar <- S7::new_generic("consultar", "x", function(x) {
     S7::S7_dispatch()

@@ -7,7 +7,7 @@
 elegir_periodo_anual(x, periodo = NULL)
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+\item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
 \item{periodo}{numeric. Periodo anual de consulta}
 }

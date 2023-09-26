@@ -7,10 +7,10 @@
 consultar(x)
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+\item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}} que contiene el resultado de la consulta solicitada
+Un data.frame con clase \verb{<transpaeco>} que contiene el resultado de la consulta solicitada
 }
 \description{
 Ejecutar consulta de seguimiento a la ejecución presupuestal

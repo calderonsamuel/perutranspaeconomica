@@ -14,7 +14,6 @@
 #' @param meta chr. Código de meta. No tiene forma estandarizada.
 #'
 #' @return Un data.frame con clase <transpaeco>
-#' @export
 elegir_destino <- function(x,
                            categoria_presupuestal = NULL,
                            producto = NULL,

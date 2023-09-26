@@ -8,7 +8,6 @@
 #' Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".
 #'
 #' @return Un data.frame con clase <transpaeco>
-#' @export
 elegir_lugar <- function(x, departamento_meta = NULL) {
     
     update_parameter(

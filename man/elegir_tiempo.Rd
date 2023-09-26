@@ -3,14 +3,17 @@
 \name{elegir_tiempo}
 \alias{elegir_tiempo}
 \alias{elegir_cuando_se_hizo_gasto}
+\alias{elegir_cuando_se_hizo_recaudacion}
 \title{Elegir el tiempo en que se usa el presupuesto}
 \usage{
 elegir_tiempo(x, trimestre = NULL, mes = NULL)
 
 elegir_cuando_se_hizo_gasto(x, trimestre = NULL, mes = NULL)
+
+elegir_cuando_se_hizo_recaudacion(x, trimestre = NULL, mes = NULL)
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+\item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
 \item{trimestre}{int. Número del 1 al 4}
 

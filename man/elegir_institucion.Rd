@@ -3,6 +3,7 @@
 \name{elegir_institucion}
 \alias{elegir_institucion}
 \alias{elegir_quien_gasta}
+\alias{elegir_quien_recauda}
 \title{Elegir la institucion que utiliza el presupuesto}
 \usage{
 elegir_institucion(
@@ -30,9 +31,22 @@ elegir_quien_gasta(
   provincia = NULL,
   municipalidad = NULL
 )
+
+elegir_quien_recauda(
+  x,
+  nivel = NULL,
+  sector = NULL,
+  pliego = NULL,
+  unidad_ejecutora = NULL,
+  goblocal_o_manc = NULL,
+  mancomunidad = NULL,
+  departamento = NULL,
+  provincia = NULL,
+  municipalidad = NULL
+)
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+\item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
 \item{nivel}{chr. Nivel de gobierno. Puede ser "E" (gobierno nacional),
 "M" (gobiernos locales) o "R" (gobiernos regionales). Si es "E" o "R",
@@ -61,4 +75,6 @@ Un data.frame con clase \if{html}{\out{<transpaeco>}}
 }
 \description{
 Estas funciones permiten desglosar la busqueda haciendo uso del clasificador institucional.
+\code{elegir_quien_gasta()} y \code{elegir_quien_recauda()} sirven los módulos de gasto e ingresos, respectivamente.
+\code{elegir_institucion()} es una versión agnóstica que sirve para ámbos módulos.
 }

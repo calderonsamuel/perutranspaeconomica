@@ -3,6 +3,7 @@
 \name{elegir_origen}
 \alias{elegir_origen}
 \alias{elegir_con_que_se_financia}
+\alias{elegir_fuentes_de_recaudacion}
 \title{Elegir el origen del presupuesto}
 \usage{
 elegir_origen(
@@ -18,9 +19,16 @@ elegir_con_que_se_financia(
   rubro = NULL,
   tipo_de_recurso = NULL
 )
+
+elegir_fuentes_de_recaudacion(
+  x,
+  fuente_financiamiento = NULL,
+  rubro = NULL,
+  tipo_de_recurso = NULL
+)
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+\item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
 \item{fuente_financiamiento}{int. Código de fuente de financiamiento.
 En su versión más reciente va del 1 al 5.}

@@ -5,7 +5,6 @@
 #' @param mes int. Número del 1 al 12
 #'
 #' @return Un data.frame con clase <transpaeco>
-#' @export
 elegir_tiempo <- function(x,
                           trimestre = NULL,
                           mes = NULL) {
@@ -28,6 +27,18 @@ elegir_tiempo <- function(x,
 #' @rdname elegir_tiempo
 #' @export
 elegir_cuando_se_hizo_gasto <- function(x,
+                                        trimestre = NULL,
+                                        mes = NULL) {
+    elegir_tiempo(
+        x = x,
+        trimestre = trimestre,
+        mes = mes
+    )
+}
+
+#' @rdname elegir_tiempo
+#' @export
+elegir_cuando_se_hizo_recaudacion <- function(x,
                                         trimestre = NULL,
                                         mes = NULL) {
     elegir_tiempo(

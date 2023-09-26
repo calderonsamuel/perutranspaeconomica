@@ -12,7 +12,6 @@
 #' ser letras o números.
 #'
 #' @return Un data.frame con clase <transpaeco>
-#' @export
 elegir_origen <- function(x,
                           fuente_financiamiento = NULL,
                           rubro = NULL,
@@ -37,6 +36,20 @@ elegir_origen <- function(x,
 #' @rdname elegir_origen
 #' @export
 elegir_con_que_se_financia <- function(x,
+                                       fuente_financiamiento = NULL,
+                                       rubro = NULL,
+                                       tipo_de_recurso = NULL) {
+    elegir_origen(
+        x = x,
+        fuente_financiamiento = fuente_financiamiento,
+        rubro = rubro,
+        tipo_de_recurso = tipo_de_recurso
+    )
+}
+
+#' @rdname elegir_origen
+#' @export
+elegir_fuentes_de_recaudacion <- function(x,
                                        fuente_financiamiento = NULL,
                                        rubro = NULL,
                                        tipo_de_recurso = NULL) {

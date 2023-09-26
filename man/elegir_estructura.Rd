@@ -24,7 +24,7 @@ elegir_como_se_estructura(
 )
 }
 \arguments{
-\item{x}{Objeto de clase 'sep_df' recipiente de los parámetros de la consulta deseada}
+\item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
 \item{generica}{chr. Código de genérica de forma "X-X-X"}
 
