@@ -9,6 +9,7 @@
 #' @param mes int. Número del 1 al 12
 #'
 #' @inherit iniciar_transparencia_economica return
+#' @export
 elegir_tiempo <- function(x,
                           trimestre = NULL,
                           mes = NULL) {

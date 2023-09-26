@@ -9,6 +9,7 @@
 #' Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".
 #'
 #' @inherit iniciar_transparencia_economica return
+#' @export
 elegir_lugar <- function(x, departamento_meta = NULL) {
     
     update_parameter(

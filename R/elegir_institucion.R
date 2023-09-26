@@ -21,6 +21,7 @@
 #'
 #' @rdname elegir_institucion
 #' @inherit iniciar_transparencia_economica return
+#' @export
 elegir_institucion <- function(x, 
                                nivel = NULL,
                                sector = NULL,

@@ -22,6 +22,7 @@
 #' @param detalle_especifica chr. Código de detalle de específica de forma "X-X-X-X-X-X"
 #'
 #' @inherit iniciar_transparencia_economica return
+#' @export
 elegir_estructura <- function(x,
                               generica = NULL,
                               subgenerica = NULL,

@@ -15,6 +15,7 @@
 #' @param meta chr. Código de meta. No tiene forma estandarizada.
 #'
 #' @inherit iniciar_transparencia_economica return
+#' @export
 elegir_destino <- function(x,
                            categoria_presupuestal = NULL,
                            producto = NULL,

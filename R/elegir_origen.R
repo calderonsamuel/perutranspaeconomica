@@ -14,6 +14,7 @@
 #' ser letras o números.
 #'
 #' @inherit iniciar_transparencia_economica return
+#' @export
 elegir_origen <- function(x,
                           fuente_financiamiento = NULL,
                           rubro = NULL,
