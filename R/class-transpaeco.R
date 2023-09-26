@@ -10,6 +10,10 @@ transpaeco <- S7::new_class(
             class = S7::class_character, 
             default = "diaria"
         ),
+        psize = S7::new_property(
+           class = S7::class_numeric,
+           default = 1000
+        ),
         req_url = S7::new_property(
             class = S7::class_character,
             getter = function(self) {
@@ -25,9 +29,14 @@ transpaeco <- S7::new_class(
                 S7::prop(self, "req_url") %>%
                     httr2::request() %>%
                     httr2::req_user_agent("perutranspaeconomica (https://perutranspaeconomica.samuelenrique.com)") %>%
-                    httr2::req_url_query(`_tgt` = "json", `_uhc` = "yes", cpage = 1, psize = 1000)
+                    httr2::req_url_query(
+                        `_tgt` = "json",
+                        `_uhc` = "yes",
+                        cpage = 1,
+                        psize = S7::prop(self, "psize")
+                    )
             }
-        ),
+        ), 
         parametros = S7::new_property(
             class = pte_params, 
             default = pte_params()

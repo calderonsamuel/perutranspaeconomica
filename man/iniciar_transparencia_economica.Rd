@@ -4,12 +4,18 @@
 \alias{iniciar_transparencia_economica}
 \title{Iniciar consulta de transparencia economica}
 \usage{
-iniciar_transparencia_economica(modulo = "gasto", actualizacion = "diaria")
+iniciar_transparencia_economica(
+  modulo = "gasto",
+  actualizacion = "diaria",
+  psize = 1000L
+)
 }
 \arguments{
 \item{modulo}{chr. Uno de c("gasto", "ingreso")}
 
 \item{actualizacion}{chr. Uno de c("mensual", "diaria")}
+
+\item{psize}{Cantidad máxima de filas del resultado. No cambiar a menos que se sepa con mucha seguridad lo que implica.}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}

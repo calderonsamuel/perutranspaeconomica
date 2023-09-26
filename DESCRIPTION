@@ -24,6 +24,7 @@ Imports:
     rvest,
     S7,
     stats,
+    stringr,
     tibble,
     tidyr,
     tidyselect
@@ -31,7 +32,6 @@ Suggests:
     DiagrammeR,
     knitr,
     rmarkdown,
-    stringr,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
