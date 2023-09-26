@@ -1,13 +1,14 @@
 #' Elegir lugar de uso del presupuesto
 #' 
 #' Estas funciones permiten desglosar la busqueda de acuerdo
-#' al lugar de uso del presupuesto.
+#' al lugar de uso del presupuesto. Debido a que solo se pueden usar en el módulo de gasto, 
+#' ambas tienen el mismo comportamiento.
 #'
 #' @inheritParams consultar
 #' @param departamento_meta chr. Código de departamento.
 #' Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".
 #'
-#' @return Un data.frame con clase <transpaeco>
+#' @inherit iniciar_transparencia_economica return
 elegir_lugar <- function(x, departamento_meta = NULL) {
     
     update_parameter(

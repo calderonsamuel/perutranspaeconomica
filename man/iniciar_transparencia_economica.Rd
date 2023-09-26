@@ -12,7 +12,7 @@ iniciar_transparencia_economica(modulo = "gasto", actualizacion = "diaria")
 \item{actualizacion}{chr. Uno de c("mensual", "diaria")}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Iniciar consulta de transparencia economica

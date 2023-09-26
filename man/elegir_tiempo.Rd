@@ -20,8 +20,10 @@ elegir_cuando_se_hizo_recaudacion(x, trimestre = NULL, mes = NULL)
 \item{mes}{int. Número del 1 al 12}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
-Elegir el tiempo en que se usa el presupuesto
+Estas funciones permiten desglosar la busqueda de acuerdo al tiempo en el periodo anual.
+\code{elegir_cuando_se_hizo_gasto()} y \code{elegir_cuando_se_hizo_recaudacion()} sirven los módulos de gasto e ingresos, respectivamente.
+\code{elegir_tiempo()} es una versión agnóstica que sirve para ámbos módulos.
 }

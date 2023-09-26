@@ -2,7 +2,8 @@
 % Please edit documentation in R/elegir_estructura.R
 \name{elegir_estructura}
 \alias{elegir_estructura}
-\alias{elegir_como_se_estructura}
+\alias{elegir_como_se_estructura_gasto}
+\alias{elegir_como_se_estructura_recaudacion}
 \title{Elegir la estructura con la que se usa el presupuesto}
 \usage{
 elegir_estructura(
@@ -14,7 +15,16 @@ elegir_estructura(
   detalle_especifica = NULL
 )
 
-elegir_como_se_estructura(
+elegir_como_se_estructura_gasto(
+  x,
+  generica = NULL,
+  subgenerica = NULL,
+  detalle_subgenerica = NULL,
+  especifica = NULL,
+  detalle_especifica = NULL
+)
+
+elegir_como_se_estructura_recaudacion(
   x,
   generica = NULL,
   subgenerica = NULL,
@@ -37,10 +47,12 @@ elegir_como_se_estructura(
 \item{detalle_especifica}{chr. Código de detalle de específica de forma "X-X-X-X-X-X"}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo a valores de estructura presupuestal.
+\code{elegir_como_se_estructura_gasto()} y \code{elegir_como_se_estructura_recaudacion()} sirven los módulos de gasto e ingresos, respectivamente.
+\code{elegir_estructura()} es una versión agnóstica que sirve para ámbos módulos.
 }
 \details{
 Estos endpoints se construyen secuencialmente en base a los valores de generica.

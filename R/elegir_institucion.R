@@ -20,7 +20,7 @@
 #' @param municipalidad chr. Código de municipalidad, de forma "XXXXXX". No corresponde con ubigeo.
 #'
 #' @rdname elegir_institucion
-#' @return Un data.frame con clase <transpaeco>
+#' @inherit iniciar_transparencia_economica return
 elegir_institucion <- function(x, 
                                nivel = NULL,
                                sector = NULL,

@@ -46,9 +46,10 @@ Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
 \item{meta}{chr. Código de meta. No tiene forma estandarizada.}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo al destino
-de uso del presupuesto.
+de uso del presupuesto. Debido a que solo se pueden usar en el módulo de gasto,
+ambas tienen el mismo comportamiento.
 }

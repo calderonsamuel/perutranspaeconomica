@@ -2,7 +2,8 @@
 
 export("%>%")
 export(consultar)
-export(elegir_como_se_estructura)
+export(elegir_como_se_estructura_gasto)
+export(elegir_como_se_estructura_recaudacion)
 export(elegir_con_que_se_financia)
 export(elegir_cuando_se_hizo_gasto)
 export(elegir_cuando_se_hizo_recaudacion)

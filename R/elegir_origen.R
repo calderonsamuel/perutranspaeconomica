@@ -2,6 +2,8 @@
 #' 
 #' Estas funciones permiten desglosar la busqueda de acuerdo al origen 
 #' del financiamiento del presupuesto.
+#' `elegir_con_que_se_financia()` y `elegir_fuentes_de_recaudacion()` sirven los módulos de gasto e ingresos, respectivamente.
+#' `elegir_origen()` es una versión agnóstica que sirve para ámbos módulos.
 #'
 #' @inheritParams consultar
 #' @param fuente_financiamiento int. Código de fuente de financiamiento.
@@ -11,7 +13,7 @@
 #' No tiene forma estandar, puede ser de uno o dos caracteres, que pueden
 #' ser letras o números.
 #'
-#' @return Un data.frame con clase <transpaeco>
+#' @inherit iniciar_transparencia_economica return
 elegir_origen <- function(x,
                           fuente_financiamiento = NULL,
                           rubro = NULL,
@@ -39,6 +41,16 @@ elegir_con_que_se_financia <- function(x,
                                        fuente_financiamiento = NULL,
                                        rubro = NULL,
                                        tipo_de_recurso = NULL) {
+    
+    modulo <- S7::prop(x, "modulo")
+    
+    if (modulo == "ingreso") {
+        cli::cli_abort(
+            "Para consultas del modulo de {.strong {modulo}} usa 
+            {.code elegir_fuentes_de_recaudacion()} o {.code elegir_origen()}"
+        )
+    }
+    
     elegir_origen(
         x = x,
         fuente_financiamiento = fuente_financiamiento,
@@ -53,6 +65,16 @@ elegir_fuentes_de_recaudacion <- function(x,
                                        fuente_financiamiento = NULL,
                                        rubro = NULL,
                                        tipo_de_recurso = NULL) {
+    
+    modulo <- S7::prop(x, "modulo")
+    
+    if (modulo == "gasto") {
+        cli::cli_abort(
+            "Para consultas del modulo de {.strong {modulo}} usa 
+            {.code elegir_con_que_se_financia()} o {.code elegir_origen()}"
+        )
+    }
+    
     elegir_origen(
         x = x,
         fuente_financiamiento = fuente_financiamiento,

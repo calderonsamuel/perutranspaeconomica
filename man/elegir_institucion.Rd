@@ -71,7 +71,7 @@ Si es "N", le corresponde \code{mancomunidad}.}
 \item{municipalidad}{chr. Código de municipalidad, de forma "XXXXXX". No corresponde con ubigeo.}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda haciendo uso del clasificador institucional.

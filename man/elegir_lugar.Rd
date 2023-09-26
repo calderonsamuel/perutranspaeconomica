@@ -16,9 +16,10 @@ elegir_donde_se_gasta(x, departamento_meta = NULL)
 Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo
-al lugar de uso del presupuesto.
+al lugar de uso del presupuesto. Debido a que solo se pueden usar en el módulo de gasto,
+ambas tienen el mismo comportamiento.
 }

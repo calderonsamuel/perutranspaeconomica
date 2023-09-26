@@ -1,7 +1,8 @@
 #' Elegir destino de uso del presupuesto.
 #' 
 #' Estas funciones permiten desglosar la busqueda de acuerdo al destino
-#' de uso del presupuesto.
+#' de uso del presupuesto. Debido a que solo se pueden usar en el módulo de gasto, 
+#' ambas tienen el mismo comportamiento.
 #'
 #' @inheritParams consultar
 #' @param categoria_presupuestal chr. Código de programa presupuestal de forma "XXXX" (4).
@@ -13,7 +14,7 @@
 #' @param grupo_funcional chr. Código de grupo funcional de forma "XXXX" (4).
 #' @param meta chr. Código de meta. No tiene forma estandarizada.
 #'
-#' @return Un data.frame con clase <transpaeco>
+#' @inherit iniciar_transparencia_economica return
 elegir_destino <- function(x,
                            categoria_presupuestal = NULL,
                            producto = NULL,
@@ -47,6 +48,7 @@ elegir_en_que_se_gasta <- function(x,
                                    division_funcional = NULL,
                                    grupo_funcional = NULL,
                                    meta = NULL) {
+    
     elegir_destino(
         x = x,
         categoria_presupuestal = categoria_presupuestal,

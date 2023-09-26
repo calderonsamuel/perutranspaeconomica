@@ -1,6 +1,8 @@
 #' Elegir la estructura con la que se usa el presupuesto
 #'
 #' Estas funciones permiten desglosar la busqueda de acuerdo a valores de estructura presupuestal.
+#' `elegir_como_se_estructura_gasto()` y `elegir_como_se_estructura_recaudacion()` sirven los módulos de gasto e ingresos, respectivamente.
+#' `elegir_estructura()` es una versión agnóstica que sirve para ámbos módulos.
 #' 
 #' Estos endpoints se construyen secuencialmente en base a los valores de generica.
 #'
@@ -19,7 +21,7 @@
 #' @param especifica chr. Código de específica de forma "X-X-X-X-X"
 #' @param detalle_especifica chr. Código de detalle de específica de forma "X-X-X-X-X-X"
 #'
-#' @return Un data.frame con clase <transpaeco>
+#' @inherit iniciar_transparencia_economica return
 elegir_estructura <- function(x,
                               generica = NULL,
                               subgenerica = NULL,
@@ -47,12 +49,50 @@ elegir_estructura <- function(x,
 
 #' @rdname elegir_estructura
 #' @export
-elegir_como_se_estructura <- function(x,
+elegir_como_se_estructura_gasto <- function(x,
                                       generica = NULL,
                                       subgenerica = NULL,
                                       detalle_subgenerica = NULL,
                                       especifica = NULL,
                                       detalle_especifica = NULL) {
+    
+    modulo <- S7::prop(x, "modulo")
+    
+    if (modulo == "ingreso") {
+        cli::cli_abort(
+            "Para consultas del modulo de {.strong {modulo}} usa 
+            {.code elegir_como_se_estructura_recaudacion()} o {.code elegir_estructura()}"
+        )
+    }
+    
+    elegir_estructura(
+        x = x,
+        generica = generica,
+        subgenerica = subgenerica,
+        detalle_subgenerica = detalle_subgenerica,
+        especifica = especifica,
+        detalle_especifica = detalle_especifica
+    )
+}
+
+#' @rdname elegir_estructura
+#' @export
+elegir_como_se_estructura_recaudacion <- function(x,
+                                      generica = NULL,
+                                      subgenerica = NULL,
+                                      detalle_subgenerica = NULL,
+                                      especifica = NULL,
+                                      detalle_especifica = NULL) {
+    
+    modulo <- S7::prop(x, "modulo")
+    
+    if (modulo == "gasto") {
+        cli::cli_abort(
+            "Para consultas del modulo de {.strong {modulo}} usa 
+            {.code elegir_como_se_estructura_gasto()} o {.code elegir_estructura()}"
+        )
+    }
+    
     elegir_estructura(
         x = x,
         generica = generica,

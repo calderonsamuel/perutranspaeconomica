@@ -40,9 +40,11 @@ No tiene forma estandar, puede ser de uno o dos caracteres, que pueden
 ser letras o números.}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo al origen
 del financiamiento del presupuesto.
+\code{elegir_con_que_se_financia()} y \code{elegir_fuentes_de_recaudacion()} sirven los módulos de gasto e ingresos, respectivamente.
+\code{elegir_origen()} es una versión agnóstica que sirve para ámbos módulos.
 }
