@@ -82,7 +82,7 @@ La elección de parámetros de consulta se hace con las funciones que `elegir_*(
 - `elegir_periodo_anual()` 
 - `elegir_quien_gasta()`
 - `elegir_en_que_se_gasta()`
-- `elegir_como_se_estructura()`
+- `elegir_como_se_estructura_gasto()`
 - `elegir_cuando_se_hizo_gasto()`
 - `elegir_donde_se_gasta()`
 
@@ -143,7 +143,7 @@ Se recomienda asignarle nombre a una consulta ejecutada para evitar posibles ted
 mi_consulta <- iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(2015:2021) %>% 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
-    elegir_como_se_estructura(generica = "todos") %>% 
+    elegir_como_se_estructura_gasto(generica = "todos") %>% 
     consultar()
 
 mi_consulta

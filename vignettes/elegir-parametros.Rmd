@@ -477,7 +477,7 @@ Para ilustrar esta clasificación voy a reproducir el camino para determinar cu�
 ```{r}
 iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(2021) %>% 
-    elegir_como_se_estructura(generica = "todos") %>% 
+    elegir_como_se_estructura_gasto(generica = "todos") %>% 
     consultar()
 ```
 
@@ -486,7 +486,7 @@ En este punto podríamos cometer el error de continuar la búsqueda en la genér
 ```{r}
 iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(2021) %>% 
-    elegir_como_se_estructura(
+    elegir_como_se_estructura_gasto(
         generica = "5-2-3", 
         subgenerica = "todos"
     ) %>% 
@@ -498,7 +498,7 @@ Continuamos con la búsqueda escogiendo la subgenérica "Contratación de Servic
 ```{r}
 iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(2021) %>% 
-    elegir_como_se_estructura(
+    elegir_como_se_estructura_gasto(
         generica = "5-2-3", 
         subgenerica = "2-3-2",
         detalle_subgenerica = "todos"
@@ -511,7 +511,7 @@ Por fin encontramos los Contratos Administrativos de Servicios. Para comprobar s
 ```{r}
 iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(2021) %>% 
-    elegir_como_se_estructura(
+    elegir_como_se_estructura_gasto(
         generica = "5-2-3", 
         subgenerica = "2-3-2",
         detalle_subgenerica = "2-3-2-8",
@@ -631,7 +631,7 @@ create_graph(attr_theme = "lr") %>%
 
 Teniendo `pp0031_departamentos`, podemos aplicarle herramientas estándar de análisis de datos. Por ejemplo, para ordenar los departamentos de manera descendente según su PIM usando `{dplyr}` usaríamos este código.
 
-```{r, eval=FALSE}
+```{r}
 pp0031_departamentos %>% 
     dplyr::arrange(dplyr::desc(pim))
 ```
@@ -643,7 +643,7 @@ iniciar_transparencia_economica() %>%
     elegir_periodo_anual(2021) %>% 
     elegir_en_que_se_gasta(categoria_presupuestal = "0031") %>% 
     elegir_donde_se_gasta(departamento_meta = "10") %>%
-    elegir_como_se_estructura(
+    elegir_como_se_estructura_gasto(
         generica = "5-2-3", 
         subgenerica = "2-3-2",
         detalle_subgenerica = "todos"
