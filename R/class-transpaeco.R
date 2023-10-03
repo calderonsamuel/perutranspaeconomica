@@ -73,7 +73,7 @@ transpaeco <- S7::new_class(
             "@actualizacion debe ser diaria o mensual"
         } else if (propiedades_de_desagregacion > 1) {
             "Debe haber solo una propiedad con valor \"todos\""
-        }
+        } 
     }
 )
 
@@ -150,4 +150,28 @@ S7::method(print, transpaeco) <- function(x) {
         NextMethod("print", x)
     } 
     invisible(x)
+}
+
+check_params_validator <- function(x) {
+    all_params <- params_for_query()
+    traduccion <- S7::prop(x, "traduccion")
+    
+    check_iterator <- list(
+        item_name = names(traduccion),
+        item_value = unname(traduccion),
+        item_regex = purrr::map_chr(item_names, ~all_params[[.x]][["regex"]])
+    )
+    
+    check_iterator %>%
+        purrr::pwalk(function(item_name, item_value, item_regex) {
+            matches_regex <- stringr::str_detect(item_value, item_regex)
+            if (!matches_regex) {
+                glue::glue("{item_name} debe hacer match con {item_regex}")
+            } else {
+                NULL
+            }
+        }) %>%
+        purrr::compact() %>%
+        purrr::map_chr(~.x)
+    
 }

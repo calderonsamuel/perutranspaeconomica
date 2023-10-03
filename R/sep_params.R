@@ -238,12 +238,31 @@ params_for_query <- function() {
     )
 }
 
+
+# Example structure of params_list_from_query:
+# list(param_name = value, param_name = value, ...)
+
+# Example usage:
+# params_list_from_query <- list(periodo = 2023, nivel_gasto = "E", mes_gasto = "todos")
+
+# Explanation:
+# - "periodo": Specifies the year as 2023.
+# - "nivel_gasto": Specifies the level of government as "E".
+# - "mes_gasto": Specifies the month, allowing "todos" to indicate all months.
+
 translate_params_list <- function(params_list_from_query) {
     all_params <- params_for_query()
     params_names <- names(params_list_from_query) %>% 
         purrr::map_chr(~all_params[[.x]][["param_name"]])
     
     params_list_from_query %>% 
+        # purrr::iwalk(~{
+        #     item_regex <- all_params[[.y]][["regex"]]
+        #     matches_regex <- stringr::str_detect(.x, item_regex)
+        #     if (!matches_regex) {
+        #         cli::cli_abort("{.y} debe hacer match con {item_regex}")
+        #     }
+        # }) %>%
         purrr::map(~ifelse(.x == "todos", "", .x)) %>%
         stats::setNames(params_names)
 }
