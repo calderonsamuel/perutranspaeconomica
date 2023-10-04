@@ -184,7 +184,7 @@ check_params_validator <- function(x) {
                 
                 # Generate an error message if the item value doesn't match the regex and is not "todos"
                 if (!matches_regex && !(item_value == "todos")) {
-                    message <- glue::glue("{item_name} debe hacer match con {item_regex}")
+                    message <- glue::glue("En modulo {modulo}, `{item_name}` debe hacer match con expresión regular '{item_regex}'")
                     return(message)
                 }
             }
@@ -193,9 +193,9 @@ check_params_validator <- function(x) {
                 matches_options <- all(item_value %in% item_options)
                 if (!matches_options && !(item_value == "todos")) {
                     message <- glue::glue(
-                        "{item_name} debe ser uno de {options}", 
+                        "En modulo {modulo}, `{item_name}` debe ser uno de {options}", 
                         options = item_options %>%
-                            glue::glue_collapse(sep = ", ", last = " o ") %>%
+                            glue::glue_collapse(sep = ", ") %>%
                             glue::glue("({collapsed})", collapsed = .)
                     )
                     return(message)
@@ -204,8 +204,9 @@ check_params_validator <- function(x) {
             return(NULL)
         }) %>%
         purrr::compact() %>%
+        # purrr::imap_chr(function(value, position) glue::glue("{position}) {value}")) %>%
         purrr::map_chr(~.x) %>%
-        glue::glue_collapse(sep = "\n")
+        glue::glue_collapse(sep = "\n- ")
     
     # Return a list indicating if all parameters passed and the message
     list(
