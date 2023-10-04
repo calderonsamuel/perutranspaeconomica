@@ -21,193 +21,193 @@ params_for_query <- function() {
         sector_gasto = list(
             param_name = "2",
             print_name = "Sector",
-            regex = "^[0-9][0-9]$",
+            regex = "^[0-9]{2}$",
             options = NULL
         ),
         sector_ingreso = list(
             param_name = "2",
             print_name = "Sector",
-            regex = "^[0-9][0-9]$",
+            regex = "^[0-9]{2}$",
             options = NULL
         ),
         pliego_gasto = list(
             param_name = "3",
             print_name = "Pliego",
-            regex = NULL,
+            regex = "^[0-9]{3}$",
             options = NULL
         ),
         pliego_ingreso = list(
             param_name = "3",
             print_name = "Pliego",
-            regex = NULL,
+            regex = "^[0-9]{3}$",
             options = NULL
         ),
         unidad_ejecutora_gasto = list(
             param_name = "4",
             print_name = "Unidad Ejecutora",
-            regex = NULL,
+            regex = "^[0-9]{1,6}$",
             options = NULL
         ),
         unidad_ejecutora_ingreso = list(
             param_name = "4",
             print_name = "Unidad Ejecutora",
-            regex = NULL,
+            regex = "^[0-9]{1,6}$",
             options = NULL
         ),
         departamento_gasto = list(
             param_name = "5",
             print_name = "Departamento",
-            regex = NULL,
+            regex = "^[0-9]{2}$",
             options = NULL
         ),
         departamento_ingreso = list(
             param_name = "5",
             print_name = "Departamento",
-            regex = NULL,
+            regex = "^[0-9]{2}$",
             options = NULL
         ),
         provincia_gasto = list(
             param_name = "6",
             print_name = "Provincia",
-            regex = NULL,
+            regex = "^[0-9]{2}$",
             options = NULL
         ),
         provincia_ingreso = list(
             param_name = "6",
             print_name = "Provincia",
-            regex = NULL,
+            regex = "^[0-9]{2}$",
             options = NULL
         ),
         municipalidad_gasto = list(
             param_name = "7",
             print_name = "Municipalidad",
-            regex = NULL,
+            regex = "^[0-9]{6}$",
             options = NULL
         ),
         municipalidad_ingreso = list(
             param_name = "7",
             print_name = "Municipalidad",
-            regex = NULL,
+            regex = "^[0-9]{6}$",
             options = NULL
         ),
         goblocal_o_manc_gasto = list(
             param_name = "37",
             print_name = "Gobierno local o mancomunidad",
             regex = NULL,
-            options = NULL
+            options = c("M", "N")
         ),
         goblocal_o_manc_ingreso = list(
             param_name = "23",
             print_name = "Gobierno local o mancomunidad",
             regex = NULL,
-            options = NULL
+            options = c("M", "N")
         ),
         mancomunidad_gasto = list(
             param_name = "36",
             print_name = "Mancomunidad",
-            regex = NULL,
+            regex = "^[0-9]{6}$",
             options = NULL
         ),
         mancomunidad_ingreso = list(
             param_name = "24",
             print_name = "Mancomunidad",
-            regex = NULL,
+            regex = "^[0-9]{6}$",
             options = NULL
         ),
         generica_gasto = list(
             param_name = "24",
             print_name = "Generica",
-            regex = NULL,
+            regex = "^[5-7]-2-[0-9]$",
             options = NULL
         ),
         generica_ingreso = list(
             param_name = "18",
             print_name = "Generica",
-            regex = NULL,
+            regex = "^1-[0-9]$",
             options = NULL
         ),
         subgenerica_gasto = list(
             param_name = "25",
             print_name = "Sub-generica",
-            regex = NULL,
+            regex = "^2-[0-9]-[0-9]$",
             options = NULL
         ),
         subgenerica_ingreso = list(
             param_name = "19",
             print_name = "Sub-generica",
-            regex = NULL,
+            regex = "^1-[0-9]-[0-9]$",
             options = NULL
         ),
         detalle_subgenerica_gasto = list(
             param_name = "26",
             print_name = "Detalle de sub-generica",
-            regex = NULL,
+            regex = "^2-[0-9]-[0-9]-[0-9]$",
             options = NULL
         ),
         detalle_subgenerica_ingreso = list(
             param_name = "20",
             print_name = "Detalle de sub-generica",
-            regex = NULL,
+            regex = "^1-[0-9]-[0-9]-[0-9]$",
             options = NULL
         ),
         especifica_gasto = list(
             param_name = "27",
             print_name = "Especifica",
-            regex = NULL,
+            regex = "^2-[0-9]-[0-9]-[0-9]-[0-9]$",
             options = NULL
         ),
         especifica_ingreso = list(
             param_name = "21",
             print_name = "Especifica",
-            regex = NULL,
+            regex = "^1-[0-9]-[0-9]-[0-9]-[0-9]$",
             options = NULL
         ),
         detalle_especifica_gasto = list(
             param_name = "28",
             print_name = "Detalle de especifica",
-            regex = NULL,
+            regex = "^2-[0-9]-[0-9]-[0-9]-[0-9]-[0-9]$",
             options = NULL
         ),
         detalle_especifica_ingreso = list(
             param_name = "22",
             print_name = "Detalle de especifica",
-            regex = NULL,
+            regex = "1-[0-9]-[0-9]-[0-9]-[0-9]-[0-9]",
             options = NULL
         ),
         fuente_financiamiento_gasto = list(
             param_name = "14",
             print_name = "Fuente de financiamiento",
             regex = NULL,
-            options = NULL
+            options = 1:5
         ),
         fuente_financiamiento_ingreso = list(
             param_name = "8",
             print_name = "Fuente de financiamiento",
             regex = NULL,
-            options = NULL
+            options = 1:5
         ),
         rubro_gasto = list(
             param_name = "15",
             print_name = "Rubro",
-            regex = NULL,
+            regex = "^[0-9][0-9]$",
             options = NULL
         ),
         rubro_ingreso = list(
             param_name = "9",
             print_name = "Rubro",
-            regex = NULL,
+            regex = "^[0-9][0-9]$",
             options = NULL
         ),
         tipo_de_recurso_gasto = list(
             param_name = "17",
             print_name = "Tipo de recurso",
-            regex = NULL,
+            regex = "^([A-Z])|([0-9]{1,2})$",
             options = NULL
         ),
         tipo_de_recurso_ingreso = list(
             param_name = "11",
             print_name = "Tipo de recurso",
-            regex = NULL,
+            regex = "^([A-Z])|([0-9]{1,2})$",
             options = NULL
         ),
         departamento_meta = list(
@@ -303,13 +303,6 @@ translate_params_list <- function(params_list_from_query) {
         purrr::map_chr(~all_params[[.x]][["param_name"]])
     
     params_list_from_query %>% 
-        # purrr::iwalk(~{
-        #     item_regex <- all_params[[.y]][["regex"]]
-        #     matches_regex <- stringr::str_detect(.x, item_regex)
-        #     if (!matches_regex) {
-        #         cli::cli_abort("{.y} debe hacer match con {item_regex}")
-        #     }
-        # }) %>%
         purrr::map(~ifelse(.x == "todos", "", .x)) %>%
         stats::setNames(params_names)
 }
