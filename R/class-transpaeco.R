@@ -67,13 +67,17 @@ transpaeco <- S7::new_class(
             purrr::map_lgl(~any(.x == "todos")) %>% 
             sum()
         
+        regex_check <- check_params_validator(self)
+        
         if (!self@modulo %in% c("ingreso", "gasto")) {
             "@modulo debe ser ingreso o gasto"
         } else if (!self@actualizacion %in% c("diaria", "mensual")) {
             "@actualizacion debe ser diaria o mensual"
         } else if (propiedades_de_desagregacion > 1) {
             "Debe haber solo una propiedad con valor \"todos\""
-        } 
+        } else if (!regex_check$passes) {
+            regex_check$message
+        }
     }
 )
 
@@ -152,26 +156,61 @@ S7::method(print, transpaeco) <- function(x) {
     invisible(x)
 }
 
+# Function to check parameters validity
 check_params_validator <- function(x) {
-    all_params <- params_for_query()
-    traduccion <- S7::prop(x, "traduccion")
     
-    check_iterator <- list(
-        item_name = names(traduccion),
+    # Retrieve all parameters for the query
+    all_params <- params_for_query()
+    
+    # Extract 'traduccion' and 'modulo' from the input 'x'
+    traduccion <- S7::prop(x, "traduccion")
+    modulo <- S7::prop(x, "modulo")
+    
+    # Create an iterator for parameter checks
+    check_iterator <- rlang::list2(
+        item_name = names(traduccion) %>% stringr::str_remove(glue::glue("_{modulo}$")),
         item_value = unname(traduccion),
-        item_regex = purrr::map_chr(item_names, ~all_params[[.x]][["regex"]])
+        item_regex = purrr::map(names(traduccion), ~all_params[[.x]][["regex"]]),
+        item_options = purrr::map(names(traduccion), ~all_params[[.x]][["options"]])
     )
     
-    check_iterator %>%
-        purrr::pwalk(function(item_name, item_value, item_regex) {
-            matches_regex <- stringr::str_detect(item_value, item_regex)
-            if (!matches_regex) {
-                glue::glue("{item_name} debe hacer match con {item_regex}")
-            } else {
-                NULL
+    # Check parameters and create a message for invalid parameters
+    message <- check_iterator %>%
+        purrr::pmap(function(item_name, item_value, item_regex, item_options) {
+            
+            if (!is.null(item_regex)) {
+                # Check if the item values match the expected regex
+                matches_regex <- all(stringr::str_detect(item_value, item_regex))
+                
+                # Generate an error message if the item value doesn't match the regex and is not "todos"
+                if (!matches_regex && !(item_value == "todos")) {
+                    message <- glue::glue("{item_name} debe hacer match con {item_regex}")
+                    return(message)
+                }
             }
+            
+            if (!is.null(item_options)) {
+                matches_options <- all(item_value %in% item_options)
+                if (!matches_options && !(item_value == "todos")) {
+                    message <- glue::glue(
+                        "{item_name} debe ser uno de {options}", 
+                        options = item_options %>%
+                            glue::glue_collapse(sep = ", ", last = " o ") %>%
+                            glue::glue("({collapsed})", collapsed = .)
+                    )
+                    return(message)
+                } 
+            }
+            return(NULL)
         }) %>%
         purrr::compact() %>%
-        purrr::map_chr(~.x)
+        purrr::map_chr(~.x) %>%
+        glue::glue_collapse(sep = "\n")
     
+    # Return a list indicating if all parameters passed and the message
+    list(
+        passes = length(message) == 0,
+        message = message
+    )
 }
+
