@@ -213,25 +213,25 @@ params_for_query <- function() {
         departamento_meta = list(
             param_name = "21",
             print_name = "Departamento (meta)",
-            regex = NULL,
+            regex = "^[0-9]{2}",
             options = NULL
         ),
         categoria_presupuestal = list(
             param_name = "30",
             print_name = "Categoria Presupuestal",
-            regex = NULL,
+            regex = "^[0-9]{4}",
             options = NULL
         ),
         producto = list(
             param_name = "31",
             print_name = "Producto",
-            regex = NULL,
+            regex = "^[0-9]{7}",
             options = NULL
         ),
         actividad = list(
             param_name = "32",
             print_name = "Actividad",
-            regex = NULL,
+            regex = "^[0-9]{7}",
             options = NULL
         ),
         meta = list(
@@ -243,44 +243,44 @@ params_for_query <- function() {
         funcion = list(
             param_name = "8",
             print_name = "Funcion",
-            regex = NULL,
+            regex = "^[0-9]{2}",
             options = NULL
         ),
         division_funcional = list(
             param_name = "33",
             print_name = "Division Funcional",
-            regex = NULL,
+            regex = "^[0-9]{3}",
             options = NULL
         ),
         grupo_funcional = list(
             param_name = "34",
             print_name = "Grupo Funcional",
-            regex = NULL,
+            regex = "^[0-9]{4}",
             options = NULL
         ),
         trimestre_gasto = list(
             param_name = "22",
             print_name = "Trimestre",
             regex = NULL,
-            options = NULL
+            options = 1:4
         ),
         trimestre_ingreso = list(
             param_name = "16",
             print_name = "Trimestre",
             regex = NULL,
-            options = NULL
+            options = 1:4
         ),
         mes_gasto = list(
             param_name = "23",
             print_name = "Mes",
             regex = NULL,
-            options = NULL
+            options = 1:12
         ),
         mes_ingreso = list(
             param_name = "17",
             print_name = "Mes",
             regex = NULL,
-            options = NULL
+            options = 1:12
         )
     )
 }
