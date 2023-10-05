@@ -184,7 +184,7 @@ check_params_validator <- function(x) {
                 
                 # Generate an error message if the item value doesn't match the regex and is not "todos"
                 if (!matches_regex && !(item_value == "todos")) {
-                    message <- glue::glue("En modulo {modulo}, `{item_name}` debe hacer match con expresión regular '{item_regex}'")
+                    message <- glue::glue("En modulo {modulo}, `{item_name}` debe hacer match con expresion regular '{item_regex}'")
                     return(message)
                 }
             }
@@ -194,10 +194,10 @@ check_params_validator <- function(x) {
                 if (!matches_options && !(item_value == "todos")) {
                     message <- glue::glue(
                         "En modulo {modulo}, `{item_name}` debe ser uno de {options}", 
-                        options = item_options %>%
-                            glue::glue_collapse(sep = ", ") %>%
-                            glue::glue("({collapsed})", collapsed = .)
+                        options = glue::glue_collapse(item_options, sep = ", ")
                     )
+                    
+                    message <- glue::glue("({message})")
                     return(message)
                 } 
             }
