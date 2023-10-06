@@ -12,11 +12,15 @@ S7::method(consultar, transpaeco) <- function(x) {
     
     check_pre_consulta(x)
     
+    modulo <- S7::prop(x, "modulo")
+    actualizacion <- S7::prop(x, "actualizacion")
+    psize <- S7::prop(x, "psize")
+    
     request <- S7::prop(x, "base_request")
     expanded <- create_query_grid(x)
     
     splitted <- expanded %>%
-        purrr::pmap(tibble::tibble)
+        purrr::pmap(list)
     
     cli::cli_alert_info("Iniciando consulta")
     
@@ -58,12 +62,7 @@ check_pre_consulta <- function(x) {
 }
 
 ejecutar_consulta_individual <- function(query_params, request) {
-    lista_amigable <- as.list(query_params)
-    lista_translated <- translate_params_list(lista_amigable)
-    
-    if (!periodo_is_the_only_param(query_params)) {
-        lista_translated <- empty_str_to_last(lista_translated)
-    }
+    lista_translated <- translate_params_list(query_params)
     
     tabla <- request %>% 
         httr2::req_url_query(!!!lista_translated) %>% 
@@ -72,22 +71,11 @@ ejecutar_consulta_individual <- function(query_params, request) {
         retrieve_response_tbl() %>%
         process_tbl()
     
-    lista_amigable %>%
+    query_params %>%
         tibble::as_tibble() %>%
         dplyr::mutate(tabla = list(tabla), .before = 1) %>%
         tidyr::unnest(tabla) %>%
         dplyr::relocate("periodo", .before = 1) %>%
         dplyr::rename_with(~stringr::str_remove(.x, "_ingreso$")) %>%
         dplyr::rename_with(~stringr::str_remove(.x, "_gasto$"))
-}
-
-empty_str_to_last <- function(x) {
-    empty_item_name <- purrr::keep(x, ~.x == "") %>% names()
-    x[[empty_item_name]] <- NULL
-    x[[empty_item_name]] <- ""
-    x
-}
-
-periodo_is_the_only_param <- function(query) {
-    (length(query) == 1L) && (names(query) == "periodo") 
 }

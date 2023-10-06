@@ -302,7 +302,24 @@ translate_params_list <- function(params_list_from_query) {
     params_names <- names(params_list_from_query) %>% 
         purrr::map_chr(~all_params[[.x]][["param_name"]])
     
-    params_list_from_query %>% 
+    translation <- params_list_from_query %>% 
         purrr::map(~ifelse(.x == "todos", "", .x)) %>%
         stats::setNames(params_names)
+    
+    if (!periodo_is_the_only_param(params_list_from_query)) {
+        translation <- empty_str_to_last(translation)
+    }
+    
+    translation
+}
+
+empty_str_to_last <- function(x) {
+    empty_item_name <- purrr::keep(x, ~.x == "") %>% names()
+    x[[empty_item_name]] <- NULL
+    x[[empty_item_name]] <- ""
+    x
+}
+
+periodo_is_the_only_param <- function(query) {
+    (length(query) == 1L) && (names(query) == "periodo") 
 }
