@@ -23,3 +23,9 @@ Un objeto con clase \verb{<transpaeco>}
 \description{
 Iniciar consulta de transparencia economica
 }
+\examples{
+iniciar_transparencia_economica(modulo = "gasto")
+iniciar_transparencia_economica(modulo = "gasto", actualizacion = "diaria")
+iniciar_transparencia_economica(modulo = "ingreso")
+
+}

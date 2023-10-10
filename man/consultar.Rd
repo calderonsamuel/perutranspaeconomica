@@ -15,3 +15,9 @@ Un data.frame que contiene el resultado de la consulta solicitada
 \description{
 Ejecutar consulta de seguimiento a la ejecución presupuestal
 }
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    consultar()
+
+}

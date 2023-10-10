@@ -4,6 +4,12 @@
 #'
 #' @return Un data.frame que contiene el resultado de la consulta solicitada
 #' @export
+#' 
+#' @examples
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     consultar()
+#' 
 consultar <- S7::new_generic("consultar", "x", function(x) {
     S7::S7_dispatch()
 })
