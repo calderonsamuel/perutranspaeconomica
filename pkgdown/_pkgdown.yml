@@ -11,7 +11,7 @@ home:
 
 template:
     bootstrap: 5
-    bootswatch: minty
+    # bootswatch: minty
     opengraph:
         twitter:
             creator: "@samucalse"
@@ -22,19 +22,26 @@ authors:
         href: https://www.samuelenrique.com
         
 reference:
+
   - title: Iniciar consulta
     desc: >
       El primer paso del flujo de trabajo es iniciar 
       un objecto de consulta
     contents:
     - iniciar_transparencia_economica
+    
   - title: Elegir parámetros
     desc: >
       Una vez iniciado el objeto de consulta se debe elegir
       parámetros adicionales. Se aplican validaciones de forma y contenido, 
       con mensajes de error amigables.
+  - subtitle: Periodo anual
     contents:
-    - starts_with("elegir_")
+    - elegir_periodo_anual
+  - subtitle: Otros parámetros
+    contents:
+    - matches("elegir_(?!periodo)")
+    
   - title: Ejecutar consulta
     desc: >
       Con los parámetros de consulta definidos, se ejecuta la consulta.
