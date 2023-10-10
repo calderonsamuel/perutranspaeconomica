@@ -100,13 +100,13 @@ En su versión más reciente va del 1 al 5.</p></dd>
 
 
 <dt>rubro</dt>
-<dd><p>chr. código de rubro, de  forma "XX" (2).</p></dd>
+<dd><p>chr. código de rubro, de  forma "00" (2 digitos).</p></dd>
 
 
 <dt>tipo_de_recurso</dt>
 <dd><p>chr, Código de tipo de recurso.
-No tiene forma estandar, puede ser de uno o dos caracteres, que pueden
-ser letras o números.</p></dd>
+No tiene forma estandar, puede ser de una letra mayuscula,
+un digito, o dos digitos.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -118,6 +118,93 @@ ser letras o números.</p></dd>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Ejemplos<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_con_que_se_financia</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        rubro <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Seguimiento al gasto presupuestal (</span><span style="font-weight: bold; font-style: italic;">actualizacion diaria</span><span style="font-weight: bold;">)</span> <span style="color: #00BBBB;">────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Parametros de consulta</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • Periodo anual: 2022</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • Rubro: <span style="font-weight: bold;">*todos*</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No se ha ejecutado ninguna consulta</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_con_que_se_financia</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        rubro <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   periodo cod_rubro desc_rubro        pia     pim certificacion compromiso_anual</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    <span style="text-decoration: underline;">2</span>022 00        RECURSOS ORD… 1.19<span style="color: #949494;">e</span>11 1.26<span style="color: #949494;">e</span>11  <span style="text-decoration: underline;">122</span>337<span style="text-decoration: underline;">997</span>880     <span style="text-decoration: underline;">120</span>695<span style="text-decoration: underline;">061</span>853</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="text-decoration: underline;">2</span>022 04        CONTRIBUCION… 4.93<span style="color: #949494;">e</span> 9 5.05<span style="color: #949494;">e</span> 9    <span style="text-decoration: underline;">5</span>047<span style="text-decoration: underline;">115</span>254       <span style="text-decoration: underline;">5</span>029<span style="text-decoration: underline;">616</span>816</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>    <span style="text-decoration: underline;">2</span>022 07        FONDO DE COM… 6.79<span style="color: #949494;">e</span> 9 1.03<span style="color: #949494;">e</span>10    <span style="text-decoration: underline;">9</span>765<span style="text-decoration: underline;">697</span>753       <span style="text-decoration: underline;">9</span>283<span style="text-decoration: underline;">283</span>955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="text-decoration: underline;">2</span>022 08        IMPUESTOS MU… 3.19<span style="color: #949494;">e</span> 9 4.26<span style="color: #949494;">e</span> 9    <span style="text-decoration: underline;">4</span>012<span style="text-decoration: underline;">840</span>643       <span style="text-decoration: underline;">3</span>763<span style="text-decoration: underline;">217</span>153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>    <span style="text-decoration: underline;">2</span>022 09        RECURSOS DIR… 1.21<span style="color: #949494;">e</span>10 1.65<span style="color: #949494;">e</span>10   <span style="text-decoration: underline;">15</span>309<span style="text-decoration: underline;">679</span>500      <span style="text-decoration: underline;">14</span>769<span style="text-decoration: underline;">552</span>474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>    <span style="text-decoration: underline;">2</span>022 13        DONACIONES Y… 2.30<span style="color: #949494;">e</span> 8 6.06<span style="color: #949494;">e</span> 9    <span style="text-decoration: underline;">5</span>099<span style="text-decoration: underline;">003</span>630       <span style="text-decoration: underline;">4</span>471<span style="text-decoration: underline;">450</span>126</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>    <span style="text-decoration: underline;">2</span>022 18        CANON Y SOBR… 1.29<span style="color: #949494;">e</span>10 3.06<span style="color: #949494;">e</span>10   <span style="text-decoration: underline;">27</span>501<span style="text-decoration: underline;">688</span>319      <span style="text-decoration: underline;">22</span>626<span style="text-decoration: underline;">242</span>689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>    <span style="text-decoration: underline;">2</span>022 19        RECURSOS POR… 3.81<span style="color: #949494;">e</span>10 3.90<span style="color: #949494;">e</span>10   <span style="text-decoration: underline;">36</span>449<span style="text-decoration: underline;">624</span>152      <span style="text-decoration: underline;">35</span>258<span style="text-decoration: underline;">276</span>709</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   girado &lt;dbl&gt;, avance_percent &lt;dbl&gt;, rubro &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># desglose de tipo de recurso del rubro de "13: Donaciones y transferencias"</span></span></span>
+<span class="r-in"><span><span class="co"># notese la variacion en los codigos de tipo de recurso</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_con_que_se_financia</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        rubro <span class="op">=</span> <span class="st">"13"</span>,</span></span>
+<span class="r-in"><span>        tipo_de_recurso <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 22 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    periodo cod_tipo_de_recurso desc_tipo_de_recurso     pia    pim certificacion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    <span style="text-decoration: underline;">2</span>022 A                   TRANSFERENCIAS DE EN… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    <span style="text-decoration: underline;">2</span>022 B                   TRANSFERENCIAS DE EN… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    <span style="text-decoration: underline;">2</span>022 C                   TRANSFERENCIA DE GOB… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    <span style="text-decoration: underline;">2</span>022 E                   TRANSFERENCIAS DE CA… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    <span style="text-decoration: underline;">2</span>022 N                   DONACIONES PARA APOY… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    <span style="text-decoration: underline;">2</span>022 O                   SUBCUENTA- TRANSFERE… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    <span style="text-decoration: underline;">2</span>022 P                   SUBCUENTA- TRANSFERE… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    <span style="text-decoration: underline;">2</span>022 0                   NORMAL                2.30<span style="color: #949494;">e</span>8 6.06<span style="color: #949494;">e</span>9    <span style="text-decoration: underline;">5</span>099<span style="text-decoration: underline;">003</span>630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    <span style="text-decoration: underline;">2</span>022 10                  DONACIONES - AGENCIA… 0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    <span style="text-decoration: underline;">2</span>022 12                  DONACIONES -VIAJA BN  0   <span style="color: #949494;"> </span>  0   <span style="color: #949494;"> </span>              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: compromiso_anual &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avance_percent &lt;dbl&gt;, rubro &lt;chr&gt;, tipo_de_recurso &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># cuando no se respeta la forma, el mensaje de error</span></span></span>
+<span class="r-in"><span><span class="co"># muestra la expresion regular esperada</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>        <span class="fu">elegir_con_que_se_financia</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            rubro <span class="op">=</span> <span class="st">"13"</span>,</span></span>
+<span class="r-in"><span>            tipo_de_recurso <span class="op">=</span> <span class="st">"AA"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;simpleError: &lt;transpaeco&gt; object is invalid:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - En modulo gasto, `tipo_de_recurso` debe hacer match con expresion regular '(^[A-Z]$)|(^[0-9]{1,2}$)'&gt;</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>En esta página</h2>
     </nav></aside></div>
 

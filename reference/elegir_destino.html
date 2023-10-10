@@ -93,32 +93,33 @@ ambas tienen el mismo comportamiento.</p>
 
 
 <dt>categoria_presupuestal</dt>
-<dd><p>chr. Código de programa presupuestal de forma "XXXX" (4).
+<dd><p>chr. Código de programa presupuestal de forma "0000" (4 digitos).
 Para Acciones Centrales usar "9001" y para APnoP usar "9002".</p></dd>
 
 
 <dt>producto</dt>
-<dd><p>chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).</p></dd>
+<dd><p>chr. Código de producto o proyecto de inversión de forma "0000000" (7 digitos).</p></dd>
 
 
 <dt>actividad</dt>
-<dd><p>chr. Código de actividad, acción de inversión u obra, de forma "XXXXXXX" (7).</p></dd>
+<dd><p>chr. Código de actividad, acción de inversión u obra, de forma "0000000" (7 digitos).</p></dd>
 
 
 <dt>funcion</dt>
-<dd><p>chr. Código de función de forma "XX" (2).</p></dd>
+<dd><p>chr. Código de función de forma "00" (2 digitos).</p></dd>
 
 
 <dt>division_funcional</dt>
-<dd><p>chr. Código de división funcional de forma "XXX" (3).</p></dd>
+<dd><p>chr. Código de división funcional de forma "000" (3 digitos).</p></dd>
 
 
 <dt>grupo_funcional</dt>
-<dd><p>chr. Código de grupo funcional de forma "XXXX" (4).</p></dd>
+<dd><p>chr. Código de grupo funcional de forma "0000" (4 digitos).</p></dd>
 
 
 <dt>meta</dt>
-<dd><p>chr. Código de meta. No tiene forma estandarizada.</p></dd>
+<dd><p>chr. Código de meta. No tiene forma estandarizada y no es obtenerla a partir de la información provista.
+Es el parametro de consulta mas problematico.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -130,6 +131,50 @@ Para Acciones Centrales usar "9001" y para APnoP usar "9002".</p></dd>
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Ejemplos<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_en_que_se_gasta</span><span class="op">(</span>categoria_presupuestal <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Seguimiento al gasto presupuestal (</span><span style="font-weight: bold; font-style: italic;">actualizacion diaria</span><span style="font-weight: bold;">)</span> <span style="color: #00BBBB;">────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Parametros de consulta</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • Periodo anual: 2022</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • Categoria Presupuestal: <span style="font-weight: bold;">*todos*</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No se ha ejecutado ninguna consulta</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_en_que_se_gasta</span><span class="op">(</span>categoria_presupuestal <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 92 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    periodo cod_categoria_presupuestal desc_categoria_presupuestal     pia    pim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    <span style="text-decoration: underline;">2</span>022 0001                       PROGRAMA ARTICULADO NUTRICI… 8.88<span style="color: #949494;">e</span>8 1.29<span style="color: #949494;">e</span>9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    <span style="text-decoration: underline;">2</span>022 0002                       SALUD MATERNO NEONATAL       2.12<span style="color: #949494;">e</span>9 2.52<span style="color: #949494;">e</span>9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    <span style="text-decoration: underline;">2</span>022 0016                       TBC-VIH/SIDA                 6.05<span style="color: #949494;">e</span>8 7.02<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    <span style="text-decoration: underline;">2</span>022 0017                       ENFERMEDADES METAXENICAS Y … 3.14<span style="color: #949494;">e</span>8 3.53<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    <span style="text-decoration: underline;">2</span>022 0018                       ENFERMEDADES NO TRANSMISIBL… 5.69<span style="color: #949494;">e</span>8 6.96<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    <span style="text-decoration: underline;">2</span>022 0024                       PREVENCION Y CONTROL DEL CA… 4.61<span style="color: #949494;">e</span>8 8.12<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    <span style="text-decoration: underline;">2</span>022 0030                       REDUCCION DE DELITOS Y FALT… 4.48<span style="color: #949494;">e</span>9 5.20<span style="color: #949494;">e</span>9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    <span style="text-decoration: underline;">2</span>022 0031                       REDUCCION DEL TRAFICO ILICI… 2.68<span style="color: #949494;">e</span>8 2.74<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    <span style="text-decoration: underline;">2</span>022 0032                       LUCHA CONTRA EL TERRORISMO   2.30<span style="color: #949494;">e</span>8 2.40<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    <span style="text-decoration: underline;">2</span>022 0036                       GESTION INTEGRAL DE RESIDUO… 1.61<span style="color: #949494;">e</span>9 2.69<span style="color: #949494;">e</span>9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 82 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: certificacion &lt;dbl&gt;, compromiso_anual &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avance_percent &lt;dbl&gt;, categoria_presupuestal &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>En esta página</h2>
     </nav></aside></div>
 

@@ -116,37 +116,41 @@ le corresponde <code>sector</code>. Si es "M", le corresponde <code>goblocal_o_m
 
 
 <dt>sector</dt>
-<dd><p>chr. Codigo de sector, de forma "XX" (2).</p></dd>
+<dd><p>chr. Codigo de sector, de forma "00" (2 digitos).</p></dd>
 
 
 <dt>pliego</dt>
-<dd><p>chr. Código de pliego, de forma "XXX" (3).</p></dd>
+<dd><p>chr. Código de pliego, de forma "000" (3 digitos).</p></dd>
 
 
 <dt>unidad_ejecutora</dt>
-<dd><p>chr. Código de Unidad Ejecutora. No tiene forma estandar</p></dd>
+<dd><p>chr. Código de Unidad Ejecutora.
+No tiene forma estandar, puede tener entre uno (1) y seis (6) digitos.</p></dd>
 
 
 <dt>goblocal_o_manc</dt>
 <dd><p>chr. Escoger entre "M" (gobierno local)
-o "N" (mancomunidad). Si es "M", desbloque <code>departamento</code>, <code>provincia</code> y <code>municipalidad</code>.
+o "N" (mancomunidad). Si es "M", puede desglosarse por <code>departamento</code>, <code>provincia</code> y <code>municipalidad</code>.
 Si es "N", le corresponde <code>mancomunidad</code>.</p></dd>
 
 
 <dt>mancomunidad</dt>
-<dd><p>chr. Código de mancomunidad, de forma "XXXXXX" (6).</p></dd>
+<dd><p>chr. Código de mancomunidad, de forma "000000" (6 digitos).</p></dd>
 
 
 <dt>departamento</dt>
-<dd><p>chr. Código de departamento. El valor "07" corresponde a Callao.</p></dd>
+<dd><p>chr. Código de departamento, de forma "00" (2 digitos).
+El valor "07" corresponde a Callao.</p></dd>
 
 
 <dt>provincia</dt>
-<dd><p>chr. Código de provincia. El valor "01" corresponde a capital de departamento.</p></dd>
+<dd><p>chr. Código de provincia, de forma "00" (2 digitos).
+El valor "01" corresponde a capital de departamento.</p></dd>
 
 
 <dt>municipalidad</dt>
-<dd><p>chr. Código de municipalidad, de forma "XXXXXX". No corresponde con ubigeo.</p></dd>
+<dd><p>chr. Código de municipalidad, de forma "000000" (6 digitos).
+<strong>No es lo mismo que el ubigeo</strong>. Los dos primeros digitos deben ser "30".</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -157,7 +161,156 @@ Si es "N", le corresponde <code>mancomunidad</code>.</p></dd>
 
 
     </div>
+    <div class="section level2">
+    <h2 id="detalles">Detalles<a class="anchor" aria-label="anchor" href="#detalles"></a></h2>
+    <p>Estas funciones aplicarán una validación de  la forma para cada argumento
+mediante expresiones regulares. Sumado a ello, se aplica una validación
+para evitar valores anómalos.</p>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Ejemplos<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_quien_gasta</span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Seguimiento al gasto presupuestal (</span><span style="font-weight: bold; font-style: italic;">actualizacion diaria</span><span style="font-weight: bold;">)</span> <span style="color: #00BBBB;">────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Parametros de consulta</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • Periodo anual: 2022</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • Nivel de gobierno: <span style="font-weight: bold;">*todos*</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No se ha ejecutado ninguna consulta</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_quien_gasta</span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   periodo cod_nivel_de_gobierno desc_nivel_de_gobierno          pia          pim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    <span style="text-decoration: underline;">2</span>022 E                     GOBIERNO NACIONAL      <span style="text-decoration: underline;">139</span>099<span style="text-decoration: underline;">209</span>295 <span style="text-decoration: underline;">134</span>800<span style="text-decoration: underline;">977</span>215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="text-decoration: underline;">2</span>022 M                     GOBIERNOS LOCALES       <span style="text-decoration: underline;">21</span>572<span style="text-decoration: underline;">594</span>607  <span style="text-decoration: underline;">52</span>638<span style="text-decoration: underline;">714</span>049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>    <span style="text-decoration: underline;">2</span>022 R                     GOBIERNOS REGIONALES    <span style="text-decoration: underline;">36</span>330<span style="text-decoration: underline;">465</span>112  <span style="text-decoration: underline;">50</span>382<span style="text-decoration: underline;">364</span>455</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: certificacion &lt;dbl&gt;, compromiso_anual &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avance_percent &lt;dbl&gt;, nivel &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># informacion de todas las UEs del Ministerio de Educacion</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_quien_gasta</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        nivel <span class="op">=</span> <span class="st">"E"</span>, </span></span>
+<span class="r-in"><span>        sector <span class="op">=</span> <span class="st">"10"</span>,</span></span>
+<span class="r-in"><span>        pliego <span class="op">=</span> <span class="st">"010"</span>,</span></span>
+<span class="r-in"><span>        unidad_ejecutora <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 22 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    periodo cod_unidad_ejecutora desc_unidad_ejecutora                 pia    pim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    <span style="text-decoration: underline;">2</span>022 001-56               USE 01 SAN JUAN DE MIRAFLORES      5.17<span style="color: #949494;">e</span>8 5.65<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    <span style="text-decoration: underline;">2</span>022 002-57               USE 02 SAN MARTIN DE PORRAS        4.44<span style="color: #949494;">e</span>8 4.82<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    <span style="text-decoration: underline;">2</span>022 003-58               USE 03 CERCADO                     3.98<span style="color: #949494;">e</span>8 4.58<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    <span style="text-decoration: underline;">2</span>022 004-59               USE 04 COMAS                       4.05<span style="color: #949494;">e</span>8 4.38<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    <span style="text-decoration: underline;">2</span>022 005-60               USE 05 SAN JUAN DE LURIGANCHO      3.81<span style="color: #949494;">e</span>8 4.05<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    <span style="text-decoration: underline;">2</span>022 006-61               USE 06 VITARTE                     3.61<span style="color: #949494;">e</span>8 4.10<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    <span style="text-decoration: underline;">2</span>022 007-62               USE 07 SAN BORJA                   2.93<span style="color: #949494;">e</span>8 3.22<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    <span style="text-decoration: underline;">2</span>022 017-72               DIRECCION DE EDUCACION DE LIMA     1.02<span style="color: #949494;">e</span>8 1.12<span style="color: #949494;">e</span>8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    <span style="text-decoration: underline;">2</span>022 021-76               ESCUELA NACIONAL DE BELLAS ARTES   9.84<span style="color: #949494;">e</span>6 1.17<span style="color: #949494;">e</span>7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    <span style="text-decoration: underline;">2</span>022 022-77               INSTITUTO PEDAGOGICO NACIONAL DE … 9.94<span style="color: #949494;">e</span>6 1.18<span style="color: #949494;">e</span>7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: certificacion &lt;dbl&gt;, compromiso_anual &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avance_percent &lt;dbl&gt;, nivel &lt;chr&gt;, sector &lt;chr&gt;, pliego &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   unidad_ejecutora &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># informacion de todas las provincias de Amazonas.</span></span></span>
+<span class="r-in"><span><span class="co"># notese que devuelve codigos de provincia de 4 digitos.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_quien_gasta</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        nivel <span class="op">=</span> <span class="st">"M"</span>, </span></span>
+<span class="r-in"><span>        goblocal_o_manc <span class="op">=</span> <span class="st">"M"</span>,</span></span>
+<span class="r-in"><span>        departamento <span class="op">=</span> <span class="st">"01"</span>,</span></span>
+<span class="r-in"><span>        provincia <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   periodo cod_provincia desc_provincia            pia       pim certificacion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    <span style="text-decoration: underline;">2</span>022 0101          CHACHAPOYAS          54<span style="text-decoration: underline;">050</span>715 137<span style="text-decoration: underline;">222</span>437     130<span style="text-decoration: underline;">816</span>267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="text-decoration: underline;">2</span>022 0102          BAGUA                51<span style="text-decoration: underline;">941</span>023  98<span style="text-decoration: underline;">204</span>124      94<span style="text-decoration: underline;">923</span>016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>    <span style="text-decoration: underline;">2</span>022 0103          BONGARA              25<span style="text-decoration: underline;">312</span>167  82<span style="text-decoration: underline;">629</span>966      78<span style="text-decoration: underline;">830</span>517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="text-decoration: underline;">2</span>022 0104          CONDORCANQUI         37<span style="text-decoration: underline;">364</span>107  75<span style="text-decoration: underline;">840</span>175      66<span style="text-decoration: underline;">238</span>904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>    <span style="text-decoration: underline;">2</span>022 0105          LUYA                 28<span style="text-decoration: underline;">410</span>987 105<span style="text-decoration: underline;">102</span>441      99<span style="text-decoration: underline;">776</span>567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>    <span style="text-decoration: underline;">2</span>022 0106          RODRIGUEZ DE MENDOZA 16<span style="text-decoration: underline;">859</span>438  51<span style="text-decoration: underline;">198</span>886      48<span style="text-decoration: underline;">414</span>075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>    <span style="text-decoration: underline;">2</span>022 0107          UCTUBAMBA            64<span style="text-decoration: underline;">551</span>770 159<span style="text-decoration: underline;">065</span>909     142<span style="text-decoration: underline;">925</span>475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: compromiso_anual &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avance_percent &lt;dbl&gt;, nivel &lt;chr&gt;, goblocal_o_manc &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   departamento &lt;chr&gt;, provincia &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># para desglosar por provincia, deben usarse solo dos digitos.</span></span></span>
+<span class="r-in"><span><span class="co"># por ejemplo, para ver los municipios de la provincia de Bagua</span></span></span>
+<span class="r-in"><span><span class="co"># debe usarse "02"</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">elegir_quien_gasta</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        nivel <span class="op">=</span> <span class="st">"M"</span>, </span></span>
+<span class="r-in"><span>        goblocal_o_manc <span class="op">=</span> <span class="st">"M"</span>,</span></span>
+<span class="r-in"><span>        departamento <span class="op">=</span> <span class="st">"01"</span>,</span></span>
+<span class="r-in"><span>        provincia <span class="op">=</span> <span class="st">"02"</span>,</span></span>
+<span class="r-in"><span>        municipalidad <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Iniciando consulta</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Unificando consultas...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Consultas realizadas y unificadas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   periodo cod_municipalidad desc_municipalidad          pia    pim certificacion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    <span style="text-decoration: underline;">2</span>022 010201-300022     MUNICIPALIDAD PROVINCIA… 1.51<span style="color: #949494;">e</span>7 2.82<span style="color: #949494;">e</span>7      27<span style="text-decoration: underline;">143</span>174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="text-decoration: underline;">2</span>022 010202-300023     MUNICIPALIDAD DISTRITAL… 2.19<span style="color: #949494;">e</span>7 3.47<span style="color: #949494;">e</span>7      34<span style="text-decoration: underline;">505</span>079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>    <span style="text-decoration: underline;">2</span>022 010203-300024     MUNICIPALIDAD DISTRITAL… 1.94<span style="color: #949494;">e</span>6 3.39<span style="color: #949494;">e</span>6       3<span style="text-decoration: underline;">352</span>729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>    <span style="text-decoration: underline;">2</span>022 010204-300025     MUNICIPALIDAD DISTRITAL… 6.64<span style="color: #949494;">e</span>5 3.49<span style="color: #949494;">e</span>6       3<span style="text-decoration: underline;">474</span>440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>    <span style="text-decoration: underline;">2</span>022 010205-300026     MUNICIPALIDAD DISTRITAL… 1.01<span style="color: #949494;">e</span>7 1.71<span style="color: #949494;">e</span>7      16<span style="text-decoration: underline;">284</span>737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>    <span style="text-decoration: underline;">2</span>022 010206-300027     MUNICIPALIDAD DISTRITAL… 2.25<span style="color: #949494;">e</span>6 1.12<span style="color: #949494;">e</span>7      10<span style="text-decoration: underline;">162</span>857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: compromiso_anual &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avance_percent &lt;dbl&gt;, nivel &lt;chr&gt;, goblocal_o_manc &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   departamento &lt;chr&gt;, provincia &lt;chr&gt;, municipalidad &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># cuando no se respeta la forma, el mensaje de error</span></span></span>
+<span class="r-in"><span><span class="co"># muestra la expresion regular esperada</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span>modulo <span class="op">=</span> <span class="st">"gasto"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>        <span class="fu">elegir_quien_gasta</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            nivel <span class="op">=</span> <span class="st">"M"</span>, </span></span>
+<span class="r-in"><span>            goblocal_o_manc <span class="op">=</span> <span class="st">"M"</span>,</span></span>
+<span class="r-in"><span>            departamento <span class="op">=</span> <span class="st">"01"</span>,</span></span>
+<span class="r-in"><span>            provincia <span class="op">=</span> <span class="st">"0102"</span>,</span></span>
+<span class="r-in"><span>            municipalidad <span class="op">=</span> <span class="st">"todos"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;simpleError: &lt;transpaeco&gt; object is invalid:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - En modulo gasto, `provincia` debe hacer match con expresion regular '^[0-9]{2}$'&gt;</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>En esta página</h2>
     </nav></aside></div>
 
