@@ -12,8 +12,13 @@ elegir_periodo_anual(x, periodo = NULL)
 \item{periodo}{numeric. Periodo anual de consulta}
 }
 \value{
-Un data.frame con clase \if{html}{\out{<transpaeco>}}
+Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Elegir periodo anual de consulta
+}
+\examples{
+iniciar_transparencia_economica() \%>\%
+    elegir_periodo_anual(2022)
+
 }

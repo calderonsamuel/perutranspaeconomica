@@ -2,8 +2,12 @@
 #'
 #' @inheritParams consultar
 #' @param periodo numeric. Periodo anual de consulta
-#' @return Un data.frame con clase <transpaeco>
+#' @inherit iniciar_transparencia_economica return
 #' @export
+#' @examples
+#' iniciar_transparencia_economica() %>%
+#'     elegir_periodo_anual(2022)
+#' 
 elegir_periodo_anual <- function(x, periodo = NULL) {
     
     if (!is.numeric(periodo)) {
