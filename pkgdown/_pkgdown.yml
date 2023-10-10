@@ -40,7 +40,8 @@ reference:
     - elegir_periodo_anual
   - subtitle: Otros parámetros
     contents:
-    - matches("elegir_(?!periodo)", perl = TRUE)
+    - starts_with("elegir")
+    - -elegir_periodo_anual
     
   - title: Ejecutar consulta
     desc: >
