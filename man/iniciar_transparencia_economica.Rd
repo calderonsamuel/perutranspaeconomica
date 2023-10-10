@@ -18,7 +18,7 @@ iniciar_transparencia_economica(
 \item{psize}{Cantidad máxima de filas del resultado. No cambiar a menos que se sepa con mucha seguridad lo que implica.}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Iniciar consulta de transparencia economica

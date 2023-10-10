@@ -20,7 +20,7 @@ elegir_cuando_se_hizo_recaudacion(x, trimestre = NULL, mes = NULL)
 \item{mes}{int. Número del 1 al 12.}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo al tiempo en el periodo anual.

@@ -16,7 +16,7 @@ elegir_donde_se_gasta(x, departamento_meta = NULL)
 Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo

@@ -75,7 +75,7 @@ El valor "01" corresponde a capital de departamento.}
 \strong{No es lo mismo que el ubigeo}. Los dos primeros digitos deben ser "30".}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda haciendo uso del clasificador institucional.

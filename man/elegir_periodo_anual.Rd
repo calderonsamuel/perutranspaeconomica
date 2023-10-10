@@ -13,7 +13,7 @@ elegir_periodo_anual(x, periodo = NULL)
 Actualmente solo se puede consultar a partir del 2012.}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Elegir periodo anual de consulta

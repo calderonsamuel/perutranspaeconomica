@@ -47,7 +47,7 @@ Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
 Es el parametro de consulta mas problematico.}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo al destino

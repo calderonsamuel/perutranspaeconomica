@@ -48,7 +48,7 @@ y en módulo de \emph{ingreso} debe tener la forma "0-0".}
 \item{detalle_especifica}{chr. Código de detalle de específica de forma "0-0-0-0-0-0"}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo a valores de estructura presupuestal.

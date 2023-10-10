@@ -40,7 +40,7 @@ No tiene forma estandar, puede ser de una letra mayuscula,
 un digito, o dos digitos.}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>}
+Un objeto con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo al origen
