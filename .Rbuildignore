@@ -10,3 +10,4 @@ docs
 ^Meta$
 ^dev
 pkgdown
+^cran-comments\.md$
