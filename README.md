@@ -9,16 +9,15 @@
 ![runiverse-package](https://calderonsamuel.r-universe.dev/badges/perutranspaeconomica)
 [![Codecov test
 coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica) -->
 [![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de
-obtener datos del Portal de Transparencia Económica Perú desde R, con
-una interfaz de programación consistente y clara.
+obtener datos del Portal de Transparencia Económica Perú con una
+interfaz de programación consistente y escalable.
 
 ## Code of Conduct
 
@@ -29,7 +28,14 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Instalación
 
-Puedes instalar el paquete desde mi
+Existen varias maneras de descargar el paquete. En primer lugar, puedes
+descargar la versión estable desde CRAN:
+
+``` r
+install.packages('perutranspaeconomica')
+```
+
+Otra opción es instalar la versión en desarrollo desde mi
 [R-universe](https://calderonsamuel.r-universe.dev/):
 
 ``` r
@@ -42,25 +48,26 @@ options(repos = c(
 install.packages('perutranspaeconomica')
 ```
 
-También puedes instalar la versión en desarrollo de
-`{perutranspaeconomica}` desde [GitHub](https://github.com/) con:
+La versión en desarrollo también puede descargarse desde
+[GitHub](https://github.com/) con:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("calderonsamuel/perutranspaeconomica", "devel")
+remotes::install_github("calderonsamuel/perutranspaeconomica")
 ```
 
 ## Ejemplo
 
 Con este paquete puedes realizar consultas del Portal de Transparencia
-Económica del MEF-Perú, específicamente en el [módulo de gasto de
-seguimiento a la ejecución
-presupuestal](https://www.mef.gob.pe/es/?option=com_content&language=es-ES&Itemid=100944&lang=es-ES&view=article&id=504).
+Económica del MEF-Perú, específicamente de los módulos de [Consulta de
+gasto presupuestal](http://apps5.mineco.gob.pe/transparencia/) y de
+[Consulta de Ingreso
+Presupuestal](http://apps5.mineco.gob.pe/transparenciaingresos/).
 
 El paquete propone un flujo de trabajo de 1) iniciar consulta, 2) elegir
 parámetros, y 3) ejecutar consulta. Para ello, se ha creado la clase
-‘sep_df’ para consolidar una infraestructura interna consistente. EL
-usuario común no va a necesitar interactuar con esa infraestructura
+`<transpaeco>` para consolidar una infraestructura interna consistente.
+El usuario común no va a necesitar interactuar con esa infraestructura
 directamente ya que se han agregado funciones de soporte que habilitan
 una interfaz de programación más amigable.
 
@@ -73,9 +80,9 @@ library(perutranspaeconomica)
 ### Iniciar consulta
 
 Para iniciar una consulta tan solo hace falta usar la función
-`iniciar_transparencia_economica()`. Esto crea un dataframe vacío y
-muestra los parámetros de consulta agregados. Al inicio no tenemos
-parámetros ni data.
+`iniciar_transparencia_economica()`. Esto crea un objeto vacío y muestra
+los parámetros de consulta agregados. Al inicio no tenemos parámetros ni
+data.
 
 ``` r
 iniciar_transparencia_economica()
@@ -92,17 +99,29 @@ iniciar_transparencia_economica()
 ### Elegir parámetros de consulta
 
 La elección de parámetros de consulta se hace con las funciones que
-`elegir_*()`. Por ejemplo, para consultas en el módulo de gasto
-presupuestal, se pueden utilizar las siguientes:
+empiezan con `elegir_*()`.
+
+Para consultas en el módulo de gasto presupuestal, se pueden utilizar
+las siguientes:
 
 - `elegir_periodo_anual()`
 - `elegir_quien_gasta()`
 - `elegir_en_que_se_gasta()`
+- `elegir_con_que_se_financia()`
 - `elegir_como_se_estructura_gasto()`
 - `elegir_cuando_se_hizo_gasto()`
 - `elegir_donde_se_gasta()`
 
-De todas ellas, la mínima requerida es `elegir_periodo_anual()`.
+Para consultas en el módulo de ingreso presupuestal, se pueden utilizar
+las siguientes:
+
+- `elegir_periodo_anual()`
+- `elegir_quien_recauda()`
+- `elegir_fuentes_de_recaudacion()`
+- `elegir_como_se_estructura_recaudacion()`
+- `elegir_cuando_se_hizo_recaudacion()`
+
+En ambos módulos, la mínima requerida es `elegir_periodo_anual()`.
 
 Una vez que se le agrega parámetros a la consulta, la interfaz lo
 refleja.
@@ -140,9 +159,10 @@ iniciar_transparencia_economica() %>%
 #> ℹ No se ha ejecutado ninguna consulta
 ```
 
-Sin embargo, en el resto de parámetros, es necesario que al menos un
-argumento esté definido como `"todos"`. Más adelante se verá que en caso
-contrario la consulta no prosperará.
+Con excepción de `elegir_periodo_anual()`, es necesario que las
+funciones `elegir_*()` tengan, en su conjunto, al menos un argumento
+definido como `"todos"`. Más adelante se verá que en caso contrario la
+consulta no prosperará.
 
 ``` r
 iniciar_transparencia_economica() %>% 
@@ -164,12 +184,12 @@ iniciar_transparencia_economica() %>%
 ```
 
 Todos los métodos `elegir_*()` cuentan con documentación referente a
-cómo deben ser definidos. Para mayor detalle consultar el método
+cómo deben ser usados. Para mayor detalle consultar el método
 específico. Por ejemplo, `help("elegir_quien_gasta")` o
 `?elegir_quien_gasta`.
 
 La elección de parámetros no prosperará si se intenta definir más de un
-parámetro como “todos”.
+parámetro como `"todos"`.
 
 ``` r
 iniciar_transparencia_economica() %>% 
@@ -180,12 +200,25 @@ iniciar_transparencia_economica() %>%
 #> - Debe haber solo una propiedad con valor "todos"
 ```
 
+Todas las funciones de `elegir_*()` tratan de validar que los inputs
+provistos tengan una forma adecuada. Por ejemplo, `generica` debe seguir
+la forma `"0-0-0"`, donde cada `0` representa un dígito. Al proveer un
+input mal formado, la validación provocará un error e indicará una
+expresión regular o listado de valores apropiados para el parámetro.
+
+``` r
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_como_se_estructura_gasto(generica = "5-20")
+#> Error: <transpaeco> object is invalid:
+#> - En modulo gasto, `generica` debe hacer match con expresion regular '^[5-7]-2-[0-9]$'
+```
+
 ### Consultar
 
 Una vez definidos los parámetros de la consulta, solo hace falta
 ejecutarla. Para ello, usamos la función `consultar()`. Esto nos
-devolverá la interfaz de consulta, pero ahora contendrá la data
-requerida.
+devolverá la data requerida.
 
 ``` r
 # ¿Cuál fue la ejecución presupuestal por departamento en el gobierno nacional?
@@ -217,6 +250,20 @@ iniciar_transparencia_economica() %>%
 #> #   avance_percent <dbl>, nivel <chr>, departamento_meta <chr>
 ```
 
+La consulta no prosperará si alguna función de `elegir_*()` (con
+excepción de `elegir_periodo_anual()`) no cuenta con ningún parámetro
+como definido como `"todos"`.
+
+``` r
+iniciar_transparencia_economica() %>% 
+    elegir_periodo_anual(2022) %>% 
+    elegir_quien_gasta(nivel = "E") %>% 
+    elegir_donde_se_gasta(departamento_meta = "01") %>%
+    consultar()
+#> Error in `check_pre_consulta()`:
+#> ! Se debe elegir un parametro de desagregacion con "todos"
+```
+
 Se recomienda asignarle nombre a una consulta ejecutada para evitar
 posibles tediosas re-descargas, especialmente cuando la consulta usa
 parámetros con vectores más grandes.
@@ -229,7 +276,7 @@ mi_consulta <- iniciar_transparencia_economica() %>%
     elegir_como_se_estructura_gasto(generica = "todos") %>% 
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 2/7 ETA:  5s | Ejecutando consulta  ⠹ 3/7 ETA:  4s | Ejecutando consulta  ⠸ 4/7 ETA:  3s | Ejecutando consulta  ⠼ 5/7 ETA:  2s | Ejecutando consulta  ⠴ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...
+#> ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 
 mi_consulta
@@ -293,4 +340,4 @@ mi_consulta %>%
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />

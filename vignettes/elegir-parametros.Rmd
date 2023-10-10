@@ -71,6 +71,8 @@ A pesar de que este paquete brinda una manera de interactuar con la plataforma d
 
 Pero si estás leyendo esto significa que la interfaz definida por el equipo del MEF no es suficiente para tus propósitos, y tienes la disposición necesaria para invertir un poco de esfuerzo para obtener la gran recompensa de aprovechar de manera más eficiente la información de la plataforma. Siéntete libre de consultar este documento cuantas veces sea necesario.
 
+A pesar de que este artículo se centra en mostrar ejemplos del módulo de *gasto*, se sigue la misma lógica para las consultas al módulo de *ingreso*.
+
 ## El flujo de trabajo
 
 Como pasa con cualquier paquete en R, para usarlo debemos cargarlo.
