@@ -1,28 +1,64 @@
 #' Elegir la estructura con la que se usa el presupuesto
 #'
 #' Estas funciones permiten desglosar la busqueda de acuerdo a valores de estructura presupuestal.
-#' `elegir_como_se_estructura_gasto()` y `elegir_como_se_estructura_recaudacion()` sirven los módulos de gasto e ingresos, respectivamente.
-#' `elegir_estructura()` es una versión agnóstica que sirve para ámbos módulos.
+#' `elegir_como_se_estructura_gasto()` y `elegir_como_se_estructura_recaudacion()` 
+#' sirven para los módulos de gasto e ingresos, respectivamente.
+#' `elegir_estructura()` es una versión agnóstica que sirve para ámbos módulos. 
+#' Ver Detalles para entender la conformacion del formato de consulta de cada parametro.
 #' 
-#' Estos endpoints se construyen secuencialmente en base a los valores de generica.
+#' Estos endpoints se construyen secuencialmente en base a los valores de genérica.
 #'
 #' Para escribir el código de genérica se debe alterar un poco la representación típica.
-#' Por ejemplo, la genérica "7-28" debe pasarse a `generica` como "7-2-8".
+#' Por ejemplo, la genérica de *gasto* "7-28" debe pasarse a `generica` como "7-2-8".
 #'
 #' A partir del nivel `subgenerica` debe omitirse solo el primer dígito de la genérica.
 #' Por ejemplo, la sub-genérica "7-28.2" debe pasarse como "2-8-2" y para el
 #' detalle de la sub-genérica "7-28.2.1" debe pasarse "2-8-2-1". La específica y
 #' detalle de específica siguen este patrón.
+#' 
+#' Estas funciones aplicarán una validación de  la forma para cada argumento 
+#' mediante expresiones regulares. Sumado a ello, se aplica una validación 
+#' para evitar valores anómalos.
 #'
 #' @inheritParams consultar
-#' @param generica chr. Código de genérica de forma "X-X-X"
-#' @param subgenerica chr. Código de sub-genérica de forma "X-X-X"
-#' @param detalle_subgenerica chr. Código de detalle de sub-genérica de forma "X-X-X-X"
-#' @param especifica chr. Código de específica de forma "X-X-X-X-X"
-#' @param detalle_especifica chr. Código de detalle de específica de forma "X-X-X-X-X-X"
+#' @param generica chr. Código de genérica. En módulo de *gasto* debe tener la forma "0-0-0" 
+#' y en módulo de *ingreso* debe tener la forma "0-0".
+#' @param subgenerica chr. Código de sub-genérica de forma "0-0-0"
+#' @param detalle_subgenerica chr. Código de detalle de sub-genérica de forma "0-0-0-0"
+#' @param especifica chr. Código de específica de forma "0-0-0-0-0"
+#' @param detalle_especifica chr. Código de detalle de específica de forma "0-0-0-0-0-0"
 #'
 #' @inherit iniciar_transparencia_economica return
 #' @export
+#' @examples
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_como_se_estructura_gasto(generica = "todos") 
+#' 
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_como_se_estructura_gasto(generica = "todos") %>%
+#'     consultar()
+#' 
+#' # notese la forma de `generica`
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_como_se_estructura_gasto(
+#'         generica = "5-2-0", 
+#'         subgenerica = "todos"
+#'     ) 
+#' 
+#' # cuando no se respeta la forma, el mensaje de error 
+#' # muestra la expresion regular esperada
+#' tryCatch({
+#'     iniciar_transparencia_economica(modulo = "gasto") %>%
+#'         elegir_periodo_anual(2022) %>%
+#'         elegir_como_se_estructura_gasto(
+#'             generica = "5-20", 
+#'             subgenerica = "todos"
+#'         ) 
+#' }, error = function(e) print(e))
+
 elegir_estructura <- function(x,
                               generica = NULL,
                               subgenerica = NULL,

@@ -33,11 +33,11 @@ elegir_fuentes_de_recaudacion(
 \item{fuente_financiamiento}{int. Código de fuente de financiamiento.
 En su versión más reciente va del 1 al 5.}
 
-\item{rubro}{chr. código de rubro, de  forma "XX" (2).}
+\item{rubro}{chr. código de rubro, de  forma "00" (2 digitos).}
 
 \item{tipo_de_recurso}{chr, Código de tipo de recurso.
-No tiene forma estandar, puede ser de uno o dos caracteres, que pueden
-ser letras o números.}
+No tiene forma estandar, puede ser de una letra mayuscula,
+un digito, o dos digitos.}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}
@@ -47,4 +47,40 @@ Estas funciones permiten desglosar la busqueda de acuerdo al origen
 del financiamiento del presupuesto.
 \code{elegir_con_que_se_financia()} y \code{elegir_fuentes_de_recaudacion()} sirven los módulos de gasto e ingresos, respectivamente.
 \code{elegir_origen()} es una versión agnóstica que sirve para ámbos módulos.
+}
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_con_que_se_financia(
+        rubro = "todos"
+    )
+
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_con_que_se_financia(
+        rubro = "todos"
+    ) \%>\%
+    consultar()
+
+# desglose de tipo de recurso del rubro de "13: Donaciones y transferencias"
+# notese la variacion en los codigos de tipo de recurso
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_con_que_se_financia(
+        rubro = "13",
+        tipo_de_recurso = "todos"
+    ) \%>\%
+    consultar()
+
+# cuando no se respeta la forma, el mensaje de error
+# muestra la expresion regular esperada
+tryCatch({
+    iniciar_transparencia_economica(modulo = "gasto") \%>\%
+        elegir_periodo_anual(2022) \%>\%
+        elegir_con_que_se_financia(
+            rubro = "13",
+            tipo_de_recurso = "AA"
+        )
+}, error = function(e) print(e))
+
 }

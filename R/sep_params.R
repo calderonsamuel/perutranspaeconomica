@@ -81,13 +81,13 @@ params_for_query <- function() {
         municipalidad_gasto = list(
             param_name = "7",
             print_name = "Municipalidad",
-            regex = "^[0-9]{6}$",
+            regex = "^30[0-9]{4}$",
             options = NULL
         ),
         municipalidad_ingreso = list(
             param_name = "7",
             print_name = "Municipalidad",
-            regex = "^[0-9]{6}$",
+            regex = "^30[0-9]{4}$",
             options = NULL
         ),
         goblocal_o_manc_gasto = list(
@@ -201,13 +201,13 @@ params_for_query <- function() {
         tipo_de_recurso_gasto = list(
             param_name = "17",
             print_name = "Tipo de recurso",
-            regex = "^([A-Z])|([0-9]{1,2})$",
+            regex = "(^[A-Z]$)|(^[0-9]{1,2}$)",
             options = NULL
         ),
         tipo_de_recurso_ingreso = list(
             param_name = "11",
             print_name = "Tipo de recurso",
-            regex = "^([A-Z])|([0-9]{1,2})$",
+            regex = "(^[A-Z]$)|(^[0-9]{1,2}$)",
             options = NULL
         ),
         departamento_meta = list(

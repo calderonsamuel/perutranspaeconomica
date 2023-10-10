@@ -12,7 +12,7 @@ elegir_donde_se_gasta(x, departamento_meta = NULL)
 \arguments{
 \item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
-\item{departamento_meta}{chr. Código de departamento.
+\item{departamento_meta}{chr. Código de departamento, de forma "00" (2 digitos).
 Para obtener "Callao" usar "07", y para obtener 'Exterior' usar "98".}
 }
 \value{
@@ -20,6 +20,31 @@ Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo
-al lugar de uso del presupuesto. Debido a que solo se pueden usar en el módulo de gasto,
-ambas tienen el mismo comportamiento.
+al lugar de uso del presupuesto. Debido a que solo se pueden usar en el
+módulo de gasto, ambas tienen el mismo comportamiento.
+}
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_donde_se_gasta(
+        departamento_meta = "todos"
+    )
+
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_donde_se_gasta(
+        departamento_meta = "todos"
+    ) \%>\%
+    consultar()
+
+# cuando no se respeta la forma, el mensaje de error
+# muestra la expresion regular esperada
+tryCatch({
+    iniciar_transparencia_economica(modulo = "gasto") \%>\%
+        elegir_periodo_anual(2022) \%>\%
+        elegir_donde_se_gasta(
+            departamento_meta = "2-0"
+        )
+}, error = function(e) print(e))
+
 }

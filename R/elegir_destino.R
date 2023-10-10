@@ -5,17 +5,28 @@
 #' ambas tienen el mismo comportamiento.
 #'
 #' @inheritParams consultar
-#' @param categoria_presupuestal chr. Código de programa presupuestal de forma "XXXX" (4).
+#' @param categoria_presupuestal chr. Código de programa presupuestal de forma "0000" (4 digitos).
 #' Para Acciones Centrales usar "9001" y para APnoP usar "9002".
-#' @param producto chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).
-#' @param actividad chr. Código de actividad, acción de inversión u obra, de forma "XXXXXXX" (7).
-#' @param funcion chr. Código de función de forma "XX" (2).
-#' @param division_funcional chr. Código de división funcional de forma "XXX" (3).
-#' @param grupo_funcional chr. Código de grupo funcional de forma "XXXX" (4).
-#' @param meta chr. Código de meta. No tiene forma estandarizada.
+#' @param producto chr. Código de producto o proyecto de inversión de forma "0000000" (7 digitos).
+#' @param actividad chr. Código de actividad, acción de inversión u obra, de forma "0000000" (7 digitos).
+#' @param funcion chr. Código de función de forma "00" (2 digitos).
+#' @param division_funcional chr. Código de división funcional de forma "000" (3 digitos).
+#' @param grupo_funcional chr. Código de grupo funcional de forma "0000" (4 digitos).
+#' @param meta chr. Código de meta. No tiene forma estandarizada y no es obtenerla a partir de la información provista.
+#' Es el parametro de consulta mas problematico.
 #'
 #' @inherit iniciar_transparencia_economica return
 #' @export
+#' @examples
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_en_que_se_gasta(categoria_presupuestal = "todos")
+#' 
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_en_que_se_gasta(categoria_presupuestal = "todos") %>%
+#'     consultar()
+#' 
 elegir_destino <- function(x,
                            categoria_presupuestal = NULL,
                            producto = NULL,

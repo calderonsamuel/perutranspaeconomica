@@ -36,32 +36,68 @@ elegir_como_se_estructura_recaudacion(
 \arguments{
 \item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
-\item{generica}{chr. Código de genérica de forma "X-X-X"}
+\item{generica}{chr. Código de genérica. En módulo de \emph{gasto} debe tener la forma "0-0-0"
+y en módulo de \emph{ingreso} debe tener la forma "0-0".}
 
-\item{subgenerica}{chr. Código de sub-genérica de forma "X-X-X"}
+\item{subgenerica}{chr. Código de sub-genérica de forma "0-0-0"}
 
-\item{detalle_subgenerica}{chr. Código de detalle de sub-genérica de forma "X-X-X-X"}
+\item{detalle_subgenerica}{chr. Código de detalle de sub-genérica de forma "0-0-0-0"}
 
-\item{especifica}{chr. Código de específica de forma "X-X-X-X-X"}
+\item{especifica}{chr. Código de específica de forma "0-0-0-0-0"}
 
-\item{detalle_especifica}{chr. Código de detalle de específica de forma "X-X-X-X-X-X"}
+\item{detalle_especifica}{chr. Código de detalle de específica de forma "0-0-0-0-0-0"}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}
 }
 \description{
 Estas funciones permiten desglosar la busqueda de acuerdo a valores de estructura presupuestal.
-\code{elegir_como_se_estructura_gasto()} y \code{elegir_como_se_estructura_recaudacion()} sirven los módulos de gasto e ingresos, respectivamente.
+\code{elegir_como_se_estructura_gasto()} y \code{elegir_como_se_estructura_recaudacion()}
+sirven para los módulos de gasto e ingresos, respectivamente.
 \code{elegir_estructura()} es una versión agnóstica que sirve para ámbos módulos.
+Ver Detalles para entender la conformacion del formato de consulta de cada parametro.
 }
 \details{
-Estos endpoints se construyen secuencialmente en base a los valores de generica.
+Estos endpoints se construyen secuencialmente en base a los valores de genérica.
 
 Para escribir el código de genérica se debe alterar un poco la representación típica.
-Por ejemplo, la genérica "7-28" debe pasarse a \code{generica} como "7-2-8".
+Por ejemplo, la genérica de \emph{gasto} "7-28" debe pasarse a \code{generica} como "7-2-8".
 
 A partir del nivel \code{subgenerica} debe omitirse solo el primer dígito de la genérica.
 Por ejemplo, la sub-genérica "7-28.2" debe pasarse como "2-8-2" y para el
 detalle de la sub-genérica "7-28.2.1" debe pasarse "2-8-2-1". La específica y
 detalle de específica siguen este patrón.
+
+Estas funciones aplicarán una validación de  la forma para cada argumento
+mediante expresiones regulares. Sumado a ello, se aplica una validación
+para evitar valores anómalos.
+}
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_como_se_estructura_gasto(generica = "todos") 
+
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_como_se_estructura_gasto(generica = "todos") \%>\%
+    consultar()
+
+# notese la forma de `generica`
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_como_se_estructura_gasto(
+        generica = "5-2-0", 
+        subgenerica = "todos"
+    ) 
+
+# cuando no se respeta la forma, el mensaje de error 
+# muestra la expresion regular esperada
+tryCatch({
+    iniciar_transparencia_economica(modulo = "gasto") \%>\%
+        elegir_periodo_anual(2022) \%>\%
+        elegir_como_se_estructura_gasto(
+            generica = "5-20", 
+            subgenerica = "todos"
+        ) 
+}, error = function(e) print(e))
 }

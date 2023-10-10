@@ -8,13 +8,49 @@
 #' @inheritParams consultar
 #' @param fuente_financiamiento int. Código de fuente de financiamiento.
 #' En su versión más reciente va del 1 al 5.
-#' @param rubro chr. código de rubro, de  forma "XX" (2).
+#' @param rubro chr. código de rubro, de  forma "00" (2 digitos).
 #' @param tipo_de_recurso chr, Código de tipo de recurso.
-#' No tiene forma estandar, puede ser de uno o dos caracteres, que pueden
-#' ser letras o números.
+#' No tiene forma estandar, puede ser de una letra mayuscula, 
+#' un digito, o dos digitos.
 #'
 #' @inherit iniciar_transparencia_economica return
 #' @export
+#' 
+#' @examples
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_con_que_se_financia(
+#'         rubro = "todos"
+#'     )
+#' 
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_con_que_se_financia(
+#'         rubro = "todos"
+#'     ) %>%
+#'     consultar()
+#' 
+#' # desglose de tipo de recurso del rubro de "13: Donaciones y transferencias"
+#' # notese la variacion en los codigos de tipo de recurso
+#' iniciar_transparencia_economica(modulo = "gasto") %>%
+#'     elegir_periodo_anual(2022) %>%
+#'     elegir_con_que_se_financia(
+#'         rubro = "13",
+#'         tipo_de_recurso = "todos"
+#'     ) %>%
+#'     consultar()
+#' 
+#' # cuando no se respeta la forma, el mensaje de error
+#' # muestra la expresion regular esperada
+#' tryCatch({
+#'     iniciar_transparencia_economica(modulo = "gasto") %>%
+#'         elegir_periodo_anual(2022) %>%
+#'         elegir_con_que_se_financia(
+#'             rubro = "13",
+#'             tipo_de_recurso = "AA"
+#'         )
+#' }, error = function(e) print(e))
+#' 
 elegir_origen <- function(x,
                           fuente_financiamiento = NULL,
                           rubro = NULL,

@@ -17,7 +17,7 @@ elegir_cuando_se_hizo_recaudacion(x, trimestre = NULL, mes = NULL)
 
 \item{trimestre}{int. Número del 1 al 4}
 
-\item{mes}{int. Número del 1 al 12}
+\item{mes}{int. Número del 1 al 12.}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}
@@ -26,4 +26,25 @@ Un data.frame con clase \verb{<transpaeco>}
 Estas funciones permiten desglosar la busqueda de acuerdo al tiempo en el periodo anual.
 \code{elegir_cuando_se_hizo_gasto()} y \code{elegir_cuando_se_hizo_recaudacion()} sirven los módulos de gasto e ingresos, respectivamente.
 \code{elegir_tiempo()} es una versión agnóstica que sirve para ámbos módulos.
+Al desglosar por mes o trimestre se pierde información de PIA, PIM
+y porcentaje de avance (en \emph{gasto}).
+}
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_cuando_se_hizo_gasto(mes = "todos")
+
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_cuando_se_hizo_gasto(mes = "todos") \%>\%
+    consultar()
+
+# se emite mensaje de error si se intenta elegir periodos no abarcados
+tryCatch({
+    iniciar_transparencia_economica(modulo = "gasto") \%>\%
+        elegir_periodo_anual(periodo = 2022) \%>\%
+        elegir_cuando_se_hizo_gasto(trimestre = "5")
+        
+}, error = function(e) print(e))
+
 }

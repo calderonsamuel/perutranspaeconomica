@@ -52,23 +52,27 @@ elegir_quien_recauda(
 "M" (gobiernos locales) o "R" (gobiernos regionales). Si es "E" o "R",
 le corresponde \code{sector}. Si es "M", le corresponde \code{goblocal_o_manc}.}
 
-\item{sector}{chr. Codigo de sector, de forma "XX" (2).}
+\item{sector}{chr. Codigo de sector, de forma "00" (2 digitos).}
 
-\item{pliego}{chr. Código de pliego, de forma "XXX" (3).}
+\item{pliego}{chr. Código de pliego, de forma "000" (3 digitos).}
 
-\item{unidad_ejecutora}{chr. Código de Unidad Ejecutora. No tiene forma estandar}
+\item{unidad_ejecutora}{chr. Código de Unidad Ejecutora.
+No tiene forma estandar, puede tener entre uno (1) y seis (6) digitos.}
 
 \item{goblocal_o_manc}{chr. Escoger entre "M" (gobierno local)
-o "N" (mancomunidad). Si es "M", desbloque \code{departamento}, \code{provincia} y \code{municipalidad}.
+o "N" (mancomunidad). Si es "M", puede desglosarse por \code{departamento}, \code{provincia} y \code{municipalidad}.
 Si es "N", le corresponde \code{mancomunidad}.}
 
-\item{mancomunidad}{chr. Código de mancomunidad, de forma "XXXXXX" (6).}
+\item{mancomunidad}{chr. Código de mancomunidad, de forma "000000" (6 digitos).}
 
-\item{departamento}{chr. Código de departamento. El valor "07" corresponde a Callao.}
+\item{departamento}{chr. Código de departamento, de forma "00" (2 digitos).
+El valor "07" corresponde a Callao.}
 
-\item{provincia}{chr. Código de provincia. El valor "01" corresponde a capital de departamento.}
+\item{provincia}{chr. Código de provincia, de forma "00" (2 digitos).
+El valor "01" corresponde a capital de departamento.}
 
-\item{municipalidad}{chr. Código de municipalidad, de forma "XXXXXX". No corresponde con ubigeo.}
+\item{municipalidad}{chr. Código de municipalidad, de forma "000000" (6 digitos).
+\strong{No es lo mismo que el ubigeo}. Los dos primeros digitos deben ser "30".}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}
@@ -77,4 +81,71 @@ Un data.frame con clase \verb{<transpaeco>}
 Estas funciones permiten desglosar la busqueda haciendo uso del clasificador institucional.
 \code{elegir_quien_gasta()} y \code{elegir_quien_recauda()} sirven los módulos de gasto e ingresos, respectivamente.
 \code{elegir_institucion()} es una versión agnóstica que sirve para ámbos módulos.
+}
+\details{
+Estas funciones aplicarán una validación de  la forma para cada argumento
+mediante expresiones regulares. Sumado a ello, se aplica una validación
+para evitar valores anómalos.
+}
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_quien_gasta(nivel = "todos")
+
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_quien_gasta(nivel = "todos") \%>\%
+    consultar()
+
+# informacion de todas las UEs del Ministerio de Educacion
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_quien_gasta(
+        nivel = "E", 
+        sector = "10",
+        pliego = "010",
+        unidad_ejecutora = "todos"
+    ) \%>\%
+    consultar()
+
+# informacion de todas las provincias de Amazonas.
+# notese que devuelve codigos de provincia de 4 digitos.
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_quien_gasta(
+        nivel = "M", 
+        goblocal_o_manc = "M",
+        departamento = "01",
+        provincia = "todos"
+    ) \%>\%
+    consultar()
+
+# para desglosar por provincia, deben usarse solo dos digitos.
+# por ejemplo, para ver los municipios de la provincia de Bagua
+# debe usarse "02"
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_quien_gasta(
+        nivel = "M", 
+        goblocal_o_manc = "M",
+        departamento = "01",
+        provincia = "02",
+        municipalidad = "todos"
+    ) \%>\%
+    consultar()
+
+# cuando no se respeta la forma, el mensaje de error
+# muestra la expresion regular esperada
+tryCatch({
+    iniciar_transparencia_economica(modulo = "gasto") \%>\%
+        elegir_periodo_anual(2022) \%>\%
+        elegir_quien_gasta(
+            nivel = "M", 
+            goblocal_o_manc = "M",
+            departamento = "01",
+            provincia = "0102",
+            municipalidad = "todos"
+        )
+}, error = function(e) print(e))
+
 }

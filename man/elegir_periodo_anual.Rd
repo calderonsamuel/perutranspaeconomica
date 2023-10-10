@@ -9,7 +9,8 @@ elegir_periodo_anual(x, periodo = NULL)
 \arguments{
 \item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
-\item{periodo}{numeric. Periodo anual de consulta}
+\item{periodo}{numeric. Periodo anual de consulta.
+Actualmente solo se puede consultar a partir del 2012.}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}
@@ -19,6 +20,22 @@ Elegir periodo anual de consulta
 }
 \examples{
 iniciar_transparencia_economica() \%>\%
-    elegir_periodo_anual(2022)
+    elegir_periodo_anual(periodo = 2022)
+
+iniciar_transparencia_economica() \%>\%
+    elegir_periodo_anual(periodo = 2022) \%>\%
+    consultar()
+
+# pueden consultarse multiples periodos al mismo tiempo
+# por ejemplo, el periodo de pandemia por Covid 19
+iniciar_transparencia_economica() \%>\%
+    elegir_periodo_anual(periodo = 2020:2022) \%>\%
+    consultar()
+
+# se emite mensaje de error si se intenta elegir periodos no abarcados
+tryCatch({
+    iniciar_transparencia_economica(modulo = "gasto") \%>\%
+        elegir_periodo_anual(periodo = 2011)
+}, error = function(e) print(e))
 
 }

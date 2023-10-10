@@ -30,20 +30,21 @@ elegir_en_que_se_gasta(
 \arguments{
 \item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 
-\item{categoria_presupuestal}{chr. Código de programa presupuestal de forma "XXXX" (4).
+\item{categoria_presupuestal}{chr. Código de programa presupuestal de forma "0000" (4 digitos).
 Para Acciones Centrales usar "9001" y para APnoP usar "9002".}
 
-\item{producto}{chr. Código de producto o proyecto de inversión de forma "XXXXXXX" (7).}
+\item{producto}{chr. Código de producto o proyecto de inversión de forma "0000000" (7 digitos).}
 
-\item{actividad}{chr. Código de actividad, acción de inversión u obra, de forma "XXXXXXX" (7).}
+\item{actividad}{chr. Código de actividad, acción de inversión u obra, de forma "0000000" (7 digitos).}
 
-\item{funcion}{chr. Código de función de forma "XX" (2).}
+\item{funcion}{chr. Código de función de forma "00" (2 digitos).}
 
-\item{division_funcional}{chr. Código de división funcional de forma "XXX" (3).}
+\item{division_funcional}{chr. Código de división funcional de forma "000" (3 digitos).}
 
-\item{grupo_funcional}{chr. Código de grupo funcional de forma "XXXX" (4).}
+\item{grupo_funcional}{chr. Código de grupo funcional de forma "0000" (4 digitos).}
 
-\item{meta}{chr. Código de meta. No tiene forma estandarizada.}
+\item{meta}{chr. Código de meta. No tiene forma estandarizada y no es obtenerla a partir de la información provista.
+Es el parametro de consulta mas problematico.}
 }
 \value{
 Un data.frame con clase \verb{<transpaeco>}
@@ -52,4 +53,15 @@ Un data.frame con clase \verb{<transpaeco>}
 Estas funciones permiten desglosar la busqueda de acuerdo al destino
 de uso del presupuesto. Debido a que solo se pueden usar en el módulo de gasto,
 ambas tienen el mismo comportamiento.
+}
+\examples{
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_en_que_se_gasta(categoria_presupuestal = "todos")
+
+iniciar_transparencia_economica(modulo = "gasto") \%>\%
+    elegir_periodo_anual(2022) \%>\%
+    elegir_en_que_se_gasta(categoria_presupuestal = "todos") \%>\%
+    consultar()
+
 }
