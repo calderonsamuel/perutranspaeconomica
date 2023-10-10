@@ -74,7 +74,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>El objetivo de <a href="https://perutranspaeconomica.samuelenrique.com">perutranspaeconomica</a> es contar con una manera de obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente y clara.</p>
+<p>El objetivo de <a href="https://perutranspaeconomica.samuelenrique.com">perutranspaeconomica</a> es contar con una manera de obtener datos del Portal de Transparencia Económica Perú con una interfaz de programación consistente y escalable.</p>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
@@ -83,8 +83,11 @@
 <div class="section level2">
 <h2 id="instalación">Instalación<a class="anchor" aria-label="anchor" href="#instalaci%C3%B3n"></a>
 </h2>
-<p>Puedes instalar el paquete desde mi <a href="https://calderonsamuel.r-universe.dev/" class="external-link">R-universe</a>:</p>
+<p>Existen varias maneras de descargar el paquete. En primer lugar, puedes descargar la versión estable desde CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'perutranspaeconomica'</span><span class="op">)</span></span></code></pre></div>
+<p>Otra opción es instalar la versión en desarrollo desde mi <a href="https://calderonsamuel.r-universe.dev/" class="external-link">R-universe</a>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Habilita el repositorio calderonsamuel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  calderonsamuel <span class="op">=</span> <span class="st">'https://calderonsamuel.r-universe.dev'</span>,</span>
@@ -92,24 +95,24 @@
 <span></span>
 <span><span class="co"># Descargar e instalar perutranspaeconomica en R</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'perutranspaeconomica'</span><span class="op">)</span></span></code></pre></div>
-<p>También puedes instalar la versión en desarrollo de <a href="https://perutranspaeconomica.samuelenrique.com">perutranspaeconomica</a> desde <a href="https://github.com/" class="external-link">GitHub</a> con:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>La versión en desarrollo también puede descargarse desde <a href="https://github.com/" class="external-link">GitHub</a> con:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"calderonsamuel/perutranspaeconomica"</span>, <span class="st">"devel"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"calderonsamuel/perutranspaeconomica"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="ejemplo">Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"></a>
 </h2>
-<p>Con este paquete puedes realizar consultas del Portal de Transparencia Económica del MEF-Perú, específicamente en el <a href="https://www.mef.gob.pe/es/?option=com_content&amp;language=es-ES&amp;Itemid=100944&amp;lang=es-ES&amp;view=article&amp;id=504" class="external-link">módulo de gasto de seguimiento a la ejecución presupuestal</a>.</p>
-<p>El paquete propone un flujo de trabajo de 1) iniciar consulta, 2) elegir parámetros, y 3) ejecutar consulta. Para ello, se ha creado la clase ‘sep_df’ para consolidar una infraestructura interna consistente. EL usuario común no va a necesitar interactuar con esa infraestructura directamente ya que se han agregado funciones de soporte que habilitan una interfaz de programación más amigable.</p>
+<p>Con este paquete puedes realizar consultas del Portal de Transparencia Económica del MEF-Perú, específicamente de los módulos de <a href="http://apps5.mineco.gob.pe/transparencia/" class="external-link">Consulta de gasto presupuestal</a> y de <a href="http://apps5.mineco.gob.pe/transparenciaingresos/" class="external-link">Consulta de Ingreso Presupuestal</a>.</p>
+<p>El paquete propone un flujo de trabajo de 1) iniciar consulta, 2) elegir parámetros, y 3) ejecutar consulta. Para ello, se ha creado la clase <code>&lt;transpaeco&gt;</code> para consolidar una infraestructura interna consistente. El usuario común no va a necesitar interactuar con esa infraestructura directamente ya que se han agregado funciones de soporte que habilitan una interfaz de programación más amigable.</p>
 <p>Empezamos por cargar el paquete:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://perutranspaeconomica.samuelenrique.com">perutranspaeconomica</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="iniciar-consulta">Iniciar consulta<a class="anchor" aria-label="anchor" href="#iniciar-consulta"></a>
 </h3>
-<p>Para iniciar una consulta tan solo hace falta usar la función <code><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica()</a></code>. Esto crea un dataframe vacío y muestra los parámetros de consulta agregados. Al inicio no tenemos parámetros ni data.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>Para iniciar una consulta tan solo hace falta usar la función <code><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica()</a></code>. Esto crea un objeto vacío y muestra los parámetros de consulta agregados. Al inicio no tenemos parámetros ni data.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Seguimiento al gasto presupuestal (actualizacion diaria) ────────────────────</span></span>
@@ -123,18 +126,28 @@
 <div class="section level3">
 <h3 id="elegir-parámetros-de-consulta">Elegir parámetros de consulta<a class="anchor" aria-label="anchor" href="#elegir-par%C3%A1metros-de-consulta"></a>
 </h3>
-<p>La elección de parámetros de consulta se hace con las funciones que <code>elegir_*()</code>. Por ejemplo, para consultas en el módulo de gasto presupuestal, se pueden utilizar las siguientes:</p>
+<p>La elección de parámetros de consulta se hace con las funciones que empiezan con <code>elegir_*()</code>.</p>
+<p>Para consultas en el módulo de gasto presupuestal, se pueden utilizar las siguientes:</p>
 <ul>
 <li><code><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code></li>
 <li><code><a href="reference/elegir_institucion.html">elegir_quien_gasta()</a></code></li>
 <li><code><a href="reference/elegir_destino.html">elegir_en_que_se_gasta()</a></code></li>
+<li><code><a href="reference/elegir_origen.html">elegir_con_que_se_financia()</a></code></li>
 <li><code><a href="reference/elegir_estructura.html">elegir_como_se_estructura_gasto()</a></code></li>
 <li><code><a href="reference/elegir_tiempo.html">elegir_cuando_se_hizo_gasto()</a></code></li>
 <li><code><a href="reference/elegir_lugar.html">elegir_donde_se_gasta()</a></code></li>
 </ul>
-<p>De todas ellas, la mínima requerida es <code><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code>.</p>
+<p>Para consultas en el módulo de ingreso presupuestal, se pueden utilizar las siguientes:</p>
+<ul>
+<li><code><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code></li>
+<li><code><a href="reference/elegir_institucion.html">elegir_quien_recauda()</a></code></li>
+<li><code><a href="reference/elegir_origen.html">elegir_fuentes_de_recaudacion()</a></code></li>
+<li><code><a href="reference/elegir_estructura.html">elegir_como_se_estructura_recaudacion()</a></code></li>
+<li><code><a href="reference/elegir_tiempo.html">elegir_cuando_se_hizo_recaudacion()</a></code></li>
+</ul>
+<p>En ambos módulos, la mínima requerida es <code><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code>.</p>
 <p>Una vez que se le agrega parámetros a la consulta, la interfaz lo refleja.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span>periodo <span class="op">=</span> <span class="fl">2023</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -148,7 +161,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ℹ No se ha ejecutado ninguna consulta</span></span></code></pre></div>
 <p>Cada argumento de las funciones <code>elegir_*()</code> puede aceptar vectores con más de un elemento para una consulta más potente.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span>periodo <span class="op">=</span> <span class="fl">2020</span><span class="op">:</span><span class="fl">2023</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -161,8 +174,8 @@
 <span><span class="co">#&gt; ── Data ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ℹ No se ha ejecutado ninguna consulta</span></span></code></pre></div>
-<p>Sin embargo, en el resto de parámetros, es necesario que al menos un argumento esté definido como <code>"todos"</code>. Más adelante se verá que en caso contrario la consulta no prosperará.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>Con excepción de <code><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code>, es necesario que las funciones <code>elegir_*()</code> tengan, en su conjunto, al menos un argumento definido como <code>"todos"</code>. Más adelante se verá que en caso contrario la consulta no prosperará.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span>periodo <span class="op">=</span> <span class="fl">2023</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_institucion.html">elegir_quien_gasta</a></span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"E"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -179,21 +192,28 @@
 <span><span class="co">#&gt; ── Data ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ℹ No se ha ejecutado ninguna consulta</span></span></code></pre></div>
-<p>Todos los métodos <code>elegir_*()</code> cuentan con documentación referente a cómo deben ser definidos. Para mayor detalle consultar el método específico. Por ejemplo, <code><a href="reference/elegir_institucion.html">help("elegir_quien_gasta")</a></code> o <code><a href="reference/elegir_institucion.html">?elegir_quien_gasta</a></code>.</p>
-<p>La elección de parámetros no prosperará si se intenta definir más de un parámetro como “todos”.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>Todos los métodos <code>elegir_*()</code> cuentan con documentación referente a cómo deben ser usados. Para mayor detalle consultar el método específico. Por ejemplo, <code><a href="reference/elegir_institucion.html">help("elegir_quien_gasta")</a></code> o <code><a href="reference/elegir_institucion.html">?elegir_quien_gasta</a></code>.</p>
+<p>La elección de parámetros no prosperará si se intenta definir más de un parámetro como <code>"todos"</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_institucion.html">elegir_quien_gasta</a></span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_lugar.html">elegir_donde_se_gasta</a></span><span class="op">(</span>departamento_meta <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: &lt;transpaeco&gt; object is invalid:</span></span>
 <span><span class="co">#&gt; - Debe haber solo una propiedad con valor "todos"</span></span></code></pre></div>
+<p>Todas las funciones de <code>elegir_*()</code> tratan de validar que los inputs provistos tengan una forma adecuada. Por ejemplo, <code>generica</code> debe seguir la forma <code>"0-0-0"</code>, donde cada <code>0</code> representa un dígito. Al proveer un input mal formado, la validación provocará un error e indicará una expresión regular o listado de valores apropiados para el parámetro.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="reference/elegir_estructura.html">elegir_como_se_estructura_gasto</a></span><span class="op">(</span>generica <span class="op">=</span> <span class="st">"5-20"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: &lt;transpaeco&gt; object is invalid:</span></span>
+<span><span class="co">#&gt; - En modulo gasto, `generica` debe hacer match con expresion regular '^[5-7]-2-[0-9]$'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="consultar">Consultar<a class="anchor" aria-label="anchor" href="#consultar"></a>
 </h3>
-<p>Una vez definidos los parámetros de la consulta, solo hace falta ejecutarla. Para ello, usamos la función <code><a href="reference/consultar.html">consultar()</a></code>. Esto nos devolverá la interfaz de consulta, pero ahora contendrá la data requerida.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>Una vez definidos los parámetros de la consulta, solo hace falta ejecutarla. Para ello, usamos la función <code><a href="reference/consultar.html">consultar()</a></code>. Esto nos devolverá la data requerida.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ¿Cuál fue la ejecución presupuestal por departamento en el gobierno nacional?</span></span>
 <span><span class="co"># Para el año 2022</span></span>
 <span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -221,8 +241,17 @@
 <span><span class="co">#&gt; # ℹ 8 more variables: certificacion &lt;dbl&gt;, compromiso_anual &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   avance_percent &lt;dbl&gt;, nivel &lt;chr&gt;, departamento_meta &lt;chr&gt;</span></span></code></pre></div>
+<p>La consulta no prosperará si alguna función de <code>elegir_*()</code> (con excepción de <code><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual()</a></code>) no cuenta con ningún parámetro como definido como <code>"todos"</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="reference/elegir_institucion.html">elegir_quien_gasta</a></span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"E"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="reference/elegir_lugar.html">elegir_donde_se_gasta</a></span><span class="op">(</span>departamento_meta <span class="op">=</span> <span class="st">"01"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="reference/consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in `check_pre_consulta()`:</span></span>
+<span><span class="co">#&gt; ! Se debe elegir un parametro de desagregacion con "todos"</span></span></code></pre></div>
 <p>Se recomienda asignarle nombre a una consulta ejecutada para evitar posibles tediosas re-descargas, especialmente cuando la consulta usa parámetros con vectores más grandes.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ¿Cómo se ejecutó el gasto por genérica para el PP 0031 entre el 2015 y 2021?</span></span>
 <span><span class="va">mi_consulta</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2015</span><span class="op">:</span><span class="fl">2021</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -230,7 +259,7 @@
 <span>    <span class="fu"><a href="reference/elegir_estructura.html">elegir_como_se_estructura_gasto</a></span><span class="op">(</span>generica <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Iniciando consulta</span></span>
-<span><span class="co">#&gt; ⠙ 2/7 ETA:  5s | Ejecutando consulta  ⠹ 3/7 ETA:  4s | Ejecutando consulta  ⠸ 4/7 ETA:  3s | Ejecutando consulta  ⠼ 5/7 ETA:  2s | Ejecutando consulta  ⠴ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...</span></span>
+<span><span class="co">#&gt; ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...</span></span>
 <span><span class="co">#&gt; ✔ Consultas realizadas y unificadas</span></span>
 <span></span>
 <span><span class="va">mi_consulta</span></span>
@@ -252,7 +281,7 @@
 <span><span class="co">#&gt; #   atencion_de_compromiso_mensual &lt;dbl&gt;, devengado &lt;dbl&gt;, girado &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   avance_percent &lt;dbl&gt;, categoria_presupuestal &lt;chr&gt;, generica &lt;chr&gt;</span></span></code></pre></div>
 <p>Una vez obtenida la consulta requerida, es posible tratar los datos obtenidos como cualquier otro dataframe en R. Por ejemplo, para calcular el porcentaje de presupuesto destinado a personal y obligaciones sociales por periodo anual.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mi_consulta</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -275,14 +304,14 @@
 <span><span class="co">#&gt; #   avance_percent &lt;dbl&gt;, categoria_presupuestal &lt;chr&gt;, generica &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   porc_presupuesto &lt;dbl&gt;</span></span></code></pre></div>
 <p>También es posible usar los datos obtenidos directamente para un gráfico con <code>ggplot2</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mi_consulta</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">periodo</span>, <span class="va">pim</span>, color <span class="op">=</span> <span class="va">cod_generica</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_dollar.html" class="external-link">label_dollar</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"S/."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%"></p>
 </div>
 </div>
 </div>
@@ -328,9 +357,8 @@
 <h2 data-toc-skip>Estado de desarrollo</h2>
 <ul class="list-unstyled">
 <li><a href="https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main" class="external-link"><img src="https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://CRAN.R-project.org/package=perutranspaeconomica" class="external-link"><img src="https://www.r-pkg.org/badges/version/perutranspaeconomica" alt="CRAN status"></a></li>
 <li><a href="https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 </ul>
 </div>
 
