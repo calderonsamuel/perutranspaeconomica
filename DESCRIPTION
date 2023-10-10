@@ -1,11 +1,12 @@
 Package: perutranspaeconomica
-Title: Consulta el sistema de transparencia economica del MEF-Peru
+Title: Consulta el portal de 'Transparencia Económica' de Perú
 Version: 0.3.1.9000
 Authors@R: 
     person("Samuel", "Calderon", , "samuel.calderon@uarm.pe", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6847-1210"))
-Description: Obtener datos del Portal de Transparencia Económica Perú 
-    con una interfaz de programación consistente y escalable.
+Description: Usa una interfaz de programación consistente y escalable 
+    para obtener datos del portal de 'Transparencia Económica' 
+    de Perú <https://www.mef.gob.pe/es/seguimiento-de-la-ejecucion-presupuestal-consulta-amigable>.
 License: MIT + file LICENSE
 URL: https://perutranspaeconomica.samuelenrique.com,
     https://github.com/calderonsamuel/perutranspaeconomica
