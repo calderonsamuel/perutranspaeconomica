@@ -10,7 +10,7 @@ consultar(x)
 \item{x}{Objeto de clase \verb{<transpaeco>} recipiente de los parámetros de la consulta deseada}
 }
 \value{
-Un data.frame con clase \verb{<transpaeco>} que contiene el resultado de la consulta solicitada
+Un data.frame que contiene el resultado de la consulta solicitada
 }
 \description{
 Ejecutar consulta de seguimiento a la ejecución presupuestal
