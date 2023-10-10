@@ -2,7 +2,7 @@ Package: perutranspaeconomica
 Title: Consulta el portal de 'Transparencia Económica' de Perú
 Version: 0.3.1.9000
 Authors@R: 
-    person("Samuel", "Calderon", , "samuel.calderon@uarm.pe", role = c("aut", "cre"),
+    person("Samuel", "Calderon", , "samuel.calderon@uarm.pe", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-6847-1210"))
 Description: Usa una interfaz de programación consistente y escalable 
     para obtener datos del portal de 'Transparencia Económica' 
