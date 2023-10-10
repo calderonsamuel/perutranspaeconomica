@@ -1,10 +1,13 @@
 url: https://perutranspaeconomica.samuelenrique.com
 
-lang: es
+# lang: es
 
 home:
-    title: Seguimiento a la ejecución presupuestal-Peru
-    description: Obtener datos del Portal de Transparencia Económica Perú desde R, con una interfaz de programación consistente, clara y escalable.
+    title: Consulta el portal de 'Transparencia Económica' de Perú
+    description: |
+      Usa una interfaz de programación consistente y escalable 
+      para obtener datos del portal de 'Transparencia Económica' 
+      de Perú.
 
 template:
     bootstrap: 5
@@ -17,3 +20,24 @@ template:
 authors:
     Samuel Calderon:
         href: https://www.samuelenrique.com
+        
+reference:
+  - title: Iniciar consulta
+    desc: >
+      El primer paso del flujo de trabajo es iniciar 
+      un objecto de consulta
+    contents:
+    - iniciar_transparencia_economica
+  - title: Elegir parámetros
+    desc: >
+      Una vez iniciado el objeto de consulta se debe elegir
+      parámetros adicionales. Se aplican validaciones de forma y contenido, 
+      con mensajes de error amigables.
+    contents:
+    - starts_with("elegir_")
+  - title: Ejecutar consulta
+    desc: >
+      Con los parámetros de consulta definidos, se ejecuta la consulta.
+      De ser exitosa, se obtiene un dataframe con los datos obtenidos.
+    contents:
+    - consultar
