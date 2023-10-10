@@ -3,7 +3,7 @@
 #' @param response Un objeto de clase "xml_node" retornado por retrieve_html_body()
 #'
 #' @return Un tibble
-#'
+#' @noRd
 retrieve_response_tbl <- function(response){
     tbl_ids <- list(data = ".Data", header = ".MapTable", history = ".History")
     

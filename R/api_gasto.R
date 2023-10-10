@@ -1,10 +1,9 @@
 #' Escoger API de gasto segun actualizacion
 #'
-#' @param actualizacion chr. Uno de c("mensual", "diaria")
-#' @param modulo chr. Uno de c("gasto", "ingreso")
+#' @inheritParams iniciar_transparencia_economica
 #'
 #' @return chr. La URL base de una API de seguimiento a la ejecucion del gasto
-#'
+#' @noRd
 api_gasto <- function(actualizacion = "mensual", modulo = "gasto") {
 
     if (!modulo %in% c("gasto", "ingreso")) {
