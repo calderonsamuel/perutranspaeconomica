@@ -220,9 +220,9 @@ graph1 <- create_graph(attr_theme = "lr") %>%
 custom_render_graph(graph1)
 ```
 
-La segunda clasificación es la Funcional, en la que es posible llegar hasta el detalle de grupo funcional. En otras palabras, se trata de las grandes líneas de acción que busca desarrollar el Estado, y no se corresponde con la estructura orgánica de las entidades. Esta clasificación "facilita el análisis de las tendencias del gasto público"[^1], así como su comparación a nivel internacional.
+La segunda clasificación es la Funcional, en la que es posible llegar hasta el detalle de grupo funcional. En otras palabras, " constituye una clasificación detallada de las funciones a cargo del Estado y tiene por objeto facilitar el seguimiento, exposición y análisis de las tendencias del gasto público respecto a las principales funciones del Estado"[^1].
 
-[^1]: Ministerio de Economía y Finanzas. Recuperado de: <https://d2oilkmr0fadqd.cloudfront.net/La+Universidad/Logistica/manual_clasificador_gastos.pdf>
+[^1]: DECRETO SUPREMO Nº 068-2008-EF Artículo 3, numeral 3.4. Recuperado de: <https://www.mef.gob.pe/en/normatividad-sp-9867/por-tema/clasificadores/7377-d-s-n-068-2008-ef-2/file>
 
 ```{r, echo=FALSE}
 graph2 <- create_graph(attr_theme = "lr") %>% 

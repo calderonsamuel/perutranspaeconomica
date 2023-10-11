@@ -36,11 +36,6 @@
 #'     elegir_periodo_anual(2022) %>%
 #'     elegir_quien_gasta(nivel = "todos")
 #' 
-#' iniciar_transparencia_economica(modulo = "gasto") %>%
-#'     elegir_periodo_anual(2022) %>%
-#'     elegir_quien_gasta(nivel = "todos") %>%
-#'     consultar()
-#' 
 #' # informacion de todas las UEs del Ministerio de Educacion
 #' iniciar_transparencia_economica(modulo = "gasto") %>%
 #'     elegir_periodo_anual(2022) %>%

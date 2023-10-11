@@ -22,14 +22,10 @@ Elegir periodo anual de consulta
 iniciar_transparencia_economica() \%>\%
     elegir_periodo_anual(periodo = 2022)
 
-iniciar_transparencia_economica() \%>\%
-    elegir_periodo_anual(periodo = 2022) \%>\%
-    consultar()
-
 # pueden consultarse multiples periodos al mismo tiempo
-# por ejemplo, el periodo de pandemia por Covid 19
+# por ejemplo, los dos primeros años de pandemia por Covid 19
 iniciar_transparencia_economica() \%>\%
-    elegir_periodo_anual(periodo = 2020:2022) \%>\%
+    elegir_periodo_anual(periodo = 2020:2021) \%>\%
     consultar()
 
 # se emite mensaje de error si se intenta elegir periodos no abarcados
