@@ -1,24 +1,90 @@
 test_that("consultar() falla si no se especifica año de búsqueda", {
     df <- iniciar_transparencia_economica()
-    expect_error(df %>% consultar() %>% suppressMessages())
-
+    df %>% 
+        consultar() %>% 
+        suppressMessages() %>% 
+        expect_error()
 })
 
 test_that("consultar() devuelve un objeto <data.frame>", {
     df <- iniciar_transparencia_economica() %>% 
         elegir_periodo_anual(periodo = current_year())
     
-    expect_s3_class(df %>% consultar() %>% suppressMessages(), "data.frame")
+    df %>% 
+        consultar() %>% 
+        suppressMessages() %>% 
+        expect_s3_class("data.frame")
 })
 
-test_that("consultar() sirve para todos los elementos de query()", {
-    df <- iniciar_transparencia_economica() %>% 
+test_that("consultar() with elegir_quien_gasta() returns a data frame", {
+    df <- iniciar_transparencia_economica() %>%
         elegir_periodo_anual(periodo = current_year())
     
-    expect_s3_class(df %>% elegir_quien_gasta(nivel = "todos") %>% consultar() %>% suppressMessages(), "data.frame")
-    expect_s3_class(df %>% elegir_como_se_estructura_gasto(generica = "todos") %>% consultar() %>% suppressMessages(), "data.frame")
-    expect_s3_class(df %>% elegir_con_que_se_financia(fuente_financiamiento = "todos") %>% consultar() %>% suppressMessages(), "data.frame")
-    expect_s3_class(df %>% elegir_cuando_se_hizo_gasto(trimestre = "todos") %>% consultar() %>% suppressMessages(), "data.frame")
-    expect_s3_class(df %>% elegir_en_que_se_gasta(categoria_presupuestal = "todos") %>% consultar() %>% suppressMessages(), "data.frame")
-    expect_s3_class(df %>% elegir_donde_se_gasta(departamento_meta = "todos") %>% consultar() %>% suppressMessages(), "data.frame")
+    result <- df %>% 
+        elegir_quien_gasta(nivel = "todos") %>% 
+        consultar() %>% 
+        suppressMessages()
+    
+    expect_s3_class(result, "data.frame")
 })
+
+test_that("consultar() with elegir_como_se_estructura_gasto() returns a data frame", {
+    df <- iniciar_transparencia_economica() %>%
+        elegir_periodo_anual(periodo = current_year())
+    
+    result <- df %>% 
+        elegir_como_se_estructura_gasto(generica = "todos") %>% 
+        consultar() %>% 
+        suppressMessages()
+    
+    expect_s3_class(result, "data.frame")
+})
+
+test_that("consultar() with elegir_con_que_se_financia() returns a data frame", {
+    df <- iniciar_transparencia_economica() %>%
+        elegir_periodo_anual(periodo = current_year())
+    
+    result <- df %>% 
+        elegir_con_que_se_financia(fuente_financiamiento = "todos") %>% 
+        consultar() %>% 
+        suppressMessages()
+    
+    expect_s3_class(result, "data.frame")
+})
+
+test_that("consultar() with elegir_cuando_se_hizo_gasto() returns a data frame", {
+    df <- iniciar_transparencia_economica() %>%
+        elegir_periodo_anual(periodo = current_year())
+    
+    result <- df %>% 
+        elegir_cuando_se_hizo_gasto(trimestre = "todos") %>% 
+        consultar() %>% 
+        suppressMessages()
+    
+    expect_s3_class(result, "data.frame")
+})
+
+test_that("consultar() with elegir_en_que_se_gasta() returns a data frame", {
+    df <- iniciar_transparencia_economica() %>%
+        elegir_periodo_anual(periodo = current_year())
+    
+    result <- df %>% 
+        elegir_en_que_se_gasta(categoria_presupuestal = "todos") %>% 
+        consultar() %>% 
+        suppressMessages()
+    
+    expect_s3_class(result, "data.frame")
+})
+
+test_that("consultar() with elegir_donde_se_gasta() returns a data frame", {
+    df <- iniciar_transparencia_economica() %>%
+        elegir_periodo_anual(periodo = current_year())
+    
+    result <- df %>% 
+        elegir_donde_se_gasta(departamento_meta = "todos") %>% 
+        consultar() %>% 
+        suppressMessages()
+    
+    expect_s3_class(result, "data.frame")
+})
+
