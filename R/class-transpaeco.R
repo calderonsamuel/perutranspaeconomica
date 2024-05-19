@@ -4,11 +4,17 @@ transpaeco <- S7::new_class(
     properties = list(
         modulo = S7::new_property(
             class = S7::class_character, 
-            default = "gasto"
+            default = "gasto", 
+            validator = function(value) {
+                if (!value %in% c("ingreso", "gasto")) "@modulo debe ser ingreso o gasto"
+            }
         ),
         actualizacion = S7::new_property(
             class = S7::class_character, 
-            default = "diaria"
+            default = "diaria",
+            validator = function(value) {
+                if (!value %in% c("diaria", "mensual")) "@actualizacion debe ser diaria o mensual"
+            }
         ),
         psize = S7::new_property(
            class = S7::class_numeric,
@@ -62,18 +68,13 @@ transpaeco <- S7::new_class(
         )
     ), 
     validator = function(self) {
-        propiedades_de_desagregacion <- self %>% 
-            S7::prop("traduccion") %>% 
-            purrr::map_lgl(~any(.x == "todos")) %>% 
+        propiedades_de_desagregacion <- self@traduccion %>%
+            purrr::map_lgl(~any(.x == "todos")) %>%
             sum()
-        
+
         regex_check <- check_params_validator(self)
         
-        if (!self@modulo %in% c("ingreso", "gasto")) {
-            "@modulo debe ser ingreso o gasto"
-        } else if (!self@actualizacion %in% c("diaria", "mensual")) {
-            "@actualizacion debe ser diaria o mensual"
-        } else if (propiedades_de_desagregacion > 1) {
+        if (propiedades_de_desagregacion > 1) {
             "Debe haber solo una propiedad con valor \"todos\""
         } else if (!regex_check$passes) {
             regex_check$message
@@ -204,7 +205,6 @@ check_params_validator <- function(x) {
             return(NULL)
         }) %>%
         purrr::compact() %>%
-        # purrr::imap_chr(function(value, position) glue::glue("{position}) {value}")) %>%
         purrr::map_chr(~.x) %>%
         glue::glue_collapse(sep = "\n- ")
     
