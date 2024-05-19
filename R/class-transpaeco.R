@@ -210,7 +210,7 @@ check_params_validator <- function(x) {
     
     # Return a list indicating if all parameters passed and the message
     list(
-        passes = length(message) == 0,
+        passes = nchar(message) == 0,
         message = message
     )
 }
