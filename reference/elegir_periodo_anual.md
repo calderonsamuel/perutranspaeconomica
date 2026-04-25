@@ -46,7 +46,6 @@ iniciar_transparencia_economica() %>%
     elegir_periodo_anual(periodo = 2020:2021) %>%
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 1/2 ETA:  1s | Ejecutando consulta  
 #> ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 #> # A tibble: 2 × 10
