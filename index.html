@@ -191,14 +191,16 @@ de Perú.
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_institucion.html">elegir_quien_gasta</a></span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_lugar.html">elegir_donde_se_gasta</a></span><span class="op">(</span>departamento_meta <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error: &lt;transpaeco&gt; object is invalid:</span></span>
+<span><span class="co">#&gt; Error:</span></span>
+<span><span class="co">#&gt; ! &lt;perutranspaeconomica::transpaeco&gt; object is invalid:</span></span>
 <span><span class="co">#&gt; - Debe haber solo una propiedad con valor "todos"</span></span></code></pre></div>
 <p>Todas las funciones de <code>elegir_*()</code> tratan de validar que los inputs provistos tengan una forma adecuada. Por ejemplo, <code>generica</code> debe seguir la forma <code>"0-0-0"</code>, donde cada <code>0</code> representa un dígito. Al proveer un input mal formado, la validación provocará un error e indicará una expresión regular o listado de valores apropiados para el parámetro.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/iniciar_transparencia_economica.html">iniciar_transparencia_economica</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_periodo_anual.html">elegir_periodo_anual</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_estructura.html">elegir_como_se_estructura_gasto</a></span><span class="op">(</span>generica <span class="op">=</span> <span class="st">"5-20"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error: &lt;transpaeco&gt; object is invalid:</span></span>
+<span><span class="co">#&gt; Error:</span></span>
+<span><span class="co">#&gt; ! &lt;perutranspaeconomica::transpaeco&gt; object is invalid:</span></span>
 <span><span class="co">#&gt; - En modulo gasto, `generica` debe hacer match con expresion regular '^[5-7]-2-[0-9]$'</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -240,7 +242,7 @@ de Perú.
 <span>    <span class="fu"><a href="reference/elegir_institucion.html">elegir_quien_gasta</a></span><span class="op">(</span>nivel <span class="op">=</span> <span class="st">"E"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/elegir_lugar.html">elegir_donde_se_gasta</a></span><span class="op">(</span>departamento_meta <span class="op">=</span> <span class="st">"01"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="reference/consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `check_pre_consulta()`:</span></span>
+<span><span class="co">#&gt; Error in `check_pre_consulta()` at perutranspaeconomica/R/consultar.R:19:5:</span></span>
 <span><span class="co">#&gt; ! Se debe elegir un parametro de desagregacion con "todos"</span></span></code></pre></div>
 <p>Se recomienda asignarle nombre a una consulta ejecutada para evitar posibles tediosas re-descargas, especialmente cuando la consulta usa parámetros con vectores más grandes.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -251,7 +253,7 @@ de Perú.
 <span>    <span class="fu"><a href="reference/elegir_estructura.html">elegir_como_se_estructura_gasto</a></span><span class="op">(</span>generica <span class="op">=</span> <span class="st">"todos"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="reference/consultar.html">consultar</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Iniciando consulta</span></span>
-<span><span class="co">#&gt; ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...</span></span>
+<span><span class="co">#&gt; ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  5s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                        ℹ Unificando consultas...</span></span>
 <span><span class="co">#&gt; ✔ Consultas realizadas y unificadas</span></span>
 <span></span>
 <span><span class="va">mi_consulta</span></span>
@@ -303,7 +305,7 @@ de Perú.
 <span>    <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">periodo</span>, <span class="va">pim</span>, color <span class="op">=</span> <span class="va">cod_generica</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">label_dollar</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"S/."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" alt="" width="100%"></p>
 </div>
 </div>
 </div>
@@ -351,6 +353,7 @@ de Perú.
 <li><a href="https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main" class="external-link"><img src="https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica" class="external-link"><img src="https://codecov.io/gh/calderonsamuel/perutranspaeconomica/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
