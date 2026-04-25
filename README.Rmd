@@ -24,6 +24,7 @@ options(pillar.min_chars = 30)
 <!-- [![CRAN status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica) -->
 [![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Codecov test coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de obtener datos del Portal de Transparencia Económica Perú con una interfaz de programación consistente y escalable.

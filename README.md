@@ -13,6 +13,8 @@ coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/
 [![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Codecov test
+coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica)
 <!-- badges: end -->
 
 El objetivo de `{perutranspaeconomica}` es contar con una manera de
@@ -196,7 +198,8 @@ iniciar_transparencia_economica() %>%
     elegir_periodo_anual(2022) %>% 
     elegir_quien_gasta(nivel = "todos") %>% 
     elegir_donde_se_gasta(departamento_meta = "todos")
-#> Error: <transpaeco> object is invalid:
+#> Error:
+#> ! <perutranspaeconomica::transpaeco> object is invalid:
 #> - Debe haber solo una propiedad con valor "todos"
 ```
 
@@ -210,7 +213,8 @@ expresión regular o listado de valores apropiados para el parámetro.
 iniciar_transparencia_economica() %>% 
     elegir_periodo_anual(2022) %>% 
     elegir_como_se_estructura_gasto(generica = "5-20")
-#> Error: <transpaeco> object is invalid:
+#> Error:
+#> ! <perutranspaeconomica::transpaeco> object is invalid:
 #> - En modulo gasto, `generica` debe hacer match con expresion regular '^[5-7]-2-[0-9]$'
 ```
 
@@ -260,7 +264,7 @@ iniciar_transparencia_economica() %>%
     elegir_quien_gasta(nivel = "E") %>% 
     elegir_donde_se_gasta(departamento_meta = "01") %>%
     consultar()
-#> Error in `check_pre_consulta()`:
+#> Error in `check_pre_consulta()` at perutranspaeconomica/R/consultar.R:19:5:
 #> ! Se debe elegir un parametro de desagregacion con "todos"
 ```
 
@@ -276,7 +280,7 @@ mi_consulta <- iniciar_transparencia_economica() %>%
     elegir_como_se_estructura_gasto(generica = "todos") %>% 
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                         ℹ Unificando consultas...
+#> ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  5s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                        ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 
 mi_consulta
@@ -340,4 +344,4 @@ mi_consulta %>%
     scale_y_continuous(labels = scales::label_dollar(prefix = "S/."))
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" alt="" width="100%" />
