@@ -127,7 +127,7 @@ S7::method(create_query_grid, transpaeco) <- function(x) {
         expand.grid(stringsAsFactors = FALSE)
 }
 
-S7::method(print, transpaeco) <- function(x) {
+S7::method(print, transpaeco) <- function(x, ...) {
     cli::cli_h1("Seguimiento al {x@modulo} presupuestal ({.emph actualizacion {x@actualizacion}})")
     
     cli::cli_h2("Parametros de consulta")
