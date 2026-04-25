@@ -1,63 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/404.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/articles/elegir-parametros.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/index.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/consultar.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_destino.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_estructura.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_institucion.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_lugar.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_origen.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_periodo_anual.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_tiempo.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/iniciar_transparencia_economica.html</loc>
-  </url>
-  <url>
-    <loc>https://perutranspaeconomica.samuelenrique.com/reference/pipe.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/404.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/LICENSE-text.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/LICENSE.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/articles/elegir-parametros.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/articles/index.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/authors.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/index.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/news/index.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/consultar.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_destino.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_estructura.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_institucion.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_lugar.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_origen.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_periodo_anual.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/elegir_tiempo.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/index.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/iniciar_transparencia_economica.html</loc></url>
+<url><loc>https://perutranspaeconomica.samuelenrique.com/reference/pipe.html</loc></url>
 </urlset>
+
