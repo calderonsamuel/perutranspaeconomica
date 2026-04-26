@@ -7,9 +7,8 @@
 
 ![runiverse-name](https://calderonsamuel.r-universe.dev/badges/:name)
 ![runiverse-package](https://calderonsamuel.r-universe.dev/badges/perutranspaeconomica)
-[![Codecov test
-coverage](https://codecov.io/gh/calderonsamuel/perutranspaeconomica/branch/main/graph/badge.svg)](https://app.codecov.io/gh/calderonsamuel/perutranspaeconomica?branch=main)
-<!-- [![CRAN status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica) -->
+[![CRAN
+status](https://www.r-pkg.org/badges/version/perutranspaeconomica)](https://CRAN.R-project.org/package=perutranspaeconomica)
 [![R-CMD-check](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/calderonsamuel/perutranspaeconomica/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -280,7 +279,7 @@ mi_consulta <- iniciar_transparencia_economica() %>%
     elegir_como_se_estructura_gasto(generica = "todos") %>% 
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  5s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                        ℹ Unificando consultas...
+#> ⠙ 1/7 ETA:  7s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                        ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 
 mi_consulta
