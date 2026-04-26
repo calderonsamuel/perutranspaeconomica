@@ -270,7 +270,7 @@ mi_consulta <- iniciar_transparencia_economica() %>%
     elegir_como_se_estructura_gasto(generica = "todos") %>% 
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 1/7 ETA:  6s | Ejecutando consulta  ⠹ 2/7 ETA:  5s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                        ℹ Unificando consultas...
+#> ⠙ 1/7 ETA:  7s | Ejecutando consulta  ⠹ 2/7 ETA:  6s | Ejecutando consulta  ⠸ 3/7 ETA:  5s | Ejecutando consulta  ⠼ 4/7 ETA:  3s | Ejecutando consulta  ⠴ 5/7 ETA:  2s | Ejecutando consulta  ⠦ 6/7 ETA:  1s | Ejecutando consulta                                        ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 
 mi_consulta

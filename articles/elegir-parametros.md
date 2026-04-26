@@ -96,7 +96,6 @@ iniciar_transparencia_economica() %>%
     elegir_periodo_anual(c(2012, 2014, 2016)) %>% 
     consultar()
 #> ℹ Iniciando consulta
-#> ⠙ 2/3 ETA:  1s | Ejecutando consulta
 #> ℹ Unificando consultas...
 #> ✔ Consultas realizadas y unificadas
 #> # A tibble: 3 × 10
